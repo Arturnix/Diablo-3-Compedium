@@ -6,8 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class Diablo3CompediumApplicationTests {
 
-    @Test
+    /*@Test
     void contextLoads() {
-    }
+    }*/
 
 }

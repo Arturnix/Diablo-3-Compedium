@@ -1,9 +1,6 @@
 package pl.arturzgodka.datamodel;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -20,19 +17,29 @@ public class User {
     @NotNull (message = "Email may not be null")
     @NotEmpty (message = "Email may not be empty")
     @NotBlank (message = "Email may not be blank")
+    @Column(unique = true)
     private String email;
     @NotNull (message = "Password may not be null")
     @NotEmpty (message = "Password may not be empty")
     @NotBlank (message = "Password may not be blank")
     private String password;
-    @OneToMany //1 user ma wiele postaci przypisanych do BattleTag - konta.
+    @OneToMany(mappedBy = "user") //1 user ma wiele postaci przypisanych do BattleTag - konta.
     private List<Character> characters;
     @NotNull (message = "BattleTag may not be null")
     @NotEmpty (message = "BattleTag may not be empty")
     @NotBlank (message = "BattleTag may not be blank")
+    @Column(unique = true)
     private String battleTag;
 
     public User() {
+    }
+
+    public User(long id, String email, String password, List<Character> characters, String battleTag) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.characters = characters;
+        this.battleTag = battleTag;
     }
 
     public long getId() {
