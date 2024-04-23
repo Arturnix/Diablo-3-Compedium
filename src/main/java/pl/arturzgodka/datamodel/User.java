@@ -26,7 +26,7 @@ public class User {
     @NotBlank (message = "Password may not be blank")
     private String password;
     @OneToMany //1 user ma wiele postaci przypisanych do BattleTag - konta.
-    List<Character> characters;
+    private List<Character> characters;
     @NotNull (message = "BattleTag may not be null")
     @NotEmpty (message = "BattleTag may not be empty")
     @NotBlank (message = "BattleTag may not be blank")

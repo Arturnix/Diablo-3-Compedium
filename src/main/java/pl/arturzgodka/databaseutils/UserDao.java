@@ -22,11 +22,22 @@ public class UserDao {
         session.close();
     }
 
-    public void deleteUser(String email) {
+    public void deleteUser(User user) { //instancja zalogowanego uzytkownika aby tylko on sam mogl wykonac operacje usuniecia konta, na ktore jest zalogowany.
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        User user = findUserByEmail(email);
         session.remove(user);
+        transaction.commit();
+        session.close();
+    }
+
+    public void deleteUser(long id) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<User> userQuery = cb.createQuery(User.class);
+        Root<User> root = userQuery.from(User.class);
+        userQuery.select(root).where(cb.equal(root.get("id"), id));
+        session.remove(session.createQuery(userQuery).getSingleResult());
         transaction.commit();
         session.close();
     }
