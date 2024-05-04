@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "player")
-public class User {
+public class UserDataModel {
     @Id
     @GeneratedValue
     private long id;
@@ -24,22 +24,22 @@ public class User {
     @NotEmpty (message = "Password may not be empty")
     @NotBlank (message = "Password may not be blank")
     private String password;
-    @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE) //1 user ma wiele postaci przypisanych do BattleTag - konta.
-    private List<Character> characters;
+    @OneToMany(mappedBy = "userDataModel", cascade=CascadeType.MERGE) //1 user ma wiele postaci przypisanych do BattleTag - konta.
+    private List<CharacterDataModel> characterDataModels;
     @NotNull (message = "BattleTag may not be null")
     @NotEmpty (message = "BattleTag may not be empty")
     @NotBlank (message = "BattleTag may not be blank")
     @Column(unique = true)
     private String battleTag;
 
-    public User() {
+    public UserDataModel() {
     }
 
-    public User(long id, String email, String password, List<Character> characters, String battleTag) {
+    public UserDataModel(long id, String email, String password, List<CharacterDataModel> characterDataModels, String battleTag) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.characters = characters;
+        this.characterDataModels = characterDataModels;
         this.battleTag = battleTag;
     }
 
@@ -67,12 +67,12 @@ public class User {
         this.password = password;
     }
 
-    public List<Character> getCharacters() {
-        return characters;
+    public List<CharacterDataModel> getCharacters() {
+        return characterDataModels;
     }
 
-    public void setCharacters(List<Character> characters) {
-        this.characters = characters;
+    public void setCharacters(List<CharacterDataModel> characterDataModels) {
+        this.characterDataModels = characterDataModels;
     }
 
     public String getBattleTag() {
@@ -89,7 +89,7 @@ public class User {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", characters=" + characters +
+                ", characters=" + characterDataModels +
                 ", battleTag='" + battleTag + '\'' +
                 '}';
     }
