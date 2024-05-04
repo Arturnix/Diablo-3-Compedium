@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### class ###
+pl.arturzgodka.ClientCredentials
+src/main/java/pl/arturzgodka/ClientCredentials.java
