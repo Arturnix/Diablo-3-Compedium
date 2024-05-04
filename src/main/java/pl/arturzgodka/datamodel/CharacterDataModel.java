@@ -29,7 +29,9 @@ public class CharacterDataModel {
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
     private List<ItemDataModel> items;
-    /*private List<FollowerDataModel> followers;*/
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    @JdbcTypeCode(SqlTypes.JSON)
+    private List<FollowerDataModel> followers;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
     private Map<String, Integer> stats;
@@ -50,8 +52,8 @@ public class CharacterDataModel {
 
    public CharacterDataModel(int id, String name, String classHero, int level, int paragonLevel,
                              boolean hardcore, boolean seasonal, boolean dead,
-                             Map<String, Integer> kills, /*List<SkillDataModel> skills,
-                             List<ItemDataModel> items,*/ /*List<FollowerDataModel> followers,*/ Map<String, Integer> stats) {
+                             Map<String, Integer> kills, List<SkillDataModel> skills,
+                             List<ItemDataModel> items, List<FollowerDataModel> followers, Map<String, Integer> stats) {
         this.id = id;
         this.name = name;
         this.classHero = classHero;
@@ -61,9 +63,9 @@ public class CharacterDataModel {
         this.seasonal = seasonal;
         this.dead = dead;
         this.kills = kills;
-        //this.skills = skills;
-        //this.items = items;
-        /*this.followers = followers;*/
+        this.skills = skills;
+        this.items = items;
+        this.followers = followers;
         this.stats = stats;
     }
 
@@ -87,17 +89,17 @@ public class CharacterDataModel {
         return this.kills;
     }
 
-    /*public List<SkillDataModel> getSkills() {
+    public List<SkillDataModel> getSkills() {
         return this.skills;
     }
 
     public List<ItemDataModel> getItems() {
         return this.items;
-    }*/
+    }
 
-    /*public List<FollowerDataModel> getFollowers() {
+    public List<FollowerDataModel> getFollowers() {
         return this.followers;
-    }*/
+    }
 
     public Map<String, Integer> getStats() {
         return this.stats;
@@ -144,9 +146,9 @@ public class CharacterDataModel {
                 ", seasonal=" + seasonal +
                 ", dead=" + dead +
                 ", kills=" + kills +
-                //", skills=" + skills +
-               // ", items=" + items +
-                    /*", followers=" + followers +*/
+                ", skills=" + skills +
+                ", items=" + items +
+                ", followers=" + followers +
                 ", stats=" + stats +
                 '}';
         }
