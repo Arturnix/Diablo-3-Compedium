@@ -1,7 +1,7 @@
-package com.diablo3CharViewer.api_handlers;
+package pl.arturzgodka.apihandlers;
 
-import com.diablo3CharViewer.token.FetchToken;
-import com.diablo3CharViewer.token.Token;
+import pl.arturzgodka.token.FetchToken;
+import pl.arturzgodka.token.Token;
 
 public class ItemHandlerApi {
     //corrupted-ashbringer-Unique_Sword_2H_104_x1

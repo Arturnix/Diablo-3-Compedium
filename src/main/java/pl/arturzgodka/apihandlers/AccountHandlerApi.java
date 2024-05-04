@@ -1,8 +1,8 @@
-package com.diablo3CharViewer.api_handlers;
+package pl.arturzgodka.apihandlers;
 
 
-import com.diablo3CharViewer.token.FetchToken;
-import com.diablo3CharViewer.token.Token;
+import pl.arturzgodka.token.FetchToken;
+import pl.arturzgodka.token.Token;
 
 public class AccountHandlerApi {
     //zrobic jako static? ta klasa jest bezstanowa, a ta metode wykorzystuje w klasie mappera wiec nie musialbym juz tworzyc obiektu tej klasy.

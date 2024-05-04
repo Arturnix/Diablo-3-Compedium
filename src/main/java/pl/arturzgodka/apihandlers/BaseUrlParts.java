@@ -1,4 +1,4 @@
-package com.diablo3CharViewer.api_handlers;
+package pl.arturzgodka.apihandlers;
 
 public class BaseUrlParts {
 
