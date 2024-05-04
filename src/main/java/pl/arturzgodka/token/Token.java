@@ -1,4 +1,4 @@
-package com.diablo3CharViewer.token;
+package pl.arturzgodka.token;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

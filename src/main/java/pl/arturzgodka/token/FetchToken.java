@@ -1,6 +1,6 @@
-package com.diablo3CharViewer.token;
+package pl.arturzgodka.token;
 
-import com.diablo3CharViewer.ClientCredentials;
+import pl.arturzgodka.ClientCredentials;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
