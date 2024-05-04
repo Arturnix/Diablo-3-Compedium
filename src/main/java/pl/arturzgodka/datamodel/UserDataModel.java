@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
+@Table(name = "player")
 public class User {
     @Id
     @GeneratedValue
@@ -23,7 +24,7 @@ public class User {
     @NotEmpty (message = "Password may not be empty")
     @NotBlank (message = "Password may not be blank")
     private String password;
-    @OneToMany(mappedBy = "user") //1 user ma wiele postaci przypisanych do BattleTag - konta.
+    @OneToMany(mappedBy = "user", cascade=CascadeType.MERGE) //1 user ma wiele postaci przypisanych do BattleTag - konta.
     private List<Character> characters;
     @NotNull (message = "BattleTag may not be null")
     @NotEmpty (message = "BattleTag may not be empty")
@@ -80,5 +81,16 @@ public class User {
 
     public void setBattleTag(String battleTag) {
         this.battleTag = battleTag;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", characters=" + characters +
+                ", battleTag='" + battleTag + '\'' +
+                '}';
     }
 }

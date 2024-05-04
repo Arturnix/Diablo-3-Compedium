@@ -8,8 +8,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.arturzgodka.databaseutils.UserDao;
 import pl.arturzgodka.datamodel.User;
+import pl.arturzgodka.datamodel.Character;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 public class UserDaoTest {
@@ -18,7 +19,7 @@ public class UserDaoTest {
     private UserDao userDaoTestMock;
     private UserDao userDaoTest;
     @Mock
-    private ArrayList<Character> charactersList;
+    private List<Character> charactersList;
     private User user = new User(142L, "abc@abc.com", "abc",  charactersList, "abc");
 
     @Test
