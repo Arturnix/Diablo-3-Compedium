@@ -24,7 +24,7 @@ public class UserDataModel {
     @NotEmpty (message = "Password may not be empty")
     @NotBlank (message = "Password may not be blank")
     private String password;
-    @OneToMany(mappedBy = "userDataModel", cascade=CascadeType.MERGE) //1 user ma wiele postaci przypisanych do BattleTag - konta.
+    @OneToMany(mappedBy = "userDataModel", cascade=CascadeType.ALL/*MERGE*/) //1 user ma wiele postaci przypisanych do BattleTag - konta.
     private List<CharacterDataModel> characterDataModels;
     @NotNull (message = "BattleTag may not be null")
     @NotEmpty (message = "BattleTag may not be empty")
@@ -35,8 +35,7 @@ public class UserDataModel {
     public UserDataModel() {
     }
 
-    public UserDataModel(long id, String email, String password, List<CharacterDataModel> characterDataModels, String battleTag) {
-        this.id = id;
+    public UserDataModel(String email, String password, List<CharacterDataModel> characterDataModels, String battleTag) {
         this.email = email;
         this.password = password;
         this.characterDataModels = characterDataModels;

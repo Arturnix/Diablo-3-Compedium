@@ -20,61 +20,61 @@ public class UserDataModelDaoTest {
     private UserDao userDaoTest;
     @Mock
     private List<CharacterDataModel> charactersList;
-    private UserDataModel userDataModel = new UserDataModel(142L, "abc@abc.com", "abc",  charactersList, "abc");
+    private final UserDataModel userDataModel = new UserDataModel("abc@abc.com", "abc",  charactersList, "abc");
 
     @Test
     public void saveUserWithNullEmailValueThrowsException() {
         Assertions.assertThrows(NullPointerException.class, ()-> {
-            userDaoTest.saveUser(new UserDataModel(142L, null, "abc",  charactersList, "abc"));
+            userDaoTest.saveUser(new UserDataModel(null, "abc",  charactersList, "abc"));
         });
     }
 
     @Test
     public void saveUserWithNullPasswordValueThrowsException() {
         Assertions.assertThrows(NullPointerException.class, ()-> {
-            userDaoTest.saveUser(new UserDataModel(142L, "abc@abc.com", null,  charactersList, "abc"));
+            userDaoTest.saveUser(new UserDataModel("abc@abc.com", null,  charactersList, "abc"));
         });
     }
 
     @Test
     public void saveUserWithNullCharListValueThrowsException() {
         Assertions.assertThrows(NullPointerException.class, ()-> {
-            userDaoTest.saveUser(new UserDataModel(142L, "abc@abc.com", "abc",  null, "abc"));
+            userDaoTest.saveUser(new UserDataModel("abc@abc.com", "abc",  null, "abc"));
         });
     }
 
     @Test
     public void saveUserWithNullBattleTagValueThrowsException() {
         Assertions.assertThrows(NullPointerException.class, ()-> {
-            userDaoTest.saveUser(new UserDataModel(142L, "abc@abc.com", "abc",  charactersList, null));
+            userDaoTest.saveUser(new UserDataModel("abc@abc.com", "abc",  charactersList, null));
         });
     }
 
     @Test
     public void deleteUserWithNullEmailValueThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
-            userDaoTest.deleteUser(new UserDataModel(142L, null, "abc", charactersList, "abc"));
+            userDaoTest.deleteUser(new UserDataModel(null, "abc", charactersList, "abc"));
         });
     }
 
     @Test
     public void deleteUserWithNullPasswordValueThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
-            userDaoTest.deleteUser(new UserDataModel(142L, "abc@abc.com", null, charactersList, "abc"));
+            userDaoTest.deleteUser(new UserDataModel("abc@abc.com", null, charactersList, "abc"));
         });
     }
 
     @Test
     public void deleteUserWithNullCharListValueThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
-            userDaoTest.deleteUser(new UserDataModel(142L, "abc@abc.com", "abc", null, "abc"));
+            userDaoTest.deleteUser(new UserDataModel("abc@abc.com", "abc", null, "abc"));
         });
     }
 
     @Test
     public void deleteUserWithNullBattleTagValueThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
-            userDaoTest.deleteUser(new UserDataModel(142L, "abc@abc.com", "abc", charactersList, null));
+            userDaoTest.deleteUser(new UserDataModel("abc@abc.com", "abc", charactersList, null));
         });
     }
 
@@ -87,7 +87,7 @@ public class UserDataModelDaoTest {
 
     @Test
     public void findUserByEmail() {
-        UserDataModel localUserDataModel = new UserDataModel(142L, "abc@abc.com", "abc",  charactersList, "abc");
+        UserDataModel localUserDataModel = new UserDataModel("abc@abc.com", "abc",  charactersList, "abc");
         Mockito.when(userDaoTestMock.findUserByEmail("abc@abc.com")).thenReturn(userDataModel);
 
         Assertions.assertEquals(userDaoTestMock.findUserByEmail("abc@abc.com").getEmail(), localUserDataModel.getEmail());
