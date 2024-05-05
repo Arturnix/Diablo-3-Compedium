@@ -1,6 +1,8 @@
 package pl.arturzgodka.datamodel;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -37,6 +39,7 @@ public class CharacterDataModel {
     private Map<String, Integer> stats;
 
     @ManyToOne(fetch=FetchType.LAZY)
+    @Cascade(CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "user_id") //join column jest zawsze tam gdzie adnotacja many to one
     private UserDataModel userDataModel;
 
