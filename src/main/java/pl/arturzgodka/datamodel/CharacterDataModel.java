@@ -112,8 +112,48 @@ public class CharacterDataModel {
         return userDataModel;
     }
 
+    public boolean isHardcore() {
+        return hardcore;
+    }
+
     public void setUser(UserDataModel userDataModel) {
         this.userDataModel = userDataModel;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setParagonLevel(int paragonLevel) {
+        this.paragonLevel = paragonLevel;
+    }
+
+    public void setSeasonal(boolean seasonal) {
+        this.seasonal = seasonal;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
+
+    public void setKills(Map<String, Integer> kills) {
+        this.kills = kills;
+    }
+
+    public void setSkills(List<SkillDataModel> skills) {
+        this.skills = skills;
+    }
+
+    public void setItems(List<ItemDataModel> items) {
+        this.items = items;
+    }
+
+    public void setFollowers(List<FollowerDataModel> followers) {
+        this.followers = followers;
+    }
+
+    public void setStats(Map<String, Integer> stats) {
+        this.stats = stats;
     }
 
     public static void showHeroesListForSpecificAccount(List<CharacterDataModel> charactersOnProvidedAccount) {
