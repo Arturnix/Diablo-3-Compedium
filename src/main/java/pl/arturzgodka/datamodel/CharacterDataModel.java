@@ -1,6 +1,9 @@
 package pl.arturzgodka.datamodel;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -14,12 +17,34 @@ import java.util.Map;
 public class CharacterDataModel {
 
     @Id
+   /* @NotNull(message = "Id may not be null")
+    @NotEmpty(message = "Id may not be empty")
+    @NotBlank(message = "Id may not be blank")*/
+    @Column(unique = true)
     private int id;
+    /*@NotNull(message = "Name may not be null")
+    @NotEmpty(message = "Name may not be empty")
+    @NotBlank(message = "Name may not be blank")*/
     private String name;
+    /*@NotNull(message = "Hero class may not be null")
+    @NotEmpty(message = "Hero class may not be empty")
+    @NotBlank(message = "Hero class may not be blank")*/
     private String classHero;
+    /*@NotNull(message = "Email may not be null")
+    @NotEmpty(message = "Email may not be empty")
+    @NotBlank(message = "Email may not be blank")*/
     private int level;
+    /*@NotNull(message = "Email may not be null")
+    @NotEmpty(message = "Email may not be empty")
+    @NotBlank(message = "Email may not be blank")*/
     private int paragonLevel;
+    /*@NotNull(message = "Email may not be null")
+    @NotEmpty(message = "Email may not be empty")
+    @NotBlank(message = "Email may not be blank")*/
     private boolean hardcore;
+   /* @NotNull(message = "Email may not be null")
+    @NotEmpty(message = "Email may not be empty")
+    @NotBlank(message = "Email may not be blank")*/
     private boolean seasonal;
     private boolean dead;
     @SuppressWarnings("JpaAttributeTypeInspection") //niweluje warning

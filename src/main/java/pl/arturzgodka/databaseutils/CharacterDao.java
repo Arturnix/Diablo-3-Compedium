@@ -52,8 +52,7 @@ public class CharacterDao {
         CriteriaQuery<CharacterDataModel> userQuery = cb.createQuery(CharacterDataModel.class);
         Root<CharacterDataModel> root = userQuery.from(CharacterDataModel.class);
         userQuery.select(root).where(cb.equal(root.get("id"), id));
-        CharacterDataModel characterDataModel = session.createQuery(userQuery).getSingleResultOrNull();
-        return characterDataModel;
+        return session.createQuery(userQuery).getSingleResultOrNull();
     }
 
     public void changeCharacterLevel(int id, int level) {
@@ -108,7 +107,7 @@ public class CharacterDao {
         session.close();
     }
 
-    public void changeCharacterSills(int id, List<SkillDataModel> skills) {
+    public void changeCharacterSkills(int id, List<SkillDataModel> skills) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         CharacterDataModel ch = findCharacterById(id);
