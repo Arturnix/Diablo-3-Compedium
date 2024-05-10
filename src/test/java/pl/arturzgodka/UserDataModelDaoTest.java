@@ -24,6 +24,7 @@ public class UserDataModelDaoTest {
 
     @Test
     public void saveUserWithNullEmailValueThrowsException() {
+        userDaoTest = new UserDao();
         Assertions.assertThrows(NullPointerException.class, ()-> {
             userDaoTest.saveUser(new UserDataModel(null, "abc",  charactersList, "abc"));
         });
@@ -52,6 +53,7 @@ public class UserDataModelDaoTest {
 
     @Test
     public void deleteUserWithNullEmailValueThrowsException() {
+        userDaoTest = new UserDao();
         Assertions.assertThrows(NullPointerException.class, () -> {
             userDaoTest.deleteUser(new UserDataModel(null, "abc", charactersList, "abc"));
         });
@@ -95,6 +97,7 @@ public class UserDataModelDaoTest {
 
     @Test
     public void changeBattleTagToNullValueThrowsException() {
+        userDaoTest = new UserDao();
         Assertions.assertThrows(NullPointerException.class, () -> {
             userDaoTest.changeUserBattleTag( "abc@abc.com",null);
         });
