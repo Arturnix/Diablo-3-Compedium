@@ -23,27 +23,15 @@ public class CharacterDao {
     }
 
     public void deleteCharacter(CharacterDataModel characterDataModel) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.remove(characterDataModel);
-        transaction.commit();
-        session.close();
-    }
-
-    public void deleteCharacter(int id) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<CharacterDataModel> userQuery = cb.createQuery(CharacterDataModel.class);
-        Root<CharacterDataModel> root = userQuery.from(CharacterDataModel.class);
-        userQuery.select(root).where(cb.equal(root.get("id"), id));
-        session.remove(session.createQuery(userQuery).getSingleResult());
-        transaction.commit();
-        session.close();
-    }
-
-    private boolean characterExists(CharacterDataModel characterDataModel) {
-        return findCharacterById(characterDataModel.getId()) != null;
+        if(findCharacterById(characterDataModel.getId()) != null) {
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            session.remove(characterDataModel);
+            transaction.commit();
+            session.close();
+        } else {
+            System.out.println("Character not found!");
+        }
     }
 
     public CharacterDataModel findCharacterById(int id) {

@@ -1,12 +1,22 @@
 package pl.arturzgodka.datamodel;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="skills")
 public class SkillDataModel {
 
     private String type;
     private String slug;
+    @Id
     private String name;
     private int level;
     private String description;
+
+    public SkillDataModel() {
+    }
 
     public SkillDataModel(String type, String slug, String name, int level, String description) {
         this.type = type;

@@ -1,11 +1,19 @@
 package pl.arturzgodka.datamodel;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.util.List;
 import java.util.Map;
 
+@Entity
+@Table(name="armors")
 public class ItemArmorDataModel extends ItemDataModel {
 
-    private final String armor;
+    private String armor;
+
+    public ItemArmorDataModel() {
+    }
 
     public ItemArmorDataModel(List<String> itemBodyPartSlots, String id, String name, int requiredLevel, Map<String, List<String>> attributes, String armor) {
         super(itemBodyPartSlots, id, name, requiredLevel, attributes);

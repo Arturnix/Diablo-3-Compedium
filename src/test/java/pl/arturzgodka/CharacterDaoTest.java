@@ -95,13 +95,6 @@ public class CharacterDaoTest {
     }
 
     @Test
-    public void deleteUserAsNullIdValueThrowsException() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            characterDaoTest.deleteCharacter((Integer)null);
-        });
-    }
-
-    @Test
     public void findCharacterById() {
         CharacterDataModel localCharacterDataModel = new CharacterDataModel(14, "Barb", "Barbarian",  35);
         Mockito.when(characterDaoTestMock.findCharacterById(14)).thenReturn(characterDataModel);

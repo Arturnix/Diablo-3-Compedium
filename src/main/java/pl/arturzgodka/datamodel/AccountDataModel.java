@@ -1,17 +1,32 @@
 package pl.arturzgodka.datamodel;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 import java.util.List;
 import java.util.Map;
 
+@Entity
+@Table(name = "account")
 public class AccountDataModel {
 
+    @Id
     private String battleTag;
     private int paragonLevel;
     private String guildName;
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    @JdbcTypeCode(SqlTypes.JSON)
     private List<CharacterDataModel> heroes;
     private int highestHardcoreLevel;
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    @JdbcTypeCode(SqlTypes.JSON)
     private Map<String, Integer> kills;
 
+    public AccountDataModel() {
+    }
 
     public AccountDataModel(String battleTag, int paragonLevel, String guildName, List<CharacterDataModel> heroes, int highestHardcoreLevel, Map<String, Integer> kills) {
         this.battleTag = battleTag;

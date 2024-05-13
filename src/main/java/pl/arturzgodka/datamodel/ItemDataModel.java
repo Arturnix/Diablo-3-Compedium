@@ -1,19 +1,33 @@
 package pl.arturzgodka.datamodel;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.List;
 import java.util.Map;
 
-
+@Entity
+@Table(name="items")
 public class ItemDataModel {
+
+    @Id
+    @GeneratedValue
+    @Column(unique = true)
+    private long itemId;
     protected String bodyPart;
     protected String id;
     protected String name;
     protected int requiredLevel;
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    @JdbcTypeCode(SqlTypes.JSON)
     protected List<String> itemBodyPartSlots;
-
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    @JdbcTypeCode(SqlTypes.JSON)
     protected Map<String, List<String>> attributes; //(key is the primary/secondary attribute, value is list of attributes)
+
+    public ItemDataModel() {
+    }
 
     public ItemDataModel(String bodyPart, String id, String name) {
         this.bodyPart = bodyPart;
