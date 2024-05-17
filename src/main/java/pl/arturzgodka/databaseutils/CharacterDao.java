@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import pl.arturzgodka.datamodel.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -85,7 +86,7 @@ public class CharacterDao {
         }
     }
 
-    public void changeCharacterKills(int id, Map<String, Integer> kills) {
+    public void changeCharacterKills(int id, HashMap<String, Integer> kills) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         CharacterDataModel ch = findCharacterById(id);
@@ -125,7 +126,7 @@ public class CharacterDao {
         session.close();
     }
 
-    public void changeCharacterStats(int id, Map<String, Integer> stats) {
+    public void changeCharacterStats(int id, HashMap<String, Integer> stats) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         CharacterDataModel ch = findCharacterById(id);

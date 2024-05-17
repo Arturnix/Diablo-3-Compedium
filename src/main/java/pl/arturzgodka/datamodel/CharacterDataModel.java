@@ -9,6 +9,7 @@ import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class CharacterDataModel {
     @NotEmpty(message = "Id may not be empty")
     @NotBlank(message = "Id may not be blank")*/
     @Column(unique = true)
-    private int id;
+    private int id; //lub int
     /*@NotNull(message = "Name may not be null")
     @NotEmpty(message = "Name may not be empty")
     @NotBlank(message = "Name may not be blank")*/
@@ -49,7 +50,7 @@ public class CharacterDataModel {
     private boolean dead;
     @SuppressWarnings("JpaAttributeTypeInspection") //niweluje warning
     @JdbcTypeCode(SqlTypes.JSON)
-    private Map<String, Integer> kills;
+    private HashMap<String, Integer> kills;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
     private List<SkillDataModel> skills;
@@ -61,7 +62,7 @@ public class CharacterDataModel {
     private List<FollowerDataModel> followers;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
-    private Map<String, Integer> stats;
+    private HashMap<String, Integer> stats;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @Cascade(CascadeType.SAVE_UPDATE)
@@ -80,8 +81,8 @@ public class CharacterDataModel {
 
    public CharacterDataModel(int id, String name, String classHero, int level, int paragonLevel,
                              boolean hardcore, boolean seasonal, boolean dead,
-                             Map<String, Integer> kills, List<SkillDataModel> skills,
-                             List<ItemDataModel> items, List<FollowerDataModel> followers, Map<String, Integer> stats) {
+                             HashMap<String, Integer> kills, List<SkillDataModel> skills,
+                             List<ItemDataModel> items, List<FollowerDataModel> followers, HashMap<String, Integer> stats) {
         this.id = id;
         this.name = name;
         this.classHero = classHero;
@@ -161,7 +162,7 @@ public class CharacterDataModel {
         this.dead = dead;
     }
 
-    public void setKills(Map<String, Integer> kills) {
+    public void setKills(HashMap<String, Integer> kills) {
         this.kills = kills;
     }
 
@@ -177,7 +178,7 @@ public class CharacterDataModel {
         this.followers = followers;
     }
 
-    public void setStats(Map<String, Integer> stats) {
+    public void setStats(HashMap<String, Integer> stats) {
         this.stats = stats;
     }
 

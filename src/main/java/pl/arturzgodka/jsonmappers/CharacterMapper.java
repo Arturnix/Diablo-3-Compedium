@@ -1,5 +1,6 @@
 package pl.arturzgodka.jsonmappers;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import pl.arturzgodka.datamodel.FollowerDataModel;
 import pl.arturzgodka.datamodel.CharacterDataModel;
 import pl.arturzgodka.datamodel.ItemDataModel;
@@ -19,8 +20,13 @@ public class CharacterMapper {
         if(!isHardcoreCharacter) {
             return heroCreator(node, false,false);
         } else {
-            boolean isDeadCharacter = node.get("dead").asBoolean();
-            return heroCreator(node, true, isDeadCharacter);
+            if(node.get("dead") != null) {
+                boolean isDeadCharacter = node.get("dead").asBoolean();
+                return heroCreator(node, true, isDeadCharacter);
+            } else {
+                boolean isDeadCharacter = node.get("alive").asBoolean();
+                return heroCreator(node, true, !isDeadCharacter);
+            }
         }
     }
 
@@ -43,11 +49,11 @@ public class CharacterMapper {
         );
     }
 
-    private Map<String, Integer> fetchKills(JsonNode node) {
+    private HashMap fetchKills(JsonNode node) {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        return objectMapper.convertValue(node.get("kills"), Map.class);
+        return objectMapper.convertValue(node.get("kills"), new TypeReference<HashMap<String, Integer>>(){});
     }
 
     private List<SkillDataModel> fetchSkills(JsonNode node) {
@@ -97,7 +103,7 @@ public class CharacterMapper {
         List<FollowerDataModel> followers = new ArrayList<>();
         List<String> followersKeys = new ArrayList<>();
         List<ItemDataModel> items = new ArrayList<>();
-        Map<String, Integer> followerStats = new HashMap<String, Integer>();
+        HashMap<String, Integer> followerStats = new HashMap<String, Integer>();
         Iterator<String> iterator = node.get("followers").fieldNames();
         iterator.forEachRemaining(followersKeys::add);
 
@@ -114,11 +120,11 @@ public class CharacterMapper {
         return followers;
     }
 
-    private Map<String, Integer> fetchHeroStats(JsonNode node) {
+    private HashMap fetchHeroStats(JsonNode node) {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        return objectMapper.convertValue(node.get("stats"), Map.class);
+        return objectMapper.convertValue(node.get("stats"), new TypeReference<HashMap<String, Integer>>(){});
     }
 
     public CharacterDataModel mapHeroToDataModel(String accountData) {

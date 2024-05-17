@@ -25,8 +25,8 @@ public class CharacterDaoTest {
     private CharacterDao characterDaoTest;
 
     private final CharacterDataModel characterDataModel = new CharacterDataModel(14, "Barb", "Barbarian",  35);
-    private Map<String, Integer> kills = new HashMap<>();
-    private Map<String, Integer> stats = new HashMap<>();
+    private HashMap<String, Integer> kills = new HashMap<>();
+    private HashMap<String, Integer> stats = new HashMap<>();
     private List<SkillDataModel> skills = new ArrayList<>();
     private List<ItemDataModel> items = new ArrayList<>();
     private List<FollowerDataModel> followers = new ArrayList<>();

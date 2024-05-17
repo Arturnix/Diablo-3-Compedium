@@ -3,11 +3,13 @@ package pl.arturzgodka;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.arturzgodka.apihandlers.AccountHandlerApi;
+import pl.arturzgodka.apihandlers.CharacterHandlerApi;
 import pl.arturzgodka.databaseutils.CharacterDao;
 import pl.arturzgodka.databaseutils.UserDao;
 import pl.arturzgodka.datamodel.CharacterDataModel;
 import pl.arturzgodka.datamodel.UserDataModel;
 import pl.arturzgodka.jsonmappers.AccountMapper;
+import pl.arturzgodka.jsonmappers.CharacterMapper;
 import pl.arturzgodka.token.FetchToken;
 import pl.arturzgodka.token.Token;
 
@@ -21,22 +23,29 @@ public class Diablo3CompediumApplication {
         SpringApplication.run(Diablo3CompediumApplication.class, args);
 
         AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
+        CharacterHandlerApi characterHandlerApi = new CharacterHandlerApi();
         FetchToken fetchToken = new FetchToken();
         AccountMapper accountMapper = new AccountMapper();
+        CharacterMapper characterMapper = new CharacterMapper();
         UserDao userDao = new UserDao();
-        CharacterDao charDao = new CharacterDao();
 
         List<CharacterDataModel> charactersList = accountMapper.fetchHeroesList(accountHandlerApi.generateRequest("Ghall#2523", fetchToken));
-        UserDataModel userDataModel1 = new UserDataModel("abc@abc.com", "abc", charactersList, "Ghall#2523");
+        List<Integer> charactersId = new ArrayList<>();
         for (CharacterDataModel characterDataModel : charactersList) {
-            characterDataModel.setUser(userDataModel1);
+            charactersId.add(characterDataModel.getId());
         }
 
+        List<CharacterDataModel> fullCharactersList = new ArrayList<>();
+        UserDataModel userDataModel1 = new UserDataModel("abc@abc.com", "abc", fullCharactersList, "Ghall#2523");
+
+        for (Integer characterId : charactersId) {
+            CharacterDataModel characterDataModel = characterMapper.mapHeroToDataModel(characterHandlerApi.generateRequest("Ghall#2523", String.valueOf(characterId), fetchToken));
+            characterDataModel.setUser(userDataModel1);
+            fullCharactersList.add(characterDataModel);
+        }
+
+        userDataModel1.setCharacters(fullCharactersList);
         userDao.saveUser(userDataModel1);
 
-        CharacterDataModel charDataModel1 = new CharacterDataModel(14, "Barb", "Barbarian",  35);
-        charDataModel1.setUser(userDao.findUserByEmail("abc@abc.com"));
-        charDao.saveCharacter(charDataModel1);
     }
-
 }
