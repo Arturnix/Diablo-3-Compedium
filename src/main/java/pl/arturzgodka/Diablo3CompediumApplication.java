@@ -46,10 +46,17 @@ public class Diablo3CompediumApplication {
         for (Integer characterId : charactersId) {
             CharacterDataModel characterDataModel = characterMapper.mapHeroToDataModel(characterHandlerApi.generateRequest("Ghall#2523", String.valueOf(characterId), fetchToken));
             characterDataModel.setUser(userDataModel1);
+
             List<ItemDataModel> itemsOnCharacter = characterDataModel.getItems();
             for(ItemDataModel item : itemsOnCharacter) {
                 item.setCharacterDataModel(characterDataModel);
             }
+
+            List<SkillDataModel> skillsOnCharacter = characterDataModel.getSkills();
+            for(SkillDataModel skill : skillsOnCharacter) {
+                skill.setCharacterDataModel(characterDataModel);
+            }
+
             fullCharactersList.add(characterDataModel);
         }
 

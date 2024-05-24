@@ -56,7 +56,8 @@ public class CharacterDataModel {
     @Column(name = "kills")
     private Map<String, Integer> kills;
     @SuppressWarnings("JpaAttributeTypeInspection")
-    @JdbcTypeCode(SqlTypes.JSON)
+    //@JdbcTypeCode(SqlTypes.JSON)
+    @OneToMany(mappedBy = "characterDataModel", cascade= jakarta.persistence.CascadeType.ALL/*MERGE*/)
     private List<SkillDataModel> skills;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)

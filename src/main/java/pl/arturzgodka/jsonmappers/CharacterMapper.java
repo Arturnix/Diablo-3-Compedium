@@ -70,7 +70,7 @@ public class CharacterMapper {
                         node.get("skills").get(singleSkillType).get(i).get("skill").get("slug").asText(),
                         node.get("skills").get(singleSkillType).get(i).get("skill").get("name").asText(),
                         node.get("skills").get(singleSkillType).get(i).get("skill").get("level").asInt(),
-                        node.get("skills").get(singleSkillType).get(i).get("skill").get("description").asText()
+                        node.get("skills").get(singleSkillType).get(i).get("skill").get("description").asText().replace("\n", " ")
                 );
                 skills.add(skillDataModel);
             }
