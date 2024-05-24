@@ -50,7 +50,7 @@ public class CharacterDataModel {
     private boolean dead;
     @SuppressWarnings("JpaAttributeTypeInspection") //niweluje warning
     @ElementCollection
-    @CollectionTable(name = "character_kills_mapping",
+    @CollectionTable(name = "kills",
             joinColumns = {@JoinColumn(name = "character_id", referencedColumnName = "id")})
     @MapKeyColumn(name = "type")
     @Column(name = "kills")

@@ -5,18 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.arturzgodka.apihandlers.AccountHandlerApi;
 import pl.arturzgodka.apihandlers.CharacterHandlerApi;
 import pl.arturzgodka.databaseutils.CharacterDao;
-import pl.arturzgodka.databaseutils.FollowerDao;
-import pl.arturzgodka.databaseutils.ItemDao;
 import pl.arturzgodka.databaseutils.UserDao;
 import pl.arturzgodka.datamodel.*;
 import pl.arturzgodka.jsonmappers.AccountMapper;
 import pl.arturzgodka.jsonmappers.CharacterMapper;
 import pl.arturzgodka.token.FetchToken;
-import pl.arturzgodka.token.Token;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @SpringBootApplication
