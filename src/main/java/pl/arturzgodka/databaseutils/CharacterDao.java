@@ -18,6 +18,10 @@ public class CharacterDao {
     public void saveCharacter(CharacterDataModel characterDataModel) {
         Session session = sessionFactory.openSession();
         Transaction t = session.beginTransaction();
+        /*List<ItemDataModel> items = characterDataModel.getItems();
+        for(ItemDataModel item : items) {
+            item.setCharacterDataModel(characterDataModel);
+        }*/
         session.merge(characterDataModel);
         t.commit();
         session.close();

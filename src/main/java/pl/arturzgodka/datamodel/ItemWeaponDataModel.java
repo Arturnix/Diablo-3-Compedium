@@ -13,12 +13,18 @@ import java.util.Map;
 public class ItemWeaponDataModel extends ItemDataModel {
     private String minDamage;
     private String maxDamage;
+    private int requiredLevel;
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    @JdbcTypeCode(SqlTypes.JSON)
+    private List<String> itemBodyPartSlots;
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    @JdbcTypeCode(SqlTypes.JSON)
+    private Map<String, List<String>> attributes;
 
     public ItemWeaponDataModel() {
     }
 
     public ItemWeaponDataModel(List<String> itemBodyPartSlots, String id, String name, int requiredLevel, Map<String, List<String>> attributes, String minDamage, String maxDamage) {
-        super(itemBodyPartSlots, id, name, requiredLevel, attributes);
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
     }

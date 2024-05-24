@@ -13,6 +13,7 @@
         <property name="show_sql">true</property> <!-- chce widziec polecenia sql jakie sa wykonywane -->
         <mapping class="pl.arturzgodka.datamodel.UserDataModel"/>
         <mapping class="pl.arturzgodka.datamodel.CharacterDataModel"/>
+        <mapping class="pl.arturzgodka.datamodel.ItemDataModel"/>
         <!-- tak hibernate jest wystarczajaco skonfigurowany aby stworzyc klase DAO: zapisac uzytkownika, sprawdzic czy uzytkownik istnieje, znajdowac uzytkonika przez jego emaila. czyli robic CRUD na nim. -->
     </session-factory>
 </hibernate-configuration>

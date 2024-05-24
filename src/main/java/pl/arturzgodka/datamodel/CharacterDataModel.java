@@ -49,16 +49,22 @@ public class CharacterDataModel {
     private boolean seasonal;
     private boolean dead;
     @SuppressWarnings("JpaAttributeTypeInspection") //niweluje warning
-    @JdbcTypeCode(SqlTypes.JSON)
-    private HashMap<String, Integer> kills;
+    @ElementCollection
+    @CollectionTable(name = "character_kills_mapping",
+            joinColumns = {@JoinColumn(name = "character_id", referencedColumnName = "id")})
+    @MapKeyColumn(name = "type")
+    @Column(name = "kills")
+    private Map<String, Integer> kills;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
     private List<SkillDataModel> skills;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
+    @OneToMany(mappedBy = "characterDataModel", cascade= jakarta.persistence.CascadeType.ALL/*MERGE*/)
     private List<ItemDataModel> items;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
+    //@OneToMany(mappedBy = "characterDataModel", cascade= jakarta.persistence.CascadeType.ALL/*MERGE*/)
     private List<FollowerDataModel> followers;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
@@ -81,7 +87,7 @@ public class CharacterDataModel {
 
    public CharacterDataModel(int id, String name, String classHero, int level, int paragonLevel,
                              boolean hardcore, boolean seasonal, boolean dead,
-                             HashMap<String, Integer> kills, List<SkillDataModel> skills,
+                             Map<String, Integer> kills, List<SkillDataModel> skills,
                              List<ItemDataModel> items, List<FollowerDataModel> followers, HashMap<String, Integer> stats) {
         this.id = id;
         this.name = name;

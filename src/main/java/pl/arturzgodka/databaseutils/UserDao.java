@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import pl.arturzgodka.datamodel.CharacterDataModel;
 import pl.arturzgodka.datamodel.UserDataModel;
 
 public class UserDao {

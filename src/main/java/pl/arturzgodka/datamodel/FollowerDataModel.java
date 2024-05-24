@@ -1,9 +1,7 @@
 package pl.arturzgodka.datamodel;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -26,6 +24,11 @@ public class FollowerDataModel {
     @SuppressWarnings("JpaAttributeTypeInspection") //niweluje warning
     @JdbcTypeCode(SqlTypes.JSON)
     private Map<String, Integer> stats;
+
+    /*@ManyToOne(fetch=FetchType.LAZY)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinColumn(name = "character_id")
+    private CharacterDataModel characterDataModel;*/
 
     public FollowerDataModel() {
     }

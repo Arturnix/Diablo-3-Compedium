@@ -49,11 +49,11 @@ public class CharacterMapper {
         );
     }
 
-    private HashMap fetchKills(JsonNode node) {
+    private Map<String, Integer> fetchKills(JsonNode node) {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        return objectMapper.convertValue(node.get("kills"), new TypeReference<HashMap<String, Integer>>(){});
+        return objectMapper.convertValue(node.get("kills"), new TypeReference<Map<String, Integer>>(){});
     }
 
     private List<SkillDataModel> fetchSkills(JsonNode node) {
