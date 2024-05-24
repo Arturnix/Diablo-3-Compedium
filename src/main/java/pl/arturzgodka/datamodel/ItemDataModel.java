@@ -25,6 +25,11 @@ public class ItemDataModel {
     @JoinColumn(name = "character_id") //join column jest zawsze tam gdzie adnotacja many to one
     private CharacterDataModel characterDataModel;
 
+    @ManyToOne(fetch=FetchType.LAZY)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinColumn(name = "follower_id") //join column jest zawsze tam gdzie adnotacja many to one
+    private FollowerDataModel followerDataModel;
+
     /*protected int requiredLevel;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
@@ -64,6 +69,14 @@ public class ItemDataModel {
 
     public void setCharacterDataModel(CharacterDataModel characterDataModel) {
         this.characterDataModel = characterDataModel;
+    }
+
+    public FollowerDataModel getFollowerDataModel() {
+        return followerDataModel;
+    }
+
+    public void setFollowerDataModel(FollowerDataModel followerDataModel) {
+        this.followerDataModel = followerDataModel;
     }
 
     @Override

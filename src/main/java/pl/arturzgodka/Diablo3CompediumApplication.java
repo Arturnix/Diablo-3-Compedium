@@ -52,6 +52,14 @@ public class Diablo3CompediumApplication {
                 skill.setCharacterDataModel(characterDataModel);
             }
 
+            List<FollowerDataModel> followersOnCharacter = characterDataModel.getFollowers();
+            for(FollowerDataModel follower : followersOnCharacter) {
+                follower.setCharacterDataModel(characterDataModel);
+                for(int i = 0; i < follower.getItems().size(); i++) {
+                    follower.getItems().get(i).setFollowerDataModel(follower);
+                    follower.getItems().get(i).setCharacterDataModel(characterDataModel);
+                }
+            }
             fullCharactersList.add(characterDataModel);
         }
 

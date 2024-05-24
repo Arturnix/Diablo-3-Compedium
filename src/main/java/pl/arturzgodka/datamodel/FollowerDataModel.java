@@ -19,16 +19,17 @@ public class FollowerDataModel {
     private String name;
     private int level;
     @SuppressWarnings("JpaAttributeTypeInspection")
-    @JdbcTypeCode(SqlTypes.JSON)
+    //@JdbcTypeCode(SqlTypes.JSON)
+    @OneToMany(mappedBy = "followerDataModel", cascade= jakarta.persistence.CascadeType.ALL/*MERGE*/)
     private List<ItemDataModel> items;
     @SuppressWarnings("JpaAttributeTypeInspection") //niweluje warning
     @JdbcTypeCode(SqlTypes.JSON)
     private Map<String, Integer> stats;
 
-    /*@ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch= FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinColumn(name = "character_id")
-    private CharacterDataModel characterDataModel;*/
+    @JoinColumn(name = "character_id") //join column jest zawsze tam gdzie adnotacja many to one
+    private CharacterDataModel characterDataModel;
 
     public FollowerDataModel() {
     }
@@ -38,6 +39,24 @@ public class FollowerDataModel {
         this.level = level;
         this.items = items;
         this.stats = stats;
+    }
+
+    public CharacterDataModel getCharacterDataModel() {
+        return characterDataModel;
+    }
+
+    public List<ItemDataModel> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemDataModel> items) {
+        this.items = items;
+    }
+
+    public void setCharacterDataModel(CharacterDataModel characterDataModel) {
+        this.characterDataModel = characterDataModel;
+
+
     }
 
     @Override

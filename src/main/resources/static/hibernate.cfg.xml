@@ -15,6 +15,7 @@
         <mapping class="pl.arturzgodka.datamodel.CharacterDataModel"/>
         <mapping class="pl.arturzgodka.datamodel.ItemDataModel"/>
         <mapping class="pl.arturzgodka.datamodel.SkillDataModel"/>
+        <mapping class="pl.arturzgodka.datamodel.FollowerDataModel"/>
         <!-- tak hibernate jest wystarczajaco skonfigurowany aby stworzyc klase DAO: zapisac uzytkownika, sprawdzic czy uzytkownik istnieje, znajdowac uzytkonika przez jego emaila. czyli robic CRUD na nim. -->
     </session-factory>
 </hibernate-configuration>

@@ -64,8 +64,8 @@ public class CharacterDataModel {
     @OneToMany(mappedBy = "characterDataModel", cascade= jakarta.persistence.CascadeType.ALL/*MERGE*/)
     private List<ItemDataModel> items;
     @SuppressWarnings("JpaAttributeTypeInspection")
-    @JdbcTypeCode(SqlTypes.JSON)
-    //@OneToMany(mappedBy = "characterDataModel", cascade= jakarta.persistence.CascadeType.ALL/*MERGE*/)
+    //@JdbcTypeCode(SqlTypes.JSON)
+    @OneToMany(mappedBy = "characterDataModel", cascade= jakarta.persistence.CascadeType.ALL/*MERGE*/)
     private List<FollowerDataModel> followers;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
