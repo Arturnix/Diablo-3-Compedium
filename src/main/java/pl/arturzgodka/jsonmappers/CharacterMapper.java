@@ -103,7 +103,7 @@ public class CharacterMapper {
         List<FollowerDataModel> followers = new ArrayList<>();
         List<String> followersKeys = new ArrayList<>();
         List<ItemDataModel> items = new ArrayList<>();
-        HashMap<String, Integer> followerStats = new HashMap<String, Integer>();
+        Map<String, Integer> followerStats;
         Iterator<String> iterator = node.get("followers").fieldNames();
         iterator.forEachRemaining(followersKeys::add);
 
@@ -120,11 +120,11 @@ public class CharacterMapper {
         return followers;
     }
 
-    private HashMap fetchHeroStats(JsonNode node) {
+    private Map fetchHeroStats(JsonNode node) {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        return objectMapper.convertValue(node.get("stats"), new TypeReference<HashMap<String, Integer>>(){});
+        return objectMapper.convertValue(node.get("stats"), new TypeReference<Map<String, Integer>>(){});
     }
 
     public CharacterDataModel mapHeroToDataModel(String accountData) {

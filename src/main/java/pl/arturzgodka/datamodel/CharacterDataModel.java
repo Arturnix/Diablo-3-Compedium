@@ -68,8 +68,12 @@ public class CharacterDataModel {
     @OneToMany(mappedBy = "characterDataModel", cascade= jakarta.persistence.CascadeType.ALL/*MERGE*/)
     private List<FollowerDataModel> followers;
     @SuppressWarnings("JpaAttributeTypeInspection")
-    @JdbcTypeCode(SqlTypes.JSON)
-    private HashMap<String, Integer> stats;
+    @ElementCollection
+    @CollectionTable(name = "stats",
+            joinColumns = {@JoinColumn(name = "character_id", referencedColumnName = "id")})
+    @MapKeyColumn(name = "type")
+    @Column(name = "value")
+    private Map<String, Integer> stats;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @Cascade(CascadeType.SAVE_UPDATE)
@@ -89,7 +93,7 @@ public class CharacterDataModel {
    public CharacterDataModel(int id, String name, String classHero, int level, int paragonLevel,
                              boolean hardcore, boolean seasonal, boolean dead,
                              Map<String, Integer> kills, List<SkillDataModel> skills,
-                             List<ItemDataModel> items, List<FollowerDataModel> followers, HashMap<String, Integer> stats) {
+                             List<ItemDataModel> items, List<FollowerDataModel> followers, Map<String, Integer> stats) {
         this.id = id;
         this.name = name;
         this.classHero = classHero;
@@ -185,7 +189,7 @@ public class CharacterDataModel {
         this.followers = followers;
     }
 
-    public void setStats(HashMap<String, Integer> stats) {
+    public void setStats(Map<String, Integer> stats) {
         this.stats = stats;
     }
 

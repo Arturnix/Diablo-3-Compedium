@@ -23,7 +23,11 @@ public class FollowerDataModel {
     @OneToMany(mappedBy = "followerDataModel", cascade= jakarta.persistence.CascadeType.ALL/*MERGE*/)
     private List<ItemDataModel> items;
     @SuppressWarnings("JpaAttributeTypeInspection") //niweluje warning
-    @JdbcTypeCode(SqlTypes.JSON)
+    @ElementCollection
+    @CollectionTable(name = "stats_follower",
+            joinColumns = {@JoinColumn(name = "follower_id", referencedColumnName = "id")})
+    @MapKeyColumn(name = "type")
+    @Column(name = "value")
     private Map<String, Integer> stats;
 
     @ManyToOne(fetch= FetchType.LAZY)
