@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import pl.arturzgodka.datamodel.CharacterDataModel;
 import pl.arturzgodka.datamodel.UserDataModel;
 
 public class UserDao {
@@ -23,27 +24,15 @@ public class UserDao {
     }
 
     public void deleteUser(UserDataModel userDataModel) { //instancja zalogowanego uzytkownika aby tylko on sam mogl wykonac operacje usuniecia konta, na ktore jest zalogowany.
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.remove(userDataModel);
-        transaction.commit();
-        session.close();
-    }
-
-    public void deleteUser(long id) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<UserDataModel> userQuery = cb.createQuery(UserDataModel.class);
-        Root<UserDataModel> root = userQuery.from(UserDataModel.class);
-        userQuery.select(root).where(cb.equal(root.get("id"), id));
-        session.remove(session.createQuery(userQuery).getSingleResult());
-        transaction.commit();
-        session.close();
-    }
-
-    private boolean userExists(UserDataModel userDataModel) {
-        return findUserByEmail(userDataModel.getEmail()) != null;
+        if(findUserByEmail(userDataModel.getEmail()) != null) {
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            session.remove(userDataModel);
+            transaction.commit();
+            session.close();
+        } else {
+            System.out.println("User not found!");
+        }
     }
 
     public UserDataModel findUserByEmail(String email) {
@@ -52,8 +41,7 @@ public class UserDao {
         CriteriaQuery<UserDataModel> userQuery = cb.createQuery(UserDataModel.class);
         Root<UserDataModel> root = userQuery.from(UserDataModel.class);
         userQuery.select(root).where(cb.equal(root.get("email"), email)); //tworze query. Tlumaczenie sql na jazyk javowy
-        UserDataModel userDataModel = session.createQuery(userQuery).getSingleResultOrNull(); //tworze tymczasowego usera aby moc go w razie potrzeby degubowac.
-        return userDataModel;
+        return session.createQuery(userQuery).getSingleResultOrNull();
     }
 
     public void changeUserBattleTag(String email, String battleTag) {

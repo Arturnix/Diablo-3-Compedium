@@ -1,19 +1,45 @@
 package pl.arturzgodka.datamodel;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.List;
 import java.util.Map;
 
-
+@Entity
+@Table(name="items")
 public class ItemDataModel {
+
+    @Id
+    @GeneratedValue
+    @Column(unique = true)
+    private long itemId;
+
     protected String bodyPart;
     protected String id;
     protected String name;
-    protected int requiredLevel;
-    protected List<String> itemBodyPartSlots;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinColumn(name = "character_id") //join column jest zawsze tam gdzie adnotacja many to one
+    private CharacterDataModel characterDataModel;
 
-    protected Map<String, List<String>> attributes; //(key is the primary/secondary attribute, value is list of attributes)
+    @ManyToOne(fetch=FetchType.LAZY)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinColumn(name = "follower_id") //join column jest zawsze tam gdzie adnotacja many to one
+    private FollowerDataModel followerDataModel;
+
+    /*protected int requiredLevel;
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    @JdbcTypeCode(SqlTypes.JSON)
+    protected List<String> itemBodyPartSlots;
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    @JdbcTypeCode(SqlTypes.JSON)
+    protected Map<String, List<String>> attributes;*/ //(key is the primary/secondary attribute, value is list of attributes)
+
+    public ItemDataModel() {
+    }
 
     public ItemDataModel(String bodyPart, String id, String name) {
         this.bodyPart = bodyPart;
@@ -21,13 +47,13 @@ public class ItemDataModel {
         this.name = name;
     }
 
-    public ItemDataModel(List<String> itemBodyPartSlots, String id, String name, int requiredLevel, Map<String, List<String>> attributes) {
+    /*public ItemDataModel(List<String> itemBodyPartSlots, String id, String name, int requiredLevel, Map<String, List<String>> attributes) {
         this.itemBodyPartSlots = itemBodyPartSlots;
         this.id = id;
         this.name = name;
         this.requiredLevel = requiredLevel;
         this.attributes = attributes;
-    }
+    }*/
 
     public String getId() {
         return this.id;
@@ -37,19 +63,51 @@ public class ItemDataModel {
         return this.name;
     }
 
-    public List<String> getItemBodyPartSlots() {
-        return this.itemBodyPartSlots;
+    public CharacterDataModel getCharacterDataModel() {
+        return characterDataModel;
     }
 
+    public void setCharacterDataModel(CharacterDataModel characterDataModel) {
+        this.characterDataModel = characterDataModel;
+    }
+
+    public FollowerDataModel getFollowerDataModel() {
+        return followerDataModel;
+    }
+
+    public void setFollowerDataModel(FollowerDataModel followerDataModel) {
+        this.followerDataModel = followerDataModel;
+    }
 
     @Override
-    public String toString() {
+    public String toString() { //ItemDataModel pobrany przez CharacterHandlerApi
         return "ItemDataModel{" +
                 "bodyPart='" + bodyPart + '\'' +
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", requiredLevel='" + requiredLevel + '\'' +
-                ", attributes='" + attributes + '\'' +
                 '}';
     }
+
+    /*public List<String> getItemBodyPartSlots() {
+        return this.itemBodyPartSlots;
+    }*/
+
+    /*@Override
+    public String toString() {
+        if(attributes == null) { //ItemDataModel pobrany przez CharacterHandlerApi
+            return "ItemDataModel{" +
+                    "bodyPart='" + bodyPart + '\'' +
+                    ", id='" + id + '\'' +
+                    ", name='" + name + '\'' +
+                    '}';
+        } else {
+            return "ItemDataModel{" + //ItemDataModel pobrany przez ItemHandlerApi. usunac jesli tych pol juz nie ma w klasie
+                    "bodyPart='" + bodyPart + '\'' +
+                    ", id='" + id + '\'' +
+                    ", name='" + name + '\'' +
+                    ", requiredLevel='" + requiredLevel + '\'' +
+                    ", attributes='" + attributes + '\'' +
+                    '}';
+        }
+    }*/
 }

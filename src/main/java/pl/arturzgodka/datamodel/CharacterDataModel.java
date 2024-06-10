@@ -1,9 +1,15 @@
 package pl.arturzgodka.datamodel;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,29 +18,65 @@ import java.util.Map;
 public class CharacterDataModel {
 
     @Id
-    private int id;
+   /* @NotNull(message = "Id may not be null")
+    @NotEmpty(message = "Id may not be empty")
+    @NotBlank(message = "Id may not be blank")*/
+    @Column(unique = true)
+    private int id; //lub int
+    /*@NotNull(message = "Name may not be null")
+    @NotEmpty(message = "Name may not be empty")
+    @NotBlank(message = "Name may not be blank")*/
     private String name;
+    /*@NotNull(message = "Hero class may not be null")
+    @NotEmpty(message = "Hero class may not be empty")
+    @NotBlank(message = "Hero class may not be blank")*/
     private String classHero;
+    /*@NotNull(message = "Email may not be null")
+    @NotEmpty(message = "Email may not be empty")
+    @NotBlank(message = "Email may not be blank")*/
     private int level;
+    /*@NotNull(message = "Email may not be null")
+    @NotEmpty(message = "Email may not be empty")
+    @NotBlank(message = "Email may not be blank")*/
     private int paragonLevel;
+    /*@NotNull(message = "Email may not be null")
+    @NotEmpty(message = "Email may not be empty")
+    @NotBlank(message = "Email may not be blank")*/
     private boolean hardcore;
+   /* @NotNull(message = "Email may not be null")
+    @NotEmpty(message = "Email may not be empty")
+    @NotBlank(message = "Email may not be blank")*/
     private boolean seasonal;
     private boolean dead;
     @SuppressWarnings("JpaAttributeTypeInspection") //niweluje warning
-    @JdbcTypeCode(SqlTypes.JSON)
+    @ElementCollection
+    @CollectionTable(name = "kills",
+            joinColumns = {@JoinColumn(name = "character_id", referencedColumnName = "id")})
+    @MapKeyColumn(name = "type")
+    @Column(name = "kills")
     private Map<String, Integer> kills;
     @SuppressWarnings("JpaAttributeTypeInspection")
-    @JdbcTypeCode(SqlTypes.JSON)
+    //@JdbcTypeCode(SqlTypes.JSON)
+    @OneToMany(mappedBy = "characterDataModel", cascade= jakarta.persistence.CascadeType.ALL/*MERGE*/)
     private List<SkillDataModel> skills;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
+    @OneToMany(mappedBy = "characterDataModel", cascade= jakarta.persistence.CascadeType.ALL/*MERGE*/)
     private List<ItemDataModel> items;
-    /*private List<FollowerDataModel> followers;*/
     @SuppressWarnings("JpaAttributeTypeInspection")
-    @JdbcTypeCode(SqlTypes.JSON)
+    //@JdbcTypeCode(SqlTypes.JSON)
+    @OneToMany(mappedBy = "characterDataModel", cascade= jakarta.persistence.CascadeType.ALL/*MERGE*/)
+    private List<FollowerDataModel> followers;
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    @ElementCollection
+    @CollectionTable(name = "stats",
+            joinColumns = {@JoinColumn(name = "character_id", referencedColumnName = "id")})
+    @MapKeyColumn(name = "type")
+    @Column(name = "value")
     private Map<String, Integer> stats;
 
     @ManyToOne(fetch=FetchType.LAZY)
+    @Cascade(CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "user_id") //join column jest zawsze tam gdzie adnotacja many to one
     private UserDataModel userDataModel;
 
@@ -50,8 +92,8 @@ public class CharacterDataModel {
 
    public CharacterDataModel(int id, String name, String classHero, int level, int paragonLevel,
                              boolean hardcore, boolean seasonal, boolean dead,
-                             Map<String, Integer> kills, /*List<SkillDataModel> skills,
-                             List<ItemDataModel> items,*/ /*List<FollowerDataModel> followers,*/ Map<String, Integer> stats) {
+                             Map<String, Integer> kills, List<SkillDataModel> skills,
+                             List<ItemDataModel> items, List<FollowerDataModel> followers, Map<String, Integer> stats) {
         this.id = id;
         this.name = name;
         this.classHero = classHero;
@@ -61,9 +103,9 @@ public class CharacterDataModel {
         this.seasonal = seasonal;
         this.dead = dead;
         this.kills = kills;
-        //this.skills = skills;
-        //this.items = items;
-        /*this.followers = followers;*/
+        this.skills = skills;
+        this.items = items;
+        this.followers = followers;
         this.stats = stats;
     }
 
@@ -87,17 +129,17 @@ public class CharacterDataModel {
         return this.kills;
     }
 
-    /*public List<SkillDataModel> getSkills() {
+    public List<SkillDataModel> getSkills() {
         return this.skills;
     }
 
     public List<ItemDataModel> getItems() {
         return this.items;
-    }*/
+    }
 
-    /*public List<FollowerDataModel> getFollowers() {
+    public List<FollowerDataModel> getFollowers() {
         return this.followers;
-    }*/
+    }
 
     public Map<String, Integer> getStats() {
         return this.stats;
@@ -107,8 +149,48 @@ public class CharacterDataModel {
         return userDataModel;
     }
 
+    public boolean isHardcore() {
+        return hardcore;
+    }
+
     public void setUser(UserDataModel userDataModel) {
         this.userDataModel = userDataModel;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setParagonLevel(int paragonLevel) {
+        this.paragonLevel = paragonLevel;
+    }
+
+    public void setSeasonal(boolean seasonal) {
+        this.seasonal = seasonal;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
+
+    public void setKills(HashMap<String, Integer> kills) {
+        this.kills = kills;
+    }
+
+    public void setSkills(List<SkillDataModel> skills) {
+        this.skills = skills;
+    }
+
+    public void setItems(List<ItemDataModel> items) {
+        this.items = items;
+    }
+
+    public void setFollowers(List<FollowerDataModel> followers) {
+        this.followers = followers;
+    }
+
+    public void setStats(Map<String, Integer> stats) {
+        this.stats = stats;
     }
 
     public static void showHeroesListForSpecificAccount(List<CharacterDataModel> charactersOnProvidedAccount) {
@@ -144,9 +226,9 @@ public class CharacterDataModel {
                 ", seasonal=" + seasonal +
                 ", dead=" + dead +
                 ", kills=" + kills +
-                //", skills=" + skills +
-               // ", items=" + items +
-                    /*", followers=" + followers +*/
+                ", skills=" + skills +
+                ", items=" + items +
+                ", followers=" + followers +
                 ", stats=" + stats +
                 '}';
         }
