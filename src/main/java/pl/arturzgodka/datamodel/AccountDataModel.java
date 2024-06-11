@@ -1,8 +1,12 @@
 package pl.arturzgodka.datamodel;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -14,7 +18,12 @@ import java.util.Map;
 public class AccountDataModel {
 
     @Id
+    @NotNull(message = "BattleTag may not be null")
+    @NotEmpty(message = "BattleTag not be empty")
+    @NotBlank(message = "BattleTag not be blank")
+    @Column(unique = true)
     private String battleTag;
+    @NotNull(message = "Paragon level may not be null")
     private int paragonLevel;
     private String guildName;
     @SuppressWarnings("JpaAttributeTypeInspection")
