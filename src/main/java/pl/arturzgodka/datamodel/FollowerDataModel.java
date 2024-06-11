@@ -5,10 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +24,6 @@ public class FollowerDataModel {
     @NotNull(message = "Follower level may not be null")
     private int level;
     @SuppressWarnings("JpaAttributeTypeInspection")
-    //@JdbcTypeCode(SqlTypes.JSON)
     @OneToMany(mappedBy = "followerDataModel", cascade= jakarta.persistence.CascadeType.ALL/*MERGE*/)
     private List<ItemDataModel> items;
     @SuppressWarnings("JpaAttributeTypeInspection") //niweluje warning
