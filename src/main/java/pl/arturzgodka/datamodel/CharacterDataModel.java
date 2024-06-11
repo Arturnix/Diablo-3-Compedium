@@ -18,35 +18,26 @@ import java.util.Map;
 public class CharacterDataModel {
 
     @Id
-   /* @NotNull(message = "Id may not be null")
-    @NotEmpty(message = "Id may not be empty")
-    @NotBlank(message = "Id may not be blank")*/
+    @NotNull(message = "Id may not be null")
     @Column(unique = true)
-    private int id; //lub int
-    /*@NotNull(message = "Name may not be null")
+    private int id;
+    @NotNull(message = "Name may not be null")
     @NotEmpty(message = "Name may not be empty")
-    @NotBlank(message = "Name may not be blank")*/
+    @NotBlank(message = "Name may not be blank")
     private String name;
-    /*@NotNull(message = "Hero class may not be null")
+    @NotNull(message = "Hero class may not be null")
     @NotEmpty(message = "Hero class may not be empty")
-    @NotBlank(message = "Hero class may not be blank")*/
+    @NotBlank(message = "Hero class may not be blank")
     private String classHero;
-    /*@NotNull(message = "Email may not be null")
-    @NotEmpty(message = "Email may not be empty")
-    @NotBlank(message = "Email may not be blank")*/
+    @NotNull(message = "Level may not be null")
     private int level;
-    /*@NotNull(message = "Email may not be null")
-    @NotEmpty(message = "Email may not be empty")
-    @NotBlank(message = "Email may not be blank")*/
+    @NotNull(message = "Paragon level may not be null")
     private int paragonLevel;
-    /*@NotNull(message = "Email may not be null")
-    @NotEmpty(message = "Email may not be empty")
-    @NotBlank(message = "Email may not be blank")*/
+    @NotNull(message = "Is hardcore character may not be null")
     private boolean hardcore;
-   /* @NotNull(message = "Email may not be null")
-    @NotEmpty(message = "Email may not be empty")
-    @NotBlank(message = "Email may not be blank")*/
+    @NotNull(message = "Is seasonal character may not be null")
     private boolean seasonal;
+    @NotNull(message = "Is dead character may not be null")
     private boolean dead;
     @SuppressWarnings("JpaAttributeTypeInspection") //niweluje warning
     @ElementCollection
