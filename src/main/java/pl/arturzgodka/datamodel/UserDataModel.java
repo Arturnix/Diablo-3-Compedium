@@ -13,22 +13,23 @@ import java.util.List;
 public class UserDataModel {
     @Id
     @GeneratedValue
+    @Column(unique = true)
     private long id;
     @Email
-    /*@NotNull (message = "Email may not be null")
+    @NotNull (message = "Email may not be null")
     @NotEmpty (message = "Email may not be empty")
-    @NotBlank (message = "Email may not be blank")*/
+    @NotBlank (message = "Email may not be blank")
     @Column(unique = true)
     private String email;
-    /*@NotNull (message = "Password may not be null")
+    @NotNull (message = "Password may not be null")
     @NotEmpty (message = "Password may not be empty")
-    @NotBlank (message = "Password may not be blank")*/
+    @NotBlank (message = "Password may not be blank")
     private String password;
     @OneToMany(mappedBy = "userDataModel", cascade=CascadeType.ALL/*MERGE*/) //1 user ma wiele postaci przypisanych do BattleTag - konta.
     private List<CharacterDataModel> characterDataModels;
-    /*@NotNull (message = "BattleTag may not be null")
+    @NotNull (message = "BattleTag may not be null")
     @NotEmpty (message = "BattleTag may not be empty")
-    @NotBlank (message = "BattleTag may not be blank")*/
+    @NotBlank (message = "BattleTag may not be blank")
     @Column(unique = true)
     private String battleTag;
 
