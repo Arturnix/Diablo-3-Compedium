@@ -1,6 +1,9 @@
 package pl.arturzgodka.datamodel;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.Cascade;
 
 @Entity
@@ -9,12 +12,22 @@ public class SkillDataModel {
 
     @Id
     @GeneratedValue
+    @NotNull(message = "Skill id may not be null")
     @Column(unique = true)
     private long skillId;
+    @NotNull(message = "Skill type may not be null")
+    @NotEmpty(message = "Skill type may not be empty")
+    @NotBlank(message = "Skill type may not be blank")
     private String type;
+    @NotNull(message = "Skill slug may not be null")
+    @NotEmpty(message = "Skill slug may not be empty")
+    @NotBlank(message = "Skill slug may not be blank")
     private String slug;
-    //@Id
+    @NotNull(message = "Skill name may not be null")
+    @NotEmpty(message = "Skill name may not be empty")
+    @NotBlank(message = "Skill name may not be blank")
     private String name;
+    @NotNull(message = "Skill level may not be null")
     private int level;
     //@Lob //pozwala na zapis ciagu znakow > 255 znakow. Zapisuje jako obiekt w bazie danych
     @Column(length = 1000)
