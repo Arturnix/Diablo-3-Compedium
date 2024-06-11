@@ -19,7 +19,7 @@ public class ItemArmorDataModel extends ItemDataModel {
     private List<String> itemBodyPartSlots;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
-    private Map<String, List<String>> attributes;
+    private Map<String, List<String>> attributes; //(key is the primary/secondary attribute, value is list of attributes)
 
     public ItemArmorDataModel() {
     }
