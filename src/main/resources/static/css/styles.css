@@ -31,6 +31,30 @@
   font-size: 2rem;
 }
 
+#homepage-title {
+  text-align: center;
+}
+
+/* font */
+
+@font-face {
+  font-family: "DiabloHeavy"; /* Give your font a unique name */
+  src: url(/font/diablo_h.ttf) format('truetype');
+  font-weight: normal;  /* Specify the font's weight */
+  font-style: normal;  /* Specify the font's style */
+}
+
+.font-diablo {
+  font-family: "DiabloHeavy", sans-serif;
+  color: blanchedalmond;
+}
+
+.font-diablo-p {
+  font-family: "DiabloHeavy", sans-serif;
+  color: blanchedalmond;
+  font-size: small;
+}
+
 /* footer */
 
 footer {
