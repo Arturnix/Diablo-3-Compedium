@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.arturzgodka.apihandlers.AccountHandlerApi;
 import pl.arturzgodka.apihandlers.CharacterHandlerApi;
+import pl.arturzgodka.apihandlers.SkillHandlerApi;
 import pl.arturzgodka.databaseutils.CharacterDao;
 import pl.arturzgodka.databaseutils.UserDao;
 import pl.arturzgodka.datamodel.*;
@@ -19,9 +20,9 @@ import java.util.List;
 public class Diablo3CompediumApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Diablo3CompediumApplication.class, args);
+        //SpringApplication.run(Diablo3CompediumApplication.class, args);
 
-        AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
+        /*AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
         CharacterHandlerApi characterHandlerApi = new CharacterHandlerApi();
         FetchToken fetchToken = new FetchToken();
         AccountMapper accountMapper = new AccountMapper();
@@ -64,8 +65,11 @@ public class Diablo3CompediumApplication {
         }
 
         userDataModel1.setCharacters(fullCharactersList);
-        userDao.saveUser(userDataModel1);
+        userDao.saveUser(userDataModel1);*/
 
         //CharacterDataModel characterDataModel = characterMapper.mapHeroToDataModel(characterHandlerApi.generateRequest("Ghall#2523", "170761702", fetchToken));
+
+        FetchToken fetchToken = new FetchToken();
+        System.out.println(SkillHandlerApi.generateRequest("barbarian", "bash", fetchToken));
     }
 }
