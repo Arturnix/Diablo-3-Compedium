@@ -70,6 +70,6 @@ public class Diablo3CompediumApplication {
         //CharacterDataModel characterDataModel = characterMapper.mapHeroToDataModel(characterHandlerApi.generateRequest("Ghall#2523", "170761702", fetchToken));
 
         FetchToken fetchToken = new FetchToken();
-        System.out.println(SkillHandlerApi.generateRequest("barbarian", "bash", fetchToken));
+        System.out.println(SkillHandlerApi.generateRequest("barbarian", null, fetchToken));
     }
 }
