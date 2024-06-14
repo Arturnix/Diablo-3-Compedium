@@ -1,0 +1,98 @@
+/* VIEW Homepage */
+
+.login-page-form {
+  min-height: 100vh !important;
+  background-image: url(https://assets.diablo3.blizzard.com/d3/media/artwork/artwork-0078-large.jpg);
+  background-size: 100% 100%;
+}
+
+.login-page-custom {
+  border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+  border-top-left-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
+}
+
+@media screen and (max-width: 1280px) {
+  #title > .header-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+    display: block;
+    padding-left: 1%;
+  }
+}
+
+.title-login-page {
+  font-family: Montserrat;
+  color: rgb(247, 196, 42);
+  text-align: center;
+  padding: 1% 0;
+  font-size: 2rem;
+}
+
+#homepage-title {
+  text-align: center;
+}
+
+/* font */
+
+@font-face {
+  font-family: "DiabloHeavy"; /* Give your font a unique name */
+  src: url(/font/diablo_h.ttf) format('truetype');
+  font-weight: normal;  /* Specify the font's weight */
+  font-style: normal;  /* Specify the font's style */
+}
+
+.font-diablo {
+  font-family: "DiabloHeavy", sans-serif;
+  color: blanchedalmond;
+}
+
+.font-diablo-p {
+  font-family: "DiabloHeavy", sans-serif;
+  color: blanchedalmond;
+  font-size: small;
+}
+
+/* footer */
+
+footer {
+  background-color: #fed049;
+  text-align: center;
+  height: 30px;
+  position: static;
+  bottom: 0;
+  width: 100%;
+}
+
+/* form */
+
+.form-control {
+  text-align: left;
+  background-color: transparent;
+}
+
+/* input */
+
+.input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+/* icon */
+
+.icon-login {
+  padding: 10px;
+  background: grey;
+  color: rgb(247, 196, 42);
+  min-width: 50px;
+  text-align: center;
+  border-radius: 12%;
+}
+
+.icon-list {
+  padding: 7px;
+}
