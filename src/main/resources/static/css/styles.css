@@ -55,6 +55,19 @@
   font-size: small;
 }
 
+/* links */
+a {
+  color: blanchedalmond;
+  text-decoration: none;
+}
+
+a:hover {
+  font-family: "DiabloHeavy", sans-serif;
+  text-decoration: none;
+  color: blanchedalmond;
+  cursor:pointer;
+}
+
 /* footer */
 
 footer {
