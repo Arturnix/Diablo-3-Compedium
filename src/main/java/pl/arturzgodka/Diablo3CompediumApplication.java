@@ -20,7 +20,7 @@ import java.util.List;
 public class Diablo3CompediumApplication {
 
     public static void main(String[] args) {
-        //SpringApplication.run(Diablo3CompediumApplication.class, args);
+        SpringApplication.run(Diablo3CompediumApplication.class, args);
 
         /*AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
         CharacterHandlerApi characterHandlerApi = new CharacterHandlerApi();
@@ -69,7 +69,7 @@ public class Diablo3CompediumApplication {
 
         //CharacterDataModel characterDataModel = characterMapper.mapHeroToDataModel(characterHandlerApi.generateRequest("Ghall#2523", "170761702", fetchToken));
 
-        FetchToken fetchToken = new FetchToken();
-        System.out.println(SkillHandlerApi.generateRequest("barbarian", null, fetchToken));
+        /*FetchToken fetchToken = new FetchToken();
+        System.out.println(SkillHandlerApi.generateRequest("barbarian", null, fetchToken));*/
     }
 }
