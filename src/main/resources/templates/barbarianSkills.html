@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Skills</title>
+    <title>Barbarian skills</title>
     <link rel="icon" href="/img/Electrocute.webp"/>
     <!-- CSS Stylesheets -->
     <link
@@ -45,13 +45,40 @@
     />
 </head>
 <body>
-<div class="skills-heroes-classes-page">
-    <h2 class="font-diablo py-3 px-3">Wybierz klasę postaci:</h2>
-
-    <ul th:each="heroClass : ${heroClassesList}" class="characters-list">
-        <li><a href="/barbarianSkills.html"><img class="heroes-classes-list-face" th:classappend="${heroClass}" th:text="${heroClass}"></a></li>
+<div class="skills-page">
+    <div class="input-container mb-4">
+        <a
+        href="heroClasses.html"
+        class="login-btn btn btn-dark btn-block"
+        type="button"
+        >
+            <i class="fa-solid fa-reply icon-list"></i>
+        Back
+        </a>
+    </div>
+    <h2 class="font-diablo py-3 px-3">Barbarian Skills list:</h2>
+    <ul th:each="barbarianSkill : ${barbarianSkills}" class="characters-list">
+        <li><img class="skill-icon" th:src="${barbarianSkill.iconURL}" th:text="${barbarianSkill.name}"></li>
+        <p style="margin-bottom: 0">Level required: <span th:text="${barbarianSkill.level}"></span></p>
+        <p th:text="${barbarianSkill.description}"></p>
+        <h5>Runes:</h5>
+            <ul th:each="rune : ${barbarianSkill.skillRunes}">
+                <li th:text="${rune.name}"></li>
+                    <p>Level required: <span th:text="${rune.level}"></span></br>
+                        <span th:text="${rune.description}"></span>
+                    </p>
+            </ul>
     </ul>
-
+    <div class="input-container mb-4">
+        <a
+                href="heroClasses.html"
+                class="login-btn btn btn-dark btn-block"
+                type="button"
+        >
+            <i class="fa-solid fa-reply icon-list"></i>
+            Back
+        </a>
+    </div>
 </div>
 
 <footer>
