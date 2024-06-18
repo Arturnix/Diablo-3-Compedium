@@ -48,6 +48,25 @@ public class SkillDataModel {
         this.description = description;
     }
 
+    public SkillDataModel(String slug, String name, int level, String description) {
+        this.slug = slug;
+        this.name = name;
+        this.level = level;
+        this.description = description;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
     public CharacterDataModel getCharacterDataModel() {
         return characterDataModel;
     }
