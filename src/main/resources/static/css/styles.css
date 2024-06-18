@@ -110,12 +110,20 @@ footer {
   padding: 7px;
 }
 
+.skill-icon {
+  margin-right: 10px;
+  margin-bottom: 7px;
+}
 /* View skills page */
 
-.skills-page {
+.skills-heroes-classes-page {
   min-height: 100vh !important;
   background-image: url(https://assets.diablo3.blizzard.com/d3/media/artwork/artwork-0133-large.jpg);
   background-size: 100% 100%;
+}
+
+.skills-page {
+  background-color: #172C3B;
 }
 
 .characters-list {
