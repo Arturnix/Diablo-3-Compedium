@@ -34,10 +34,11 @@
             rel="stylesheet"
     />
 </head>
-<body>
+<body id="body-skills-list">
 <div class="skills-page">
-    <div class="input-container mb-4">
+
         <a
+        id="button-fixed-top"
         href="heroClasses.html"
         class="login-btn btn btn-dark btn-block"
         type="button"
@@ -45,8 +46,8 @@
             <i class="fa-solid fa-reply icon-list"></i>
         Back
         </a>
-    </div>
-    <h2 class="font-diablo py-3 px-3">Crusader skills list:</h2>
+
+    <h2 class="font-diablo py-5 px-3">Crusader skills list:</h2>
     <ul th:each="crusaderSkill : ${crusaderSkills}" class="characters-list">
         <li><img class="skill-icon" th:src="${crusaderSkill.iconURL}" th:text="${crusaderSkill.name}"></li>
         <p style="margin-bottom: 0">Level required: <span th:text="${crusaderSkill.level}"></span></p>
@@ -59,16 +60,7 @@
                     </p>
             </ul>
     </ul>
-    <div class="input-container">
-        <a
-                href="heroClasses.html"
-                class="login-btn btn btn-dark btn-block"
-                type="button"
-        >
-            <i class="fa-solid fa-reply icon-list"></i>
-            Back
-        </a>
-    </div>
+
 </div>
 
 <footer>

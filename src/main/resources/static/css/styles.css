@@ -1,5 +1,9 @@
 /* VIEW Homepage */
 
+#body-skills-list {
+  background-color: #172C3B;
+}
+
 .login-page-form {
   min-height: 100vh !important;
   background-image: url(https://assets.diablo3.blizzard.com/d3/media/artwork/artwork-0078-large.jpg);
@@ -114,6 +118,7 @@ footer {
   margin-right: 10px;
   margin-bottom: 7px;
 }
+
 /* View skills page */
 
 .skills-heroes-classes-page {
@@ -124,6 +129,7 @@ footer {
 
 .skills-page {
   background-color: #172C3B;
+  position: relative;
 }
 
 .characters-list {
@@ -167,3 +173,11 @@ footer {
 .Wizard {
   background-position: 100% 50%;
 }
+
+/* button */
+
+#button-fixed-top {
+  position: fixed;
+}
+
+
