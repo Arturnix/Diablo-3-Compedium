@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Barbarian skills</title>
+    <title>Crusader skills</title>
     <link rel="icon" href="/img/Electrocute.webp"/>
     <!-- CSS Stylesheets -->
     <link
@@ -46,13 +46,13 @@
         Back
         </a>
     </div>
-    <h2 class="font-diablo py-3 px-3">Barbarian skills list:</h2>
-    <ul th:each="barbarianSkill : ${barbarianSkills}" class="characters-list">
-        <li><img class="skill-icon" th:src="${barbarianSkill.iconURL}" th:text="${barbarianSkill.name}"></li>
-        <p style="margin-bottom: 0">Level required: <span th:text="${barbarianSkill.level}"></span></p>
-        <p th:text="${barbarianSkill.description}"></p>
+    <h2 class="font-diablo py-3 px-3">Crusader skills list:</h2>
+    <ul th:each="crusaderSkill : ${crusaderSkills}" class="characters-list">
+        <li><img class="skill-icon" th:src="${crusaderSkill.iconURL}" th:text="${crusaderSkill.name}"></li>
+        <p style="margin-bottom: 0">Level required: <span th:text="${crusaderSkill.level}"></span></p>
+        <p th:text="${crusaderSkill.description}"></p>
         <h5>Runes:</h5>
-            <ul th:each="rune : ${barbarianSkill.skillRunes}">
+            <ul th:each="rune : ${crusaderSkill.skillRunes}">
                 <li th:text="${rune.name}"></li>
                     <p>Level required: <span th:text="${rune.level}"></span></br>
                         <span th:text="${rune.description}"></span>
