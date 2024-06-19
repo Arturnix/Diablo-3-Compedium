@@ -26,11 +26,15 @@ public class SkillsController {
             "breath-of-heaven", "dashing-strike", "crippling-wave", "wave-of-light", "exploding-palm", "cyclone-strike", "way-of-the-hundred-fists",
             "serenity", "sevensided-strike", "mantra-of-salvation", "sweeping-wind", "mantra-of-retribution", "inner-sanctuary", "mystic-ally",
             "mantra-of-healing", "mantra-of-conviction", "epiphany");
+    private final List<String> necromancerSkills = Arrays.asList("bone-spikes", "bone-spear", "grim-scythe", "corpse-explosion", "skeletal-mage", "corpse-lance",
+            "command-skeletons", "siphon-blood", "death-nova", "command-golem", "decrepify", "devour", "leech", "bone-armor", "army-of-the-dead", "frailty",
+            "revive", "bone-spirit", "blood-rush", "land-of-the-dead", "simulacrum");
     private final SkillMapper skillMapper = new SkillMapper();
     private List<HeroSkillDataModel> barbarianSkillsFetched = skillMapper.fetchSkills("barbarian", barbarianSkills);
     private List<HeroSkillDataModel> crusaderSkillsFetched = skillMapper.fetchSkills("crusader", crusaderSkills);
     private List<HeroSkillDataModel> demonHunterSkillsFetched = skillMapper.fetchSkills("demon-hunter", demonHunterSkills);
     private List<HeroSkillDataModel> monkSkillsFetched = skillMapper.fetchSkills("monk", monkSkills);
+    private List<HeroSkillDataModel> necromancerSkillsFetched = skillMapper.fetchSkills("necromancer", necromancerSkills);
 
     @RequestMapping("/heroClasses.html")
     public String getHeroesList(Model model) { //model przakzuje aby miec pelnie MVC
@@ -60,5 +64,11 @@ public class SkillsController {
     public String getMonkSkills(Model model) {
         model.addAttribute("monkSkills", monkSkillsFetched);
         return "monkSkills";
+    }
+
+    @RequestMapping("/NecromancerSkills.html")
+    public String getNecromancerSkills(Model model) {
+        model.addAttribute("necromancerSkills", necromancerSkillsFetched);
+        return "necromancerSkills";
     }
 }
