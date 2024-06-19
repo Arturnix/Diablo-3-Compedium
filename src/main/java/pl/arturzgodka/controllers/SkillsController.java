@@ -29,12 +29,16 @@ public class SkillsController {
     private final List<String> necromancerSkills = Arrays.asList("bone-spikes", "bone-spear", "grim-scythe", "corpse-explosion", "skeletal-mage", "corpse-lance",
             "command-skeletons", "siphon-blood", "death-nova", "command-golem", "decrepify", "devour", "leech", "bone-armor", "army-of-the-dead", "frailty",
             "revive", "bone-spirit", "blood-rush", "land-of-the-dead", "simulacrum");
+    private final List<String> witchDoctorSkills = Arrays.asList("poison-dart", "grasp-of-the-dead", "corpse-spiders", "summon-zombie-dogs", "firebats", "horrify",
+            "soul-harvest", "plague-of-toads", "haunt", "sacrifice", "zombie-charger", "spirit-walk", "spirit-barrage", "gargantuan", "locust-swarm", "firebomb",
+            "hex", "acid-cloud", "mass-confusion", "big-bad-voodoo", "wall-of-death", "fetish-army", "piranhas");
     private final SkillMapper skillMapper = new SkillMapper();
     private List<HeroSkillDataModel> barbarianSkillsFetched = skillMapper.fetchSkills("barbarian", barbarianSkills);
     private List<HeroSkillDataModel> crusaderSkillsFetched = skillMapper.fetchSkills("crusader", crusaderSkills);
     private List<HeroSkillDataModel> demonHunterSkillsFetched = skillMapper.fetchSkills("demon-hunter", demonHunterSkills);
     private List<HeroSkillDataModel> monkSkillsFetched = skillMapper.fetchSkills("monk", monkSkills);
     private List<HeroSkillDataModel> necromancerSkillsFetched = skillMapper.fetchSkills("necromancer", necromancerSkills);
+    private List<HeroSkillDataModel> witchDoctorSkillsFetched = skillMapper.fetchSkills("witch-doctor", witchDoctorSkills);
 
     @RequestMapping("/heroClasses.html")
     public String getHeroesList(Model model) { //model przakzuje aby miec pelnie MVC
@@ -70,5 +74,11 @@ public class SkillsController {
     public String getNecromancerSkills(Model model) {
         model.addAttribute("necromancerSkills", necromancerSkillsFetched);
         return "necromancerSkills";
+    }
+
+    @RequestMapping("/Witch-DoctorSkills.html")
+    public String getWitchDoctorSkills(Model model) {
+        model.addAttribute("witchDoctorSkills", witchDoctorSkillsFetched);
+        return "witchDoctorSkills";
     }
 }
