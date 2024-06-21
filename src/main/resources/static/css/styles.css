@@ -136,6 +136,7 @@ footer {
   font-family: Montserrat;
   color: blanchedalmond;
   font-size: larger;
+  list-style-type: none;
 }
 
 .heroes-classes-list-face {
@@ -154,7 +155,7 @@ footer {
   background-position: 0 100%;
 }
 
-.Demon-Hunter {
+.Demon {
   background-position: 100% 33.247754%;
 }
 
@@ -166,7 +167,7 @@ footer {
   background-position: 0 83.333333%;
 }
 
-.Witch-Doctor {
+.Witch {
   background-position: 0 16.538462%;
 }
 

@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 public class SkillsController {
 
-    private final List<String> heroClasses = Arrays.asList("Barbarian", "Crusader", "Demon-Hunter", "Monk", "Necromancer", "Witch-Doctor", "Wizard");
+    private final List<String> heroClasses = Arrays.asList("Barbarian", "Crusader", "Demon Hunter", "Monk", "Necromancer", "Witch Doctor", "Wizard");
     private final List<String> barbarianSkills = Arrays.asList("bash", "hammer-of-the-ancients", "cleave", "ground-stomp", "rend", "leap", "overpower", "frenzy",
             "seismic-slam", "revenge", "threatening-shout", "sprint", "weapon-throw", "earthquake", "whirlwind", "furious-charge",
             "ignore-pain", "battle-rage", "call-of-the-ancients", "ancient-spear", "war-cry", "wrath-of-the-berserker", "avalanche");
@@ -62,7 +62,7 @@ public class SkillsController {
         return "crusaderSkills";
     }
 
-    @RequestMapping("/Demon-HunterSkills.html")
+    @RequestMapping("/Demon HunterSkills.html")
     public String getDemonHunterSkills(Model model) {
         model.addAttribute("demonHunterSkills", demonHunterSkillsFetched);
         return "demonHunterSkills";
@@ -80,7 +80,7 @@ public class SkillsController {
         return "necromancerSkills";
     }
 
-    @RequestMapping("/Witch-DoctorSkills.html")
+    @RequestMapping("/Witch DoctorSkills.html")
     public String getWitchDoctorSkills(Model model) {
         model.addAttribute("witchDoctorSkills", witchDoctorSkillsFetched);
         return "witchDoctorSkills";
