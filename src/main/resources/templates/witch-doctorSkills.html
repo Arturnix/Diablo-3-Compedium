@@ -48,12 +48,12 @@
         </a>
 
     <h2 class="font-diablo py-5 px-3">Witch Doctor skills list:</h2>
-    <ul th:each="witchDoctorSkill : ${witchDoctorSkills}" class="characters-list">
-        <li><img class="skill-icon" th:src="${witchDoctorSkill.iconURL}" th:text="${witchDoctorSkill.name}"></li>
-        <p style="margin-bottom: 0">Level required: <span th:text="${witchDoctorSkill.level}"></span></p>
-        <p th:text="${witchDoctorSkill.description}"></p>
+    <ul th:each="witch_doctorSkill : ${witch_doctorSkills}" class="characters-list">
+        <li><img class="skill-icon" th:src="${witch_doctorSkill.iconURL}" th:text="${witch_doctorSkill.name}"></li>
+        <p style="margin-bottom: 0">Level required: <span th:text="${witch_doctorSkill.level}"></span></p>
+        <p th:text="${witch_doctorSkill.description}"></p>
         <h5>Runes:</h5>
-            <ul th:each="rune : ${witchDoctorSkill.skillRunes}">
+            <ul th:each="rune : ${witch_doctorSkill.skillRunes}">
                 <li th:text="${rune.name}"></li>
                     <p>Level required: <span th:text="${rune.level}"></span></br>
                         <span th:text="${rune.description}"></span>

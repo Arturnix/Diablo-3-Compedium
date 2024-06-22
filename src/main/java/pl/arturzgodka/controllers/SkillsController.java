@@ -2,12 +2,14 @@ package pl.arturzgodka.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import pl.arturzgodka.datamodel.HeroSkillDataModel;
 import pl.arturzgodka.jsonmappers.SkillMapper;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class SkillsController {
@@ -35,60 +37,35 @@ public class SkillsController {
     private final List<String> wizardSkills = Arrays.asList("magic-missile", "ray-of-frost", "shock-pulse", "frost-nova", "arcane-orb", "diamond-skin",
             "wave-of-force", "spectral-blade", "arcane-torrent", "energy-twister", "ice-armor", "electrocute", "slow-time", "storm-armor", "explosive-blast",
             "magic-weapon", "hydra", "disintegrate", "familiar", "teleport", "mirror-image", "meteor", "blizzard", "energy-armor", "archon", "black-hole");
+
+    private final Map<String, List<String>> heroClassSkillsMap = new HashMap<String, List<String>>() {{
+        put("barbarian", barbarianSkills);
+        put("crusader", crusaderSkills);
+        put("demon-hunter", demonHunterSkills);
+        put("monk", monkSkills);
+        put("necromancer", necromancerSkills);
+        put("witch-doctor", witchDoctorSkills);
+        put("wizard", wizardSkills);
+    }};
+
     private final SkillMapper skillMapper = new SkillMapper();
-    private List<HeroSkillDataModel> barbarianSkillsFetched = skillMapper.fetchSkills("barbarian", barbarianSkills);
-    private List<HeroSkillDataModel> crusaderSkillsFetched = skillMapper.fetchSkills("crusader", crusaderSkills);
-    private List<HeroSkillDataModel> demonHunterSkillsFetched = skillMapper.fetchSkills("demon-hunter", demonHunterSkills);
-    private List<HeroSkillDataModel> monkSkillsFetched = skillMapper.fetchSkills("monk", monkSkills);
-    private List<HeroSkillDataModel> necromancerSkillsFetched = skillMapper.fetchSkills("necromancer", necromancerSkills);
-    private List<HeroSkillDataModel> witchDoctorSkillsFetched = skillMapper.fetchSkills("witch-doctor", witchDoctorSkills);
-    private List<HeroSkillDataModel> wizardSkillsFetched = skillMapper.fetchSkills("wizard", wizardSkills);
 
     @RequestMapping("/heroClasses.html")
-    public String getHeroesList(Model model) { //model przakzuje aby miec pelnie MVC
+    public String getHeroesList(Model model) { //model przakzuje aby miec pelne MVC
         model.addAttribute("heroClassesList", heroClasses); //model.addStribute podake nazwe zmiennje i skad ma pchodzic wartosc dla tej zmiennej.
         return "heroClasses";
     }
 
-    @RequestMapping("/BarbarianSkills.html")
-    public String getBarbarianSkills(Model model) {
-        model.addAttribute("barbarianSkills", barbarianSkillsFetched);
-        return "barbarianSkills";
+    @RequestMapping("/{heroClasses}")
+    public String getSkills(Model model, @PathVariable(value="heroClasses") String heroClass) {
+
+        String heroClassLoverCaseWithHyphonSeparator = heroClass.toLowerCase().replace(" ", "-");
+        String heroClassLoverCaseWithUnderscoreSeparator = heroClass.toLowerCase().replace(" ", "_");
+        List<String> heroClassSkills = heroClassSkillsMap.get(heroClassLoverCaseWithHyphonSeparator);
+        List<HeroSkillDataModel> skillsMapped = skillMapper.fetchSkills(heroClassLoverCaseWithHyphonSeparator, heroClassSkills);
+
+        model.addAttribute(heroClassLoverCaseWithUnderscoreSeparator + "Skills", skillsMapped);
+        return heroClassLoverCaseWithHyphonSeparator + "Skills";
     }
 
-    @RequestMapping("/CrusaderSkills.html")
-    public String getCrusaderSkills(Model model) {
-        model.addAttribute("crusaderSkills", crusaderSkillsFetched);
-        return "crusaderSkills";
-    }
-
-    @RequestMapping("/Demon HunterSkills.html")
-    public String getDemonHunterSkills(Model model) {
-        model.addAttribute("demonHunterSkills", demonHunterSkillsFetched);
-        return "demonHunterSkills";
-    }
-
-    @RequestMapping("/MonkSkills.html")
-    public String getMonkSkills(Model model) {
-        model.addAttribute("monkSkills", monkSkillsFetched);
-        return "monkSkills";
-    }
-
-    @RequestMapping("/NecromancerSkills.html")
-    public String getNecromancerSkills(Model model) {
-        model.addAttribute("necromancerSkills", necromancerSkillsFetched);
-        return "necromancerSkills";
-    }
-
-    @RequestMapping("/Witch DoctorSkills.html")
-    public String getWitchDoctorSkills(Model model) {
-        model.addAttribute("witchDoctorSkills", witchDoctorSkillsFetched);
-        return "witchDoctorSkills";
-    }
-
-    @RequestMapping("/WizardSkills.html")
-    public String getWizardSkills(Model model) {
-        model.addAttribute("wizardSkills", wizardSkillsFetched);
-        return "wizardSkills";
-    }
 }

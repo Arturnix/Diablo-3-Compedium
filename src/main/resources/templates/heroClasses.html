@@ -40,7 +40,7 @@
     <h2 class="font-diablo py-3 px-3">Choose character class to show skills:</h2>
 
     <ul th:each="heroClass : ${heroClassesList}" class="characters-list">
-        <li><a th:href="${heroClass} + 'Skills.html'"><img class="heroes-classes-list-face" th:classappend="${heroClass}" th:text="${heroClass}"></a></li>
+        <li><a th:href="${heroClass}"><img class="heroes-classes-list-face" th:classappend="${heroClass}" th:text="${heroClass}"></a></li>
     </ul>
 
     <div class="input-container">

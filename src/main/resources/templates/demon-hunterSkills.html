@@ -48,12 +48,12 @@
         </a>
 
     <h2 class="font-diablo py-5 px-3">Demon Hunter skills list:</h2>
-    <ul th:each="demonHunterSkill : ${demonHunterSkills}" class="characters-list">
-        <li><img class="skill-icon" th:src="${demonHunterSkill.iconURL}" th:text="${demonHunterSkill.name}"></li>
-        <p style="margin-bottom: 0">Level required: <span th:text="${demonHunterSkill.level}"></span></p>
-        <p th:text="${demonHunterSkill.description}"></p>
+    <ul th:each="demon_hunterSkill : ${demon_hunterSkills}" class="characters-list">
+        <li><img class="skill-icon" th:src="${demon_hunterSkill.iconURL}" th:text="${demon_hunterSkill.name}"></li>
+        <p style="margin-bottom: 0">Level required: <span th:text="${demon_hunterSkill.level}"></span></p>
+        <p th:text="${demon_hunterSkill.description}"></p>
         <h5>Runes:</h5>
-            <ul th:each="rune : ${demonHunterSkill.skillRunes}">
+            <ul th:each="rune : ${demon_hunterSkill.skillRunes}">
                 <li th:text="${rune.name}"></li>
                     <p>Level required: <span th:text="${rune.level}"></span></br>
                         <span th:text="${rune.description}"></span>
