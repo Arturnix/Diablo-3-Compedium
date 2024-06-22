@@ -32,7 +32,7 @@ public class SkillsController {
     public String getSkills(Model model, @PathVariable(value="heroClasses") String heroClass) {
 
         String heroClassLoverCaseWithHyphonSeparator = heroClass.toLowerCase().replace(" ", "-");
-        List<HeroSkillDataModel> skillsMapped = skillMapper.fetchSkills(heroClassLoverCaseWithHyphonSeparator, heroClassSkillsMap.get(heroClassLoverCaseWithHyphonSeparator)); //z innej klasy nie moge tak zrobic bo dostaję błąd
+        List<HeroSkillDataModel> skillsMapped = skillMapper.fetchSkills(heroClassLoverCaseWithHyphonSeparator, heroClassSkillsMap.get(heroClassLoverCaseWithHyphonSeparator)); //z innej klasy nie moge tak zrobic bo dostaję błąd, server status 500.
 
         model.addAttribute("skills", skillsMapped);
         model.addAttribute("heroClass", heroClass);

@@ -20,7 +20,7 @@ public class SkillMapper {
                 node.get("skill").get("name").asText(),
                 node.get("skill").get("level").asInt(),
                 node.get("skill").get("description").asText(),
-                BaseUrlParts.getBaseMediaIconApi() + node.get("skill").get("icon").asText() + ".png",
+                BaseUrlParts.BASE_MEDIA_BLIZZARD_URL + node.get("skill").get("icon").asText() + ".png",
                 fetchSkillRunes(node)
         );
     }
