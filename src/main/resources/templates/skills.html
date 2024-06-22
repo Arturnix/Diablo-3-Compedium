@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Wizard skills</title>
+    <title>Skills</title>
     <link rel="icon" href="/img/Electrocute.webp"/>
     <!-- CSS Stylesheets -->
     <link
@@ -37,28 +37,29 @@
 <body id="body-skills-list">
 <div class="skills-page">
 
-        <a
-        id="button-fixed-top"
-        href="heroClasses.html"
-        class="login-btn btn btn-dark btn-block"
-        type="button"
-        >
-            <i class="fa-solid fa-reply icon-list"></i>
+    <a
+            id="button-fixed-top"
+            href="heroClasses.html"
+            class="login-btn btn btn-dark btn-block"
+            type="button"
+    >
+        <i class="fa-solid fa-reply icon-list"></i>
         Back
-        </a>
+    </a
+    >
 
-    <h2 class="font-diablo py-5 px-3">Wizard skills list:</h2>
-    <ul th:each="wizardSkill : ${wizardSkills}" class="characters-list">
-        <li><img class="skill-icon" th:src="${wizardSkill.iconURL}" th:text="${wizardSkill.name}"></li>
-        <p style="margin-bottom: 0">Level required: <span th:text="${wizardSkill.level}"></span></p>
-        <p th:text="${wizardSkill.description}"></p>
+    <h2 class="font-diablo py-5 px-3" th:text="${heroClass} + ' skills list:'"></h2>
+    <ul th:each="skill : ${skills}" class="characters-list">
+        <li><img class="skill-icon" th:src="${skill.iconURL}" th:text="${skill.name}"></li>
+        <p style="margin-bottom: 0">Level required: <span th:text="${skill.level}"></span></p>
+        <p th:text="${skill.description}"></p>
         <h5>Runes:</h5>
-            <ul th:each="rune : ${wizardSkill.skillRunes}">
-                <li th:text="${rune.name}"></li>
-                    <p>Level required: <span th:text="${rune.level}"></span></br>
-                        <span th:text="${rune.description}"></span>
-                    </p>
-            </ul>
+        <ul th:each="rune : ${skill.skillRunes}">
+            <li th:text="${rune.name}"></li>
+            <p>Level required: <span th:text="${rune.level}"></span></br>
+                <span th:text="${rune.description}"></span>
+            </p>
+        </ul>
     </ul>
 
 </div>
