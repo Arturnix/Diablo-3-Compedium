@@ -26,12 +26,12 @@ public class SkillDataModel {
     @NotNull(message = "Skill name may not be null")
     @NotEmpty(message = "Skill name may not be empty")
     @NotBlank(message = "Skill name may not be blank")
-    private String name;
+    protected String name;
     @NotNull(message = "Skill level may not be null")
-    private int level;
+    protected int level;
     //@Lob //pozwala na zapis ciagu znakow > 255 znakow. Zapisuje jako obiekt w bazie danych
     @Column(length = 1000)
-    private String description;
+    protected String description;
     @ManyToOne(fetch= FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "character_id") //join column jest zawsze tam gdzie adnotacja many to one
@@ -46,6 +46,24 @@ public class SkillDataModel {
         this.name = name;
         this.level = level;
         this.description = description;
+    }
+
+    public SkillDataModel(String name, int level, String description) {
+        this.name = name;
+        this.level = level;
+        this.description = description;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
     public CharacterDataModel getCharacterDataModel() {

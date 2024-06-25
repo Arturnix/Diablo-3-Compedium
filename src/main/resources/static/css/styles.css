@@ -1,5 +1,9 @@
 /* VIEW Homepage */
 
+#body-skills-list {
+  background-color: #172C3B;
+}
+
 .login-page-form {
   min-height: 100vh !important;
   background-image: url(https://assets.diablo3.blizzard.com/d3/media/artwork/artwork-0078-large.jpg);
@@ -55,6 +59,19 @@
   font-size: small;
 }
 
+/* links */
+a {
+  color: blanchedalmond;
+  text-decoration: none;
+}
+
+a:hover {
+  font-family: "DiabloHeavy", sans-serif;
+  text-decoration: none;
+  color: blanchedalmond;
+  cursor:pointer;
+}
+
 /* footer */
 
 footer {
@@ -96,3 +113,72 @@ footer {
 .icon-list {
   padding: 7px;
 }
+
+.skill-icon {
+  margin-right: 10px;
+  margin-bottom: 7px;
+}
+
+/* View skills page */
+
+.skills-heroes-classes-page {
+  min-height: 100vh !important;
+  background-image: url(https://assets.diablo3.blizzard.com/d3/media/artwork/artwork-0133-large.jpg);
+  background-size: 100% 100%;
+}
+
+.skills-page {
+  background-color: #172C3B;
+  position: relative;
+}
+
+.characters-list {
+  font-family: Montserrat;
+  color: blanchedalmond;
+  font-size: larger;
+  list-style-type: none;
+}
+
+.heroes-classes-list-face {
+  background-image: url('../img/heroes-faces.png');
+  background-size: 203%;
+  width: 100px;
+  height: 79px;
+  margin-right: 30px;
+}
+
+.barbarian {
+  background-position: 0 0;
+}
+
+.crusader {
+  background-position: 0 100%;
+}
+
+.demon {
+  background-position: 100% 33.247754%;
+}
+
+.monk {
+  background-position: 0 66.666667%;
+}
+
+.necromancer {
+  background-position: 0 83.333333%;
+}
+
+.witch {
+  background-position: 0 16.538462%;
+}
+
+.wizard {
+  background-position: 100% 50%;
+}
+
+/* button */
+
+#button-fixed-top {
+  position: fixed;
+}
+
+
