@@ -9,18 +9,11 @@ import pl.arturzgodka.jsonmappers.SkillMapper;
 
 import java.util.*;
 
+import static pl.arturzgodka.controllers.HeroClassesAndSkillsLists.getHeroClassSkillsList;
+
 @Controller
 public class SkillsController {
     private final SkillMapper skillMapper = new SkillMapper();
-    private final Map<String, List<String>> heroClassSkillsMap = new HashMap<String, List<String>>() {{
-        put("barbarian", HeroClassesAndSkillsLists.barbarianSkills);
-        put("crusader", HeroClassesAndSkillsLists.crusaderSkills);
-        put("demon-hunter", HeroClassesAndSkillsLists.demonHunterSkills);
-        put("monk", HeroClassesAndSkillsLists.monkSkills);
-        put("necromancer", HeroClassesAndSkillsLists.necromancerSkills);
-        put("witch-doctor", HeroClassesAndSkillsLists.witchDoctorSkills);
-        put("wizard", HeroClassesAndSkillsLists.wizardSkills);
-    }};
 
     @RequestMapping("/heroClasses.html")
     public String getHeroesList(Model model) { //model przakzuje aby miec pelne MVC
@@ -31,11 +24,12 @@ public class SkillsController {
     @RequestMapping("/{heroClasses}")
     public String getSkills(Model model, @PathVariable(value="heroClasses") String heroClass) {
 
-        String heroClassLoverCaseWithHyphonSeparator = heroClass.toLowerCase().replace(" ", "-");
-        List<HeroSkillDataModel> skillsMapped = skillMapper.fetchSkills(heroClassLoverCaseWithHyphonSeparator, heroClassSkillsMap.get(heroClassLoverCaseWithHyphonSeparator)); //z innej klasy nie moge tak zrobic bo dostaję błąd, server status 500.
+        String heroClassWithHyphonSeparator = heroClass.replace(" ", "-");
+        List<HeroSkillDataModel> skillsMapped = skillMapper.mapSkillsToDataModel(heroClassWithHyphonSeparator, getHeroClassSkillsList(heroClassWithHyphonSeparator)); //z innej klasy nie moge tak zrobic bo dostaję błąd, server status 500.
 
         model.addAttribute("skills", skillsMapped);
         model.addAttribute("heroClass", heroClass);
+
         return "skills";
     }
 

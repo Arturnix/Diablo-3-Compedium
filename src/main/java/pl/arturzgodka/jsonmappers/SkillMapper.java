@@ -14,18 +14,20 @@ import java.util.List;
 
 public class SkillMapper {
 
-    private HeroSkillDataModel fetchSkill(JsonNode node) {
+    public List<HeroSkillDataModel> mapSkillsToDataModel(String heroClass, List<String> barbarianSkills) {
 
-        return new HeroSkillDataModel(
-                node.get("skill").get("name").asText(),
-                node.get("skill").get("level").asInt(),
-                node.get("skill").get("description").asText(),
-                BaseUrlParts.BASE_MEDIA_BLIZZARD_URL + node.get("skill").get("icon").asText() + ".png",
-                fetchSkillRunes(node)
-        );
+        List<HeroSkillDataModel> skills = new ArrayList<>();
+        FetchToken fetchToken = new FetchToken();
+
+        for (String skill : barbarianSkills) {
+            HeroSkillDataModel heroSkillDataModel = fetchSkillsAndRunes(SkillHandlerApi.generateRequest(heroClass, skill, fetchToken));
+            skills.add(heroSkillDataModel);
+        }
+
+        return skills;
     }
 
-    private HeroSkillDataModel mapSkillToDataModel(String accountData) {
+    private HeroSkillDataModel fetchSkillsAndRunes(String accountData) {
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
@@ -39,11 +41,24 @@ public class SkillMapper {
         return fetchSkill(node);
     }
 
+
+    private HeroSkillDataModel fetchSkill(JsonNode node) {
+
+        return new HeroSkillDataModel(
+                node.get("skill").get("name").asText(),
+                node.get("skill").get("level").asInt(),
+                node.get("skill").get("description").asText(),
+                BaseUrlParts.BASE_MEDIA_BLIZZARD_URL + node.get("skill").get("icon").asText() + ".png",
+                fetchSkillRunes(node)
+        );
+    }
+
     private List<SkillDataModel> fetchSkillRunes(JsonNode node) {
 
         List<SkillDataModel> runes = new ArrayList<>();
 
-            for(int i = 0; i < node.get("runes").size(); i++) {
+        if (node.has("runes")) {
+            for (int i = 0; i < node.get("runes").size(); i++) {
                 SkillDataModel skillDataModel = new SkillDataModel(
                         node.get("runes").get(i).get("name").asText(),
                         node.get("runes").get(i).get("level").asInt(),
@@ -52,19 +67,11 @@ public class SkillMapper {
                 runes.add(skillDataModel);
             }
 
-        return runes;
-    }
+            return runes;
 
-    public List<HeroSkillDataModel> fetchSkills(String heroClass, List<String> barbarianSkills) {
+        } else {
 
-        List<HeroSkillDataModel> skills = new ArrayList<>();
-        FetchToken fetchToken = new FetchToken();
-
-        for (String skill : barbarianSkills) {
-            HeroSkillDataModel heroSkillDataModel = mapSkillToDataModel(SkillHandlerApi.generateRequest(heroClass, skill, fetchToken));
-            skills.add(heroSkillDataModel);
+            return runes;
         }
-
-        return skills;
     }
 }

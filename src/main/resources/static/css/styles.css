@@ -147,31 +147,31 @@ footer {
   margin-right: 30px;
 }
 
-.Barbarian {
+.barbarian {
   background-position: 0 0;
 }
 
-.Crusader {
+.crusader {
   background-position: 0 100%;
 }
 
-.Demon {
+.demon {
   background-position: 100% 33.247754%;
 }
 
-.Monk {
+.monk {
   background-position: 0 66.666667%;
 }
 
-.Necromancer {
+.necromancer {
   background-position: 0 83.333333%;
 }
 
-.Witch {
+.witch {
   background-position: 0 16.538462%;
 }
 
-.Wizard {
+.wizard {
   background-position: 100% 50%;
 }
 

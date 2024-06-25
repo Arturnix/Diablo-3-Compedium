@@ -32,43 +32,43 @@ public class SkillMapperTest {
 
     @Test
     public void correctSkillsFetchedToDataModel() {
-        Mockito.when(testSkillMapperMock.fetchSkills(heroClass, barbarianSkills)).thenReturn(fetchedSkillsList);
-        Assertions.assertEquals("bash", testSkillMapperMock.fetchSkills(heroClass, barbarianSkills).get(0).getName());
-        Assertions.assertEquals("hammer-of-the-ancients", testSkillMapperMock.fetchSkills(heroClass, barbarianSkills).get(1).getName());
-        Assertions.assertEquals("cleave", testSkillMapperMock.fetchSkills(heroClass, barbarianSkills).get(2).getName());
+        Mockito.when(testSkillMapperMock.mapSkillsToDataModel(heroClass, barbarianSkills)).thenReturn(fetchedSkillsList);
+        Assertions.assertEquals("bash", testSkillMapperMock.mapSkillsToDataModel(heroClass, barbarianSkills).get(0).getName());
+        Assertions.assertEquals("hammer-of-the-ancients", testSkillMapperMock.mapSkillsToDataModel(heroClass, barbarianSkills).get(1).getName());
+        Assertions.assertEquals("cleave", testSkillMapperMock.mapSkillsToDataModel(heroClass, barbarianSkills).get(2).getName());
     }
 
     @Test
     public void correctNumberOfSkillsFetched() {
-        Mockito.when(testSkillMapperMock.fetchSkills(heroClass, barbarianSkills)).thenReturn(fetchedSkillsList);
-        Assertions.assertEquals(3, testSkillMapperMock.fetchSkills(heroClass, barbarianSkills).size());
+        Mockito.when(testSkillMapperMock.mapSkillsToDataModel(heroClass, barbarianSkills)).thenReturn(fetchedSkillsList);
+        Assertions.assertEquals(3, testSkillMapperMock.mapSkillsToDataModel(heroClass, barbarianSkills).size());
     }
 
     @Test
     public void providedHeroClassDoesntExistThrowsException() {
         Assertions.assertThrows(RuntimeException.class, ()-> {
-            testSkillMapper.fetchSkills("aaa", barbarianSkills);
+            testSkillMapper.mapSkillsToDataModel("aaa", barbarianSkills);
         });
     }
 
     @Test
     public void providedHeroClassIsNullThrowsException() {
         Assertions.assertThrows(RuntimeException.class, ()-> {
-            testSkillMapper.fetchSkills(null, barbarianSkills);
+            testSkillMapper.mapSkillsToDataModel(null, barbarianSkills);
         });
     }
 
     @Test
     public void providedSkillsListContainsWrongElementsThrowsException() {
         Assertions.assertThrows(RuntimeException.class, ()-> {
-            testSkillMapper.fetchSkills("barbarian", barbarianSkillsWrong);
+            testSkillMapper.mapSkillsToDataModel("barbarian", barbarianSkillsWrong);
         });
     }
 
     @Test
     public void providedSkillsListIsNullThrowsException() {
         Assertions.assertThrows(NullPointerException.class, ()-> {
-            testSkillMapper.fetchSkills("barbarian", null);
+            testSkillMapper.mapSkillsToDataModel("barbarian", null);
         });
     }
 }
