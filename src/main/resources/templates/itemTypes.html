@@ -39,7 +39,7 @@
 
     <a
             id="button-fixed-top"
-            href="/"
+            href="/itemsTypes.html"
             class="login-btn btn btn-dark btn-block"
             type="button"
     >
@@ -47,15 +47,15 @@
         Back
     </a>
 
-    <h2 class="font-diablo py-5 px-3">Choose items types to show more items:</h2>
+    <h2 class="font-diablo py-5 px-3">Choose item types to show more items:</h2>
 
-    <ul th:each="itemType : ${itemTypesList}" class="characters-list">
-        <li><a th:href="${itemType}"><img th:src="@{'/img/' + ${itemType} + '.webp'}" class="skill-icon item-type-icon" th:text="${itemType}"></a></li>
+    <ul th:each="itemTypeName : ${armorNames}" class="characters-list">
+        <li><a th:href="${itemTypeName}"><img th:src="@{'/img/' + ${itemTypeName} + '.webp'}" class="skill-icon item-type-icon" th:text="${itemTypeName}"></a></li>
     </ul>
-</div>
 
-<footer>
-    © 2024 <img src="/img/favicon.ico" alt="Arturnix icon"/> Arturnix.
-</footer>
+    <footer>
+        © 2024 <img src="/img/favicon.ico" alt="Arturnix icon"/> Arturnix.
+    </footer>
+</div>
 </body>
 </html>

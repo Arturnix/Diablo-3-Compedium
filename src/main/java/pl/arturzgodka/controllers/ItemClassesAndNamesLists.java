@@ -1,9 +1,10 @@
 package pl.arturzgodka.controllers;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class ItemClassesAndNamesLists {
+
+    public static final List<String> itemTypes = Arrays.asList("Armor", "Weapon");
 
     /* helmets */
     private static final List<String> helmets = Arrays.asList("veil-of-steel-p43_RetroHelm_003", "leorics-crown-Unique_Helm_002_p1", "harlequin-crest-p43_RetroHelm_001", "the-undead-crown-p43_RetroHelm_002",
@@ -87,5 +88,21 @@ public class ItemClassesAndNamesLists {
             "grand-chain-BarbBelt_204", "immortal-kings-tribal-binding-Unique_BarbBelt_009_x1", "platinum-lock-BarbBelt_205");
 
     /* pants */
+
+    public static Set<String> getItemTypesNames(String itemType){
+        return itemsTypesMap.get(itemType).keySet();
+    }
+
+    private static final Map<String, Map<String, List<List<String>>>> itemsTypesMap = new HashMap<String, Map<String, List<List<String>>>>() {{
+        put("Armor", new HashMap<String, List<List<String>>>() {{
+            put("Helmets", List.of(helmets, spiritStones, voodooMasks, wizardHats));
+            put("Pauldrons", List.of(pauldrons));
+            put("Armors", List.of(chestArmor, cloaks));
+            put("Bracers", List.of(bracers));
+            put("Gloves", List.of(gloves));
+            put("Belts", List.of(belts, mightyBelts));
+        }});
+        //put("Weapon", );
+    }};
 
 }
