@@ -4,13 +4,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.arturzgodka.apihandlers.AccountHandlerApi;
 import pl.arturzgodka.apihandlers.CharacterHandlerApi;
+import pl.arturzgodka.apihandlers.ItemHandlerApi;
 import pl.arturzgodka.apihandlers.SkillHandlerApi;
+import pl.arturzgodka.controllers.ItemClassesAndNamesLists;
 import pl.arturzgodka.databaseutils.CharacterDao;
 import pl.arturzgodka.databaseutils.UserDao;
 import pl.arturzgodka.datamodel.*;
 import pl.arturzgodka.jsonmappers.AccountMapper;
 import pl.arturzgodka.jsonmappers.CharacterMapper;
+import pl.arturzgodka.jsonmappers.ItemMapper;
 import pl.arturzgodka.token.FetchToken;
+import pl.arturzgodka.token.Token;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +25,13 @@ public class Diablo3CompediumApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(Diablo3CompediumApplication.class, args);
+
+        FetchToken fetchToken = new FetchToken();
+        ItemMapper itemMapper = new ItemMapper();
+        //System.out.println(itemMapper.mapItemToArmorTypeDataModel(ItemHandlerApi.generateRequest("veil-of-steel-p43_RetroHelm_003", fetchToken)));
+        System.out.println(ItemClassesAndNamesLists.getArmorSelectedItemLists("Armor", "Armors"));
+        //System.out.println(ItemClassesAndNamesLists.getArmorSelectedItemFullLists("Armor", "Armors"));
+
 
         /*AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
         CharacterHandlerApi characterHandlerApi = new CharacterHandlerApi();

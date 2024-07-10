@@ -28,6 +28,10 @@ public class ItemDataModel {
     public ItemDataModel() {
     }
 
+    public ItemDataModel(String name) {
+        this.name = name;
+    }
+
     public ItemDataModel(String bodyPart, String id, String name) {
         this.bodyPart = bodyPart;
         this.id = id;

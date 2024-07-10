@@ -49,8 +49,8 @@
 
     <h2 class="font-diablo py-5 px-3">Choose item types to show more items:</h2>
 
-    <ul th:each="itemTypeName : ${armorNames}" class="characters-list">
-        <li><a th:href="${itemTypeName}"><img th:src="@{'/img/' + ${itemTypeName} + '.webp'}" class="skill-icon item-type-icon" th:text="${itemTypeName}"></a></li>
+    <ul th:each="itemTypeName : ${itemTypesNames}" class="characters-list">
+        <li><a th:href="@{/Armor/(itemType=${itemTypeName})}"><img th:src="@{'/img/' + ${itemTypeName} + '.webp'}" class="skill-icon item-type-icon" th:text="${itemTypeName}"></a></li>
     </ul>
 
     <footer>

@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SkillMapper {
 
-    public List<HeroSkillDataModel> mapSkillsToDataModel(String heroClass, List<String> barbarianSkills) {
+    public List<HeroSkillDataModel> mapSkillsToDataModel(String heroClass, List<String> barbarianSkills) { //change List<String> not to specific class name
 
         List<HeroSkillDataModel> skills = new ArrayList<>();
         FetchToken fetchToken = new FetchToken();

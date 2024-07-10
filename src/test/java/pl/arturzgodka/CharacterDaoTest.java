@@ -21,7 +21,7 @@ import java.util.Map;
 @ExtendWith(MockitoExtension.class)
 public class CharacterDaoTest {
     @Mock
-    private CharacterDao characterDaoTestMock;
+    private CharacterDao characterDaoTestMock; //zrobic tak jak bym korzystal z bazy danych i rzeczywiste a nie mock
     private CharacterDao characterDaoTest;
 
     private final CharacterDataModel characterDataModel = new CharacterDataModel(14, "Barb", "Barbarian",  35);

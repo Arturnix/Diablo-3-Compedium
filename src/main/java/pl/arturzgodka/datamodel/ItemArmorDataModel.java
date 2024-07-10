@@ -25,11 +25,31 @@ public class ItemArmorDataModel extends ItemDataModel {
     }
 
     public ItemArmorDataModel(List<String> itemBodyPartSlots, String id, String name, int requiredLevel, Map<String, List<String>> attributes, String armor) {
+        this.requiredLevel = requiredLevel;
+        this.armor = armor;
+    }
+ //czy te wszystkie konstruktory sa wykorzystywane???
+    public ItemArmorDataModel(String bodyPart, String id, String name, String armor) {
+        super(bodyPart, id, name);
+        this.armor = armor;
+    }
+
+    public ItemArmorDataModel(String name, int requiredLevel, String armor) {
+        super(name);
+        this.requiredLevel = requiredLevel;
         this.armor = armor;
     }
 
     public String getArmor() {
         return this.armor;
+    }
+
+    public int getRequiredLevel() {
+        return this.requiredLevel;
+    }
+
+    public String getName() {
+        return super.getName();
     }
 
     @Override

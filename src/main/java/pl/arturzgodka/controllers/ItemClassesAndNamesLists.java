@@ -93,9 +93,23 @@ public class ItemClassesAndNamesLists {
         return itemsTypesMap.get(itemType).keySet();
     }
 
+    public static List<String> getArmorSelectedItemLists(String itemType, String selectedItem) { //zmienic nie armor tylko oglnie bo weapon tez bedzie z tego korzystal
+
+        List<String> allItemsOfSelectedType = new ArrayList<>();
+
+        for(int i = 0; i < itemsTypesMap.get(itemType).get(selectedItem).size(); i++) {
+            allItemsOfSelectedType.addAll(itemsTypesMap.get(itemType).get(selectedItem).get(i));
+        }
+        return allItemsOfSelectedType;
+    }
+
+    public static List<List<String>> getArmorSelectedItemFullLists(String itemType, String selectedItem) { //czy to jest potrzebne???
+        return itemsTypesMap.get(itemType).get(selectedItem);
+    }
+
     private static final Map<String, Map<String, List<List<String>>>> itemsTypesMap = new HashMap<String, Map<String, List<List<String>>>>() {{
         put("Armor", new HashMap<String, List<List<String>>>() {{
-            put("Helmets", List.of(helmets, spiritStones, voodooMasks, wizardHats));
+            put("Helmets", List.of(spiritStones, voodooMasks, wizardHats)); //wyrzuca blad kiedy klikam w Helmets i dodana jest lista "Helmets"
             put("Pauldrons", List.of(pauldrons));
             put("Armors", List.of(chestArmor, cloaks));
             put("Bracers", List.of(bracers));
