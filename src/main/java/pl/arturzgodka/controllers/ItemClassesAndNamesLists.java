@@ -89,11 +89,18 @@ public class ItemClassesAndNamesLists {
 
     /* pants */
 
+    /* Weapons */
+    /* one-handed */
+    /* axes */
+    private final static List<String> axes = Arrays.asList("the-butchers-cleaver-p43_RetroAxe_001", "hand-axe-Axe_1H_001", "aidans-revenge-TransmogAxe_241_001", "weathered-hand-axe-Axe_1H_000", "broad-axe-Axe_1H_002", "genzaniku-Unique_Axe_1H_003_x1", "heavy-axe-Axe_1H_004", "marauder-axe-Axe_1H_006", "flesh-tearer-Unique_Axe_1H_001_x1",
+            "hack-Unique_Axe_1H_103_x1", "toporok-Axe_1H_106", "the-butchers-sickle-Unique_Axe_1H_006_x1", "masakari-Axe_1H_107", "tomahawk-Axe_1H_201", "balestarius-Axe_1H_204", "sky-splitter-Unique_Axe_1H_005_p2", "the-burning-axe-of-sankis-Unique_Axe_1H_007_x1", "arch-axe-Axe_1H_207", "skartaran-axe-Axe_1H_205", "galraki-Axe_1H_206",
+            "mordullus-promise-P4_Unique_Axe_1H_102");
+
     public static Set<String> getItemTypesNames(String itemType){
         return itemsTypesMap.get(itemType).keySet();
     }
 
-    public static List<String> getArmorSelectedItemLists(String itemType, String selectedItem) { //zmienic nie armor tylko oglnie bo weapon tez bedzie z tego korzystal
+    public static List<String> getSelectedItemList(String itemType, String selectedItem) { //zmienic nie armor tylko oglnie bo weapon tez bedzie z tego korzystal
 
         List<String> allItemsOfSelectedType = new ArrayList<>();
 
@@ -109,14 +116,17 @@ public class ItemClassesAndNamesLists {
 
     private static final Map<String, Map<String, List<List<String>>>> itemsTypesMap = new HashMap<String, Map<String, List<List<String>>>>() {{
         put("Armor", new HashMap<String, List<List<String>>>() {{
-            put("Helmets", List.of(spiritStones, voodooMasks, wizardHats)); //wyrzuca blad kiedy klikam w Helmets i dodana jest lista "Helmets"
+            put("Helmets", List.of(spiritStones, voodooMasks, wizardHats)); //wyrzuca blad kiedy klikam w Helmets i dodana jest lista "Helmets". Pewnie ktorys string wyrzuca blad api. Czy wszystkie te itemy pphodza ze sciezki item? jesli z artisan to moze wywalac rzeczywiscie...
             put("Pauldrons", List.of(pauldrons));
             put("Armors", List.of(chestArmor, cloaks));
             put("Bracers", List.of(bracers));
             put("Gloves", List.of(gloves));
             put("Belts", List.of(belts, mightyBelts));
         }});
-        //put("Weapon", );
+        put("Weapon", new HashMap<String, List<List<String>>>() {{
+            put("Axes", List.of(axes));
+
+        }});
     }};
 
 }

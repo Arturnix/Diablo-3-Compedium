@@ -29,8 +29,9 @@ public class Diablo3CompediumApplication {
         FetchToken fetchToken = new FetchToken();
         ItemMapper itemMapper = new ItemMapper();
         //System.out.println(itemMapper.mapItemToArmorTypeDataModel(ItemHandlerApi.generateRequest("veil-of-steel-p43_RetroHelm_003", fetchToken)));
-        System.out.println(ItemClassesAndNamesLists.getArmorSelectedItemLists("Armor", "Armors"));
+        //System.out.println(ItemClassesAndNamesLists.getSelectedItemList("Weapon", "Axes"));
         //System.out.println(ItemClassesAndNamesLists.getArmorSelectedItemFullLists("Armor", "Armors"));
+        //System.out.println(itemMapper.mapItemToWeaponTypeDataModel(ItemHandlerApi.generateRequest("the-butchers-cleaver-p43_RetroAxe_001", fetchToken)));
 
 
         /*AccountHandlerApi accountHandlerApi = new AccountHandlerApi();

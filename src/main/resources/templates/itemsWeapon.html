@@ -35,22 +35,17 @@
     />
 </head>
 <body>
-<div class="items-types-page">
+<div class="skills-page"> <!-- change naming of css styles classes -->
 
-    <a
-            id="button-fixed-top"
-            href="/itemsTypes.html"
-            class="login-btn btn btn-dark btn-block"
-            type="button"
-    >
-        <i class="fa-solid fa-reply icon-list"></i>
-        Back
-    </a>
+    <a><button id="button-fixed-top" class="login-btn btn btn-dark btn-block" onclick="history.back()"><i class="fa-solid fa-reply icon-list"></i>Back</button></a>
 
-    <h2 class="font-diablo py-5 px-3">Choose item types to show more items:</h2>
+    <h2 class="font-diablo py-5 px-3" th:text="${selectedItemType} + ' list:'"></h2>
 
-    <ul th:each="itemTypeName : ${itemTypesNames}" class="characters-list">
-        <li><a th:href="@{${selectedItemType + '/'}(itemType=${itemTypeName})}"><img th:src="@{'/img/' + ${itemTypeName} + '.webp'}" class="skill-icon item-type-icon" th:text="${itemTypeName}"></a></li>
+    <ul th:each="item : ${itemsMapped}" class="characters-list">
+        <li><img th:src="@{'/img/' + ${selectedItemType} + '.webp'}" class="skill-icon item-type-icon" th:text="${item.getName()}">
+        <p style="margin-bottom: 0" th:text="'Level required: ' + ${item.getRequiredLevel()}"></p>
+        <p style="margin-bottom: 0" th:text="'Damage: ' + ${item.getMinDamage()} + ' - ' + ${item.getMaxDamage()}"></p>
+        </li>
     </ul>
 
     <footer>

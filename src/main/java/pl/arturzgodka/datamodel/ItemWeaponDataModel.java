@@ -29,6 +29,29 @@ public class ItemWeaponDataModel extends ItemDataModel {
         this.maxDamage = maxDamage;
     }
 
+    public ItemWeaponDataModel(String name, int requiredLevel, String minDamage, String maxDamage) {
+        super(name);
+        this.requiredLevel = requiredLevel;
+        this.minDamage = minDamage;
+        this.maxDamage = maxDamage;
+    }
+
+    public String getName() {
+        return super.getName();
+    }
+
+    public int getRequiredLevel() {
+        return this.requiredLevel;
+    }
+
+    public String getMinDamage() {
+        return this.minDamage;
+    }
+
+    public String getMaxDamage() {
+        return this.maxDamage;
+    }
+
     @Override
     public String toString() {
         return "ItemWeaponDataModel{" +

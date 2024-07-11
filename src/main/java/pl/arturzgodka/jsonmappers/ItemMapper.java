@@ -65,12 +65,22 @@ public class ItemMapper {
         );
     }
 
-    private ItemArmorDataModel createArmorDataModelToItemsListView(JsonNode node) {
+    private ItemArmorDataModel createArmorDataModelToItemsListView(JsonNode node) { //te 2 moetody zrobic w 1 i dac if w zaleznosci od tego co ma zostac zwrocone? Czy armor czy weapon type.
 
         return new ItemArmorDataModel(
                 node.get("name").asText(),
                 node.get("requiredLevel").asInt(),
                 node.get("armor").asText()
+        );
+    }
+
+    private ItemWeaponDataModel createWeaponDataModelToItemsListView(JsonNode node) {
+
+        return new ItemWeaponDataModel(
+                node.get("name").asText(),
+                node.get("requiredLevel").asInt(),
+                getMinDamage(node),
+                getMaxDamage(node)
         );
     }
 
@@ -119,6 +129,20 @@ public class ItemMapper {
             return createArmorDataModelToItemsListView(node);
     }
 
+    public ItemWeaponDataModel mapItemToWeaponTypeDataModel(String itemData) {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode node = null;
+
+        try {
+            node = objectMapper.readTree(itemData);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return createWeaponDataModelToItemsListView(node);
+    }
+
     public List<ItemDataModel> getItemsOfSelectedType(List<String> itemsOfSelectedType) {
 
         List<ItemDataModel> items = new ArrayList<>();
@@ -140,6 +164,19 @@ public class ItemMapper {
         for (String item : itemsOfSelectedType) {
             ItemArmorDataModel itemArmorDataModel = mapItemToArmorTypeDataModel(ItemHandlerApi.generateRequest(item, fetchToken));
             items.add(itemArmorDataModel);
+        }
+
+        return items;
+    }
+
+    public List<ItemWeaponDataModel> getItemsOfWeaponType(List<String> itemsOfSelectedType) {
+
+        List<ItemWeaponDataModel> items = new ArrayList<>();
+        FetchToken fetchToken = new FetchToken();
+
+        for (String item : itemsOfSelectedType) {
+            ItemWeaponDataModel itemWeaponDataModel = mapItemToWeaponTypeDataModel(ItemHandlerApi.generateRequest(item, fetchToken));
+            items.add(itemWeaponDataModel);
         }
 
         return items;
