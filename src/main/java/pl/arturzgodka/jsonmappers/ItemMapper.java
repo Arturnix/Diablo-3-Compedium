@@ -17,6 +17,63 @@ import java.util.Map;
 
 public class ItemMapper {
 
+    public List<ItemDataModel> getItemsOfSelectedType(List<String> itemsOfSelectedType) {
+
+        List<ItemDataModel> items = new ArrayList<>();
+        FetchToken fetchToken = new FetchToken();
+
+        for (String item : itemsOfSelectedType) {
+            ItemDataModel itemDataModel = mapItemToDataModel(ItemHandlerApi.generateRequest(item, fetchToken));
+            items.add(itemDataModel);
+        }
+
+        return items;
+    }
+
+    public List<ItemArmorDataModel> getItemsOfArmorType(List<String> itemsOfSelectedType) {
+
+        List<ItemArmorDataModel> items = new ArrayList<>();
+        FetchToken fetchToken = new FetchToken();
+
+        for (String item : itemsOfSelectedType) {
+            ItemArmorDataModel itemArmorDataModel = mapItemToArmorTypeDataModel(ItemHandlerApi.generateRequest(item, fetchToken));
+            items.add(itemArmorDataModel);
+        }
+
+        return items;
+    }
+
+    public List<ItemWeaponDataModel> getItemsOfWeaponType(List<String> itemsOfSelectedType) {
+
+        List<ItemWeaponDataModel> items = new ArrayList<>();
+        FetchToken fetchToken = new FetchToken();
+
+        for (String item : itemsOfSelectedType) {
+            ItemWeaponDataModel itemWeaponDataModel = mapItemToWeaponTypeDataModel(ItemHandlerApi.generateRequest(item, fetchToken));
+            items.add(itemWeaponDataModel);
+        }
+
+        return items;
+    }
+
+    public ItemDataModel mapItemToDataModel(String itemData) {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode node = null;
+
+        try {
+            node = objectMapper.readTree(itemData);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        if(node.has("armor")) {
+            return createArmorDataModel(node);
+        } else {
+            return  createWeaponDataModel(node);
+        }
+    }
+
     private List<String> fetchItemBodyPartSlots(JsonNode node) {
 
         List<String> itemBodyPartSlots = new ArrayList<>();
@@ -97,25 +154,7 @@ public class ItemMapper {
         );
     }
 
-    public ItemDataModel mapItemToDataModel(String itemData) {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode node = null;
-
-        try {
-            node = objectMapper.readTree(itemData);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
-        if(node.has("armor")) {
-            return createArmorDataModel(node);
-        } else {
-           return  createWeaponDataModel(node);
-        }
-    }
-
-    public ItemArmorDataModel mapItemToArmorTypeDataModel(String itemData) {
+    private ItemArmorDataModel mapItemToArmorTypeDataModel(String itemData) {
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
@@ -129,7 +168,7 @@ public class ItemMapper {
             return createArmorDataModelToItemsListView(node);
     }
 
-    public ItemWeaponDataModel mapItemToWeaponTypeDataModel(String itemData) {
+    private ItemWeaponDataModel mapItemToWeaponTypeDataModel(String itemData) {
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
@@ -141,44 +180,5 @@ public class ItemMapper {
         }
 
         return createWeaponDataModelToItemsListView(node);
-    }
-
-    public List<ItemDataModel> getItemsOfSelectedType(List<String> itemsOfSelectedType) {
-
-        List<ItemDataModel> items = new ArrayList<>();
-        FetchToken fetchToken = new FetchToken();
-
-        for (String item : itemsOfSelectedType) {
-            ItemDataModel itemDataModel = mapItemToDataModel(ItemHandlerApi.generateRequest(item, fetchToken));
-            items.add(itemDataModel);
-        }
-
-        return items;
-    }
-
-    public List<ItemArmorDataModel> getItemsOfArmorType(List<String> itemsOfSelectedType) {
-
-        List<ItemArmorDataModel> items = new ArrayList<>();
-        FetchToken fetchToken = new FetchToken();
-
-        for (String item : itemsOfSelectedType) {
-            ItemArmorDataModel itemArmorDataModel = mapItemToArmorTypeDataModel(ItemHandlerApi.generateRequest(item, fetchToken));
-            items.add(itemArmorDataModel);
-        }
-
-        return items;
-    }
-
-    public List<ItemWeaponDataModel> getItemsOfWeaponType(List<String> itemsOfSelectedType) {
-
-        List<ItemWeaponDataModel> items = new ArrayList<>();
-        FetchToken fetchToken = new FetchToken();
-
-        for (String item : itemsOfSelectedType) {
-            ItemWeaponDataModel itemWeaponDataModel = mapItemToWeaponTypeDataModel(ItemHandlerApi.generateRequest(item, fetchToken));
-            items.add(itemWeaponDataModel);
-        }
-
-        return items;
     }
 }
