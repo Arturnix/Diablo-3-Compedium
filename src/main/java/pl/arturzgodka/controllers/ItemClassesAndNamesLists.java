@@ -96,6 +96,32 @@ public class ItemClassesAndNamesLists {
             "hack-Unique_Axe_1H_103_x1", "toporok-Axe_1H_106", "the-butchers-sickle-Unique_Axe_1H_006_x1", "masakari-Axe_1H_107", "tomahawk-Axe_1H_201", "balestarius-Axe_1H_204", "sky-splitter-Unique_Axe_1H_005_p2", "the-burning-axe-of-sankis-Unique_Axe_1H_007_x1", "arch-axe-Axe_1H_207", "skartaran-axe-Axe_1H_205", "galraki-Axe_1H_206",
             "mordullus-promise-P4_Unique_Axe_1H_102");
 
+    /* daggers */
+    private final static List<String> daggers = Arrays.asList("simple-dagger-Dagger_001", "shiv-Dagger_002", "dagger-Dagger_004", "the-clipper-Unique_Dagger_008", "the-clipper-Unique_Dagger_008_104", "the-clipper-Unique_Dagger_008_x1", "envious-blade-Unique_Dagger_103_x1", "the-clipper-Unique_Dagger_008_1xx", "pig-sticker-Unique_Dagger_007_x1",
+            "the-horadric-hamburger-Unique_Offhand_001_x1", "kindjal-Dagger_102", "rondel-Dagger_104", "main-gauche-Dagger_106", "kukri-Dagger_201", "skain-Dagger_204", "piercer-Dagger_206", "darkblade-Dagger_207", "wizardspike-P610_Unique_Dagger_010", "basilard-Dagger_205", "karleis-point-P61_Unique_Dagger_101_x1",
+            "eunjangdo-Unique_Dagger_104_x1", "lord-greenstones-fan-P61_Unique_Dagger_102_x1");
+
+    /* maces */
+    private final static List<String> maces = Arrays.asList("club-Mace_1H_001", "mace-of-the-crows-TransmogMace_241_001", "cudgel-Mace_1H_002", "odyn-son-Unique_Mace_1H_002_x1", "morning-star-Mace_1H_003", "mace-Mace_1H_004", "mad-monarchs-scepter-Unique_Mace_1H_101_x1", "wirts-original-leg-Unique_Mace_1H_010_104",
+            "wirts-original-leg-Unique_Mace_1H_010_x1", "wirts-original-leg-Unique_Mace_1H_010", "wirts-original-leg-Unique_Mace_1H_010_1xx", "telrandens-hand-Unique_Mace_1H_007_x1", "nutcracker-Unique_Mace_1H_005_x1", "solanium-Unique_Mace_1H_102_x1", "jaces-hammer-of-vigilance-Unique_Mace_1H_103_x1",
+            "spiked-baton-Mace_1H_102", "pernach-Mace_1H_105", "heavy-hammer-Mace_1H_106", "neanderthal-Unique_Mace_1H_003_x1", "nailbiter-Unique_Mace_1H_008_x1", "skull-crusher-Mace_1H_201", "death-mace-Mace_1H_203", "tripyor-Mace_1H_204", "sun-keeper-Unique_Mace_1H_011_x1", "echoing-fury-P66_Unique_Mace_1H_001",
+            "demolisher-Mace_1H_207", "crag-hammer-Mace_1H_206");
+
+    /* spears */
+    private final static List<String> spears = Arrays.asList("steffons-heavy-lance-TransmogSpear_241_001", "javelin-Spear_001", "fuscina-Spear_002", "spear-Spear_003", "spear-of-jairo-P6_Unique_Spear_01", "hasta-Spear_004", "pilum-Spear_005", "scrimshaw-P610_Unique_Spear_004", "arreats-law-P3_Unique_Spear_001",
+            "arreats-law-P73_Unique_Spear_001", "angon-Spear_101", "assegai-Spear_102", "war-spear-Spear_103", "spontoon-Spear_104", "the-three-hundredth-spear-P73_Unique_Spear_002", "the-three-hundredth-spear-P4_Unique_Spear_002", "yari-Spear_105", "harpoon-Spear_201", "impaler-Spear_202",
+            "empyrean-messenger-Unique_Spear_003_x1", "vel-Spear_204", "centurion-spear-Spear_205", "qiang-Spear_203", "honed-spear-Spear_301", "akanesh-the-herald-of-righteousness-Unique_Spear_101_x1");
+
+    /* swords */
+    private final static List<String> swords = Arrays.asList("kings-sword-of-haste-p43_RetroSword_1H_001", "griswolds-worn-edge-Unique_Sword_1H_001_104", "griswolds-worn-edge-Unique_Sword_1H_001", "griswolds-worn-edge-Unique_Sword_1H_001_1xx", "griswolds-worn-edge-Unique_Sword_1H_001_x1",
+            "griswolds-edge-p43_RetroSword_002", "ghoul-kings-blade-TransmogSword_241_003", "god-butcher-TransmogSword_241_001", "quinquennial-sword-TransmogSword_241_004", "amberwing-TransmogSword_241_002", "second-quinquennial-sword-TransmogSword_241_005", "short-sword-Sword_1H_001",
+            "sabre-Sword_1H_002", "broadsword-Sword_1H_003", "monster-hunter-Unique_Sword_1H_017_x1", "wildwood-Unique_Sword_1H_002_x1", "falchion-Sword_1H_005", "rakanishus-blade-Unique_Sword_1H_010_x1", "rakanishus-blade-Unique_Sword_1H_010_1xx", "rakanishus-blade-Unique_Sword_1H_010",
+            "rakanishus-blade-Unique_Sword_1H_010_104", "bastard-sword-Sword_1H_008", "the-ancient-bonesaber-of-zumakalis-Unique_Sword_1H_003_x1", "doombringer-Unique_Sword_1H_014_x1", "spectrum-Unique_Sword_1H_021_x1", "rimeheart-Unique_Sword_1H_109_x1", "fulminator-P3_Unique_Sword_1H_104",
+            "exarian-Unique_Sword_1H_102_x1", "thunderfury-blessed-blade-of-the-windseeker-Unique_Sword_1H_101_x1", "gift-of-silaria-Unique_Sword_1H_103_x1", "battle-sword-Sword_1H_103", "dao-Sword_1H_105", "raid-sword-Sword_1H_107", "sever-Unique_Sword_1H_007_x1",
+            "skycutter-Unique_Sword_1H_004_x1", "spatha-Sword_1H_201", "strong-sword-Sword_1H_203", "king-blade-Sword_1H_204", "saif-Sword_1H_206", "conquest-sword-Sword_1H_207", "rune-sword-Sword_1H_208", "devil-tongue-Unique_Sword_1H_011_x1", "azurewrath-P3_Unique_Sword_1H_012",
+            "sword-of-mediocrity-Holiday_Sword_001", "sword-of-ill-will-P4_Unique_Sword_1H_01", "deathwish-P61_Unique_Sword_1H_112_x1", "little-rogue-Unique_Sword_1H_Set_03_x1", "ingeom-Unique_Sword_1H_113_x1", "the-slanderer-Unique_Sword_1H_Set_02_x1", "shard-of-hate-Unique_Sword_1H_Promo_02_x1",
+            "the-twisted-sword-P610_Unique_Sword_1H_107");
+
     public static Set<String> getItemTypesNames(String itemType){
         return itemsTypesMap.get(itemType).keySet();
     }
