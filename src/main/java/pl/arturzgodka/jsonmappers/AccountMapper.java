@@ -13,34 +13,6 @@ import java.util.Map;
 
 public class AccountMapper {
 
-    private Map<String, Integer> sumEliteKills(JsonNode node) {
-
-        int kills = 0;
-        for(int i = 0; i < node.get("heroes").size(); i++) {
-            kills += Integer.parseInt(node.get("heroes").get(i).get("kills").get("elites").asText());
-        }
-        Map<String, Integer> mapKills = new HashMap<String, Integer>();
-        mapKills.put("elites", kills);
-
-        return mapKills;
-    }
-
-    private List<CharacterDataModel> fetchHeroesList(JsonNode node) {
-
-        List<CharacterDataModel> heroes = new ArrayList<>();
-        for(int i = 0; i < node.get("heroes").size(); i++) {
-            CharacterDataModel characterDataModel = new CharacterDataModel(
-                    node.get("heroes").get(i).get("id").asInt(),
-                    node.get("heroes").get(i).get("name").asText(),
-                    node.get("heroes").get(i).get("class").asText(),
-                    node.get("heroes").get(i).get("level").asInt()
-            );
-            heroes.add(characterDataModel);
-        }
-
-        return heroes;
-    }
-
     public AccountDataModel mapAccountToDataModel(String accountData) { //zmienic nazwe na mapAccToDM
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -74,5 +46,33 @@ public class AccountMapper {
         }
 
         return fetchHeroesList(node);
+    }
+
+    private Map<String, Integer> sumEliteKills(JsonNode node) {
+
+        int kills = 0;
+        for(int i = 0; i < node.get("heroes").size(); i++) {
+            kills += Integer.parseInt(node.get("heroes").get(i).get("kills").get("elites").asText());
+        }
+        Map<String, Integer> mapKills = new HashMap<String, Integer>();
+        mapKills.put("elites", kills);
+
+        return mapKills;
+    }
+
+    private List<CharacterDataModel> fetchHeroesList(JsonNode node) {
+
+        List<CharacterDataModel> heroes = new ArrayList<>();
+        for(int i = 0; i < node.get("heroes").size(); i++) {
+            CharacterDataModel characterDataModel = new CharacterDataModel(
+                    node.get("heroes").get(i).get("id").asInt(),
+                    node.get("heroes").get(i).get("name").asText(),
+                    node.get("heroes").get(i).get("class").asText(),
+                    node.get("heroes").get(i).get("level").asInt()
+            );
+            heroes.add(characterDataModel);
+        }
+
+        return heroes;
     }
 }

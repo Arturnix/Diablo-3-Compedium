@@ -1,29 +1,33 @@
 package pl.arturzgodka;
 
+import pl.arturzgodka.apihandlers.AccountHandlerApi;
 import pl.arturzgodka.datamodel.AccountDataModel;
 import pl.arturzgodka.datamodel.CharacterDataModel;
 import pl.arturzgodka.jsonmappers.AccountMapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import pl.arturzgodka.token.FetchToken;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class AccountMapperTest {
 
     @Mock
     private AccountMapper testAccountMapperMock;
-    private String accountData;
     private final AccountMapper testAccountMapper = new AccountMapper();
+    private FetchToken fetchToken = new FetchToken();
+    private AccountDataModel account = testAccountMapper.mapAccountToDataModel(AccountHandlerApi.generateRequest("Ghall#2523", fetchToken));
+    private String accountData;
     private final String expectedBattleTag = "Ghall#2523";
     private final int expectedParagonLevel = 1111;
     private final String expectedGuildName = "Phantas Magoria";
@@ -38,52 +42,77 @@ public class AccountMapperTest {
             heroes, 70, mapKills);
 
    @Test
-    public void correctAccountFetchedToDataModel() {
-       Mockito.when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
-       Assertions.assertEquals(expectedBattleTag, testAccountMapperMock.mapAccountToDataModel(accountData).getBattleTag());
+    public void correctAccountFetchedToDataModelMock() {
+       when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
+       assertEquals(expectedBattleTag, testAccountMapperMock.mapAccountToDataModel(accountData).getBattleTag());
     }
 
     @Test
-    public void correctParagonLevelFetchedToDataModel() {
-        Mockito.when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
-        Assertions.assertEquals(expectedParagonLevel, testAccountMapperMock.mapAccountToDataModel(accountData).getParagonLevel());
+    public void correctAccountFetchedToDataModel() { //test for container - no mock used
+
+        //given
+        //when
+        //then
+        assertEquals("Ghall#2523", account.getBattleTag());
+
     }
 
     @Test
-    public void correctGuildNameFetchedToDataModel() {
-        Mockito.when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
-        Assertions.assertEquals(expectedGuildName, testAccountMapperMock.mapAccountToDataModel(accountData).getGuildName());
+    public void correctParagonLevelFetchedToDataModelMock() {
+        when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
+        assertEquals(expectedParagonLevel, testAccountMapperMock.mapAccountToDataModel(accountData).getParagonLevel());
     }
 
     @Test
-    public void correctHeroesListSizeFetchedToDataModel() {
+    public void correctParagonLevelFetchedToDataModel() { //test for container - no mock used
+
+        //given
+        //when
+        //then
+        assertEquals(224, account.getParagonLevel());
+    }
+
+    @Test
+    public void correctGuildNameFetchedToDataModelMock() {
+        when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
+        assertEquals(expectedGuildName, testAccountMapperMock.mapAccountToDataModel(accountData).getGuildName());
+    }
+
+    @Test
+    public void correctHeroesListSizeFetchedToDataModelMock() {
         lenient().when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
-        Assertions.assertEquals(2, heroes.size());
+        assertEquals(2, heroes.size());
+    }
+
+    @Test
+    public void correctHeroesListSizeFetchedToDataModel() { //test for container - no mock used
+
+        assertEquals(5, account.getHeroes().size());
     }
 
     @Test
     public void correctHighestHardcoreLevelFetchedToDataModel() {
-        Mockito.when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
-        Assertions.assertEquals(70, testAccountMapperMock.mapAccountToDataModel(accountData).getHighestHardcoreLevel());
+        when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
+        assertEquals(70, testAccountMapperMock.mapAccountToDataModel(accountData).getHighestHardcoreLevel());
     }
 
     @Test
     public void correctKillsFetchedToDataModel() {
-        Mockito.when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
-        Assertions.assertTrue(testAccountMapperMock.mapAccountToDataModel(accountData).getKills().containsKey("elites"));
-        Assertions.assertTrue(testAccountMapperMock.mapAccountToDataModel(accountData).getKills().containsValue(1974));
+        when(testAccountMapperMock.mapAccountToDataModel(accountData)).thenReturn(accountDataModel);
+        assertTrue(testAccountMapperMock.mapAccountToDataModel(accountData).getKills().containsKey("elites"));
+        assertTrue(testAccountMapperMock.mapAccountToDataModel(accountData).getKills().containsValue(1974));
     }
 
     @Test
     public void providedBattleTagDoesntExistThrowsException() {
-        Assertions.assertThrows(RuntimeException.class, ()-> {
+       assertThrows(RuntimeException.class, ()-> {
             testAccountMapper.mapAccountToDataModel(ShareableDataForTests.battleTagAsDosentExist);
         });
     }
 
     @Test
     public void providedAccountDataIsNullThrowsException() {
-        Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+        assertThrows(IllegalArgumentException.class, ()-> {
             testAccountMapper.mapAccountToDataModel(null);
         });
     }
