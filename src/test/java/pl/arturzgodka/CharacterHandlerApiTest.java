@@ -35,8 +35,8 @@ public class CharacterHandlerApiTest {
     @Test
     public void fetchHeroFailedMissedCredentialsNotContainDesiredField() {
 
-        String requestUrl = BaseUrlParts.getBaseProfileApi() + BaseUrlParts.getBaseHeroApi()
-                            + BaseUrlParts.getBaseLocaleAndToken();
+        String requestUrl = BaseUrlParts.BASE_PROFILE_API + BaseUrlParts.BASE_HERO_API
+                            + BaseUrlParts.BASE_LOCALE_AND_TOKEN;
 
         Mockito.when(testObject.fetchAPIResourceRequest(requestUrl)).thenReturn("");
 
@@ -48,13 +48,13 @@ public class CharacterHandlerApiTest {
     @Test
     public void fetchHeroFailedMissedCredentials() {
 
-        String requestUrlOK = BaseUrlParts.getBaseProfileApi() + "Ghall-2523"
-                + BaseUrlParts.getBaseHeroApi() + "170761702"
-                + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token();
+        String requestUrlOK = BaseUrlParts.BASE_PROFILE_API + "Ghall-2523"
+                + BaseUrlParts.BASE_HERO_API + "170761702"
+                + BaseUrlParts.BASE_LOCALE_AND_TOKEN + Token.getAccess_token();
 
-        String requestUrlNOK = BaseUrlParts.getBaseProfileApi()
-                + BaseUrlParts.getBaseHeroApi()
-                + BaseUrlParts.getBaseLocaleAndToken();
+        String requestUrlNOK = BaseUrlParts.BASE_PROFILE_API
+                + BaseUrlParts.BASE_HERO_API
+                + BaseUrlParts.BASE_LOCALE_AND_TOKEN;
 
         Mockito.when(testObject.fetchAPIResourceRequest(requestUrlOK)).thenReturn("170761702");
         Mockito.when(testObject.fetchAPIResourceRequest(requestUrlNOK)).thenReturn("");

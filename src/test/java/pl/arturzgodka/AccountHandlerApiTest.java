@@ -37,12 +37,12 @@ public class AccountHandlerApiTest {
     @Test
     public void fetchAccountFailedMissedCredentialsNotContainDesiredChar() {
 
-        Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi()
-                        + BaseUrlParts.getBaseLocaleAndToken()))
+        Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.BASE_PROFILE_API
+                        + BaseUrlParts.BASE_LOCALE_AND_TOKEN))
                 .thenReturn("");
 
-        String fetchedAccount = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi()
-                 + BaseUrlParts.getBaseLocaleAndToken());
+        String fetchedAccount = testObject.fetchAPIResourceRequest(BaseUrlParts.BASE_PROFILE_API
+                 + BaseUrlParts.BASE_LOCALE_AND_TOKEN);
 
         Assertions.assertFalse(fetchedAccount.contains("#"));
     }
@@ -50,17 +50,17 @@ public class AccountHandlerApiTest {
     @Test
     public void fetchAccountFailedMissedCredentials() {
 
-        Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + "Ghall-2523"
-                        + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token()))
+        Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.BASE_PROFILE_API + "Ghall-2523"
+                        + BaseUrlParts.BASE_LOCALE_AND_TOKEN + Token.getAccess_token()))
                 .thenReturn("Ghall#2523");
 
-        Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + BaseUrlParts.getBaseLocaleAndToken()))
+        Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.BASE_PROFILE_API + BaseUrlParts.BASE_LOCALE_AND_TOKEN))
                 .thenReturn("");
 
-        String fetchedAccountOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + "Ghall-2523"
-                + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token());
+        String fetchedAccountOK = testObject.fetchAPIResourceRequest(BaseUrlParts.BASE_PROFILE_API + "Ghall-2523"
+                + BaseUrlParts.BASE_LOCALE_AND_TOKEN + Token.getAccess_token());
 
-        String fetchedAccountNOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + BaseUrlParts.getBaseLocaleAndToken());
+        String fetchedAccountNOK = testObject.fetchAPIResourceRequest(BaseUrlParts.BASE_PROFILE_API + BaseUrlParts.BASE_LOCALE_AND_TOKEN);
 
         Assertions.assertNotEquals(fetchedAccountOK, fetchedAccountNOK);
     }
@@ -89,13 +89,13 @@ public class AccountHandlerApiTest {
         /*Mockito.when(testAccountHandlerApi.generateRequest(null, testObject))
                 .thenReturn("");*/
         String battleTag = null;
-       Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + battleTag
-                + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token()))
+       Mockito.when(testObject.fetchAPIResourceRequest(BaseUrlParts.BASE_PROFILE_API + battleTag
+                + BaseUrlParts.BASE_LOCALE_AND_TOKEN + Token.getAccess_token()))
                 .thenReturn("");
 
         String fetchedAccountOK = testAccountHandlerApi.generateRequest("Ghall-2523", testObject);
-        String fetchedAccountNOK = testObject.fetchAPIResourceRequest(BaseUrlParts.getBaseProfileApi() + battleTag
-                + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token());
+        String fetchedAccountNOK = testObject.fetchAPIResourceRequest(BaseUrlParts.BASE_PROFILE_API + battleTag
+                + BaseUrlParts.BASE_LOCALE_AND_TOKEN + Token.getAccess_token());
 
         Assertions.assertNotEquals(fetchedAccountOK, fetchedAccountNOK);
     }

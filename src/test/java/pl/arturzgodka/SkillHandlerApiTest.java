@@ -36,8 +36,8 @@ public class SkillHandlerApiTest {
     @Test
     public void fetchSkillFailedMissedCredentialsNotContainDesiredField() {
 
-        String requestUrl = BaseUrlParts.getBaseDataHeroApi() + BaseUrlParts.getBaseSkillApi()
-                + BaseUrlParts.getBaseLocaleAndToken();
+        String requestUrl = BaseUrlParts.BASE_DATA_HERO_API + BaseUrlParts.BASE_SKILL_API
+                + BaseUrlParts.BASE_LOCALE_AND_TOKEN;
 
         Mockito.when(testObject.fetchAPIResourceRequest(requestUrl)).thenReturn("");
 
@@ -49,13 +49,13 @@ public class SkillHandlerApiTest {
     @Test
     public void fetchSkillFailedMissedCredentials() {
 
-        String requestUrlOK = BaseUrlParts.getBaseDataHeroApi() + "barbarian"
-                + BaseUrlParts.getBaseSkillApi() + "bash"
-                + BaseUrlParts.getBaseLocaleAndToken() + Token.getAccess_token();
+        String requestUrlOK = BaseUrlParts.BASE_DATA_HERO_API + "barbarian"
+                + BaseUrlParts.BASE_SKILL_API + "bash"
+                + BaseUrlParts.BASE_LOCALE_AND_TOKEN + Token.getAccess_token();
 
-        String requestUrlNOK = BaseUrlParts.getBaseDataHeroApi()
-                + BaseUrlParts.getBaseSkillApi()
-                + BaseUrlParts.getBaseLocaleAndToken();
+        String requestUrlNOK = BaseUrlParts.BASE_DATA_HERO_API
+                + BaseUrlParts.BASE_SKILL_API
+                + BaseUrlParts.BASE_LOCALE_AND_TOKEN;
 
         Mockito.when(testObject.fetchAPIResourceRequest(requestUrlOK)).thenReturn("bash");
         Mockito.when(testObject.fetchAPIResourceRequest(requestUrlNOK)).thenReturn("");
