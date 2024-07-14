@@ -21,7 +21,7 @@ import java.util.Map;
 @ExtendWith(MockitoExtension.class)
 public class CharacterDaoTest {
     @Mock
-    private CharacterDao characterDaoTestMock; //zrobic tak jak bym korzystal z bazy danych i rzeczywiste a nie mock
+    private CharacterDao characterDaoTestMock; //zrobic tak jak bym korzystal z bazy danych i rzeczywiste a nie mock - dla conteiners tests
     private CharacterDao characterDaoTest;
 
     private final CharacterDataModel characterDataModel = new CharacterDataModel(14, "Barb", "Barbarian",  35);
@@ -95,11 +95,19 @@ public class CharacterDaoTest {
     }
 
     @Test
-    public void findCharacterById() {
+    public void findCharacterByIdUsingMock() {
         CharacterDataModel localCharacterDataModel = new CharacterDataModel(14, "Barb", "Barbarian",  35);
         Mockito.when(characterDaoTestMock.findCharacterById(14)).thenReturn(characterDataModel);
 
         Assertions.assertEquals(characterDaoTestMock.findCharacterById(14).getId(), localCharacterDataModel.getId());
+    }
+
+    @Test
+    public void findCharacterById() {
+        characterDaoTest = new CharacterDao();
+        characterDaoTest.saveCharacter(characterDataModel);
+
+        Assertions.assertEquals(14, characterDaoTest.findCharacterById(characterDataModel.getId()).getId());
     }
 
     @Test

@@ -1,8 +1,6 @@
 package pl.arturzgodka.jsonmappers;
 
 import pl.arturzgodka.apihandlers.ItemHandlerApi;
-import pl.arturzgodka.apihandlers.SkillHandlerApi;
-import pl.arturzgodka.datamodel.HeroSkillDataModel;
 import pl.arturzgodka.datamodel.ItemArmorDataModel;
 import pl.arturzgodka.datamodel.ItemDataModel;
 import pl.arturzgodka.datamodel.ItemWeaponDataModel;
@@ -17,17 +15,32 @@ import java.util.Map;
 
 public class ItemMapper {
 
-    public List<ItemDataModel> getItemsOfSelectedType(List<String> itemsOfSelectedType) {
+    public ItemArmorDataModel mapItemToArmorTypeDataModel(String itemData) {
 
-        List<ItemDataModel> items = new ArrayList<>();
-        FetchToken fetchToken = new FetchToken();
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode node = null;
 
-        for (String item : itemsOfSelectedType) {
-            ItemDataModel itemDataModel = mapItemToDataModel(ItemHandlerApi.generateRequest(item, fetchToken));
-            items.add(itemDataModel);
+        try {
+            node = objectMapper.readTree(itemData);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
 
-        return items;
+        return createArmorDataModelToItemsListView(node);
+    }
+
+    public ItemWeaponDataModel mapItemToWeaponTypeDataModel(String itemData) {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode node = null;
+
+        try {
+            node = objectMapper.readTree(itemData);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return createWeaponDataModelToItemsListView(node);
     }
 
     public List<ItemArmorDataModel> getItemsOfArmorType(List<String> itemsOfSelectedType) {
@@ -147,7 +160,6 @@ public class ItemMapper {
                 node.get("requiredLevel").asInt(),
                 getMinDamage(node),
                 getMaxDamage(node),
-                //fetchItemAttrtibutes(node)
                 fetchItemAttrtibutesMap(node)
         );
     }
@@ -163,33 +175,5 @@ public class ItemMapper {
                 getMinDamage(node),
                 getMaxDamage(node)
         );
-    }
-
-    private ItemArmorDataModel mapItemToArmorTypeDataModel(String itemData) {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode node = null;
-
-        try {
-            node = objectMapper.readTree(itemData);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
-            return createArmorDataModelToItemsListView(node);
-    }
-
-    public ItemWeaponDataModel mapItemToWeaponTypeDataModel(String itemData) {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode node = null;
-
-        try {
-            node = objectMapper.readTree(itemData);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
-        return createWeaponDataModelToItemsListView(node);
     }
 }
