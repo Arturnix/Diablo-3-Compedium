@@ -11,6 +11,7 @@ import pl.arturzgodka.datamodel.ItemDataModel;
 import pl.arturzgodka.datamodel.ItemWeaponDataModel;
 import pl.arturzgodka.jsonmappers.ItemMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 

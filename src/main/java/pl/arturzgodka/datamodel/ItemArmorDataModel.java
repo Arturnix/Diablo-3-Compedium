@@ -5,6 +5,7 @@ import jakarta.persistence.Table;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,8 @@ public class ItemArmorDataModel extends ItemDataModel {
     private List<String> itemBodyPartSlots;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
-    private Map<String, List<String>> attributes; //(key is the primary/secondary attribute, value is list of attributes)
+    //private Map<String, List<String>> attributes; //(key is the primary/secondary attribute, value is list of attributes)
+    private Map<String, List<Map<String, String>>> attributes;
 
     public ItemArmorDataModel() {
     }
@@ -34,10 +36,11 @@ public class ItemArmorDataModel extends ItemDataModel {
         this.armor = armor;
     }
 
-    public ItemArmorDataModel(String name, int requiredLevel, String armor) {
+    public ItemArmorDataModel(String name, int requiredLevel, String armor, Map<String, List<Map<String, String>>> attributes) {
         super(name);
         this.requiredLevel = requiredLevel;
         this.armor = armor;
+        this.attributes = attributes;
     }
 
     public String getArmor() {
@@ -50,6 +53,30 @@ public class ItemArmorDataModel extends ItemDataModel {
 
     public String getName() {
         return super.getName();
+    }
+
+    public List<String> attributesList(String key) {
+
+        if(this.attributes == null) {
+            return new ArrayList<>();
+        }
+
+        List<String> attributesList = new ArrayList<String>();
+
+        for(int i = 0; i < getAttributesSize(key); i++) {
+            attributesList.add(this.attributes.get(key).get(i).get("text"));
+        }
+
+        return attributesList;
+    }
+
+    public int getAttributesSize(String key) {
+
+        if(this.attributes == null) {
+            return 0;
+        }
+
+        return this.attributes.get(key).size();
     }
 
     @Override

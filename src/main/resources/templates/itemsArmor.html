@@ -42,9 +42,17 @@
     <h2 class="font-diablo py-5 px-3" th:text="${selectedItemType} + ' list:'"></h2>
 
     <ul th:each="item : ${itemsMapped}" class="characters-list">
-        <li><img th:src="@{'/img/' + ${selectedItemType} + '.webp'}" class="skill-icon item-type-icon" th:text="${item.getName()}">
-        <p style="margin-bottom: 0" th:text="'Level required: ' + ${item.getRequiredLevel()}"></p>
-        <p style="margin-bottom: 0" th:text="'Armor: ' + ${item.getArmor()}"></p>
+        <li class="items-list-item"><img th:src="@{'/img/' + ${selectedItemType} + '.webp'}" class="skill-icon item-type-icon" th:text="${item.getName()}">
+            <p style="margin-bottom: 0" th:text="'Level required: ' + ${item.getRequiredLevel()}"></p>
+            <p style="margin-bottom: 0" th:text="'Armor: ' + ${item.getArmor()}"></p>
+            <p style="margin-bottom: 0" th:text="${item.attributesList('primary').isEmpty()} ? '' : 'Primary attributes:'"></p>
+            <ul th:each="attribute : ${item.attributesList('primary')}">
+                <li th:text="${attribute}"></li>
+            </ul>
+            <p style="margin-bottom: 0" th:text="${item.attributesList('secondary').isEmpty()} ? '' : 'Secondary attributes:'"></p>
+            <ul th:each="attribute : ${item.attributesList('secondary')}">
+                <li th:text="${attribute}"></li>
+            </ul>
         </li>
     </ul>
 

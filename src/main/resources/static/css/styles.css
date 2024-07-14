@@ -193,4 +193,8 @@ footer {
   position: fixed;
 }
 
+/* items */
 
+.items-list-item {
+  margin-bottom: 60px;
+}

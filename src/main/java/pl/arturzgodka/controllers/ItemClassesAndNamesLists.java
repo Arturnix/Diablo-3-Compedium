@@ -151,7 +151,10 @@ public class ItemClassesAndNamesLists {
         }});
         put("Weapon", new HashMap<String, List<List<String>>>() {{
             put("Axes", List.of(axes));
-
+            put("Daggers", List.of(daggers));
+            put("Maces", List.of(maces));
+            put("Spears", List.of(spears));
+            put("Swords", List.of(swords));
         }});
     }};
 

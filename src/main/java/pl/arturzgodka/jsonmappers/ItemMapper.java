@@ -93,6 +93,14 @@ public class ItemMapper {
         return mapItemAttributes;
     }
 
+    private Map<String, List<Map<String, String>>> fetchItemAttrtibutesMap(JsonNode node) {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, List<Map<String, String>>> mapItemAttributes = objectMapper.convertValue(node.get("attributes"), Map.class);
+
+        return mapItemAttributes;
+    }
+
     private String getMinDamage(JsonNode node) {
 
         int minDamageEndIndex = node.get("damage").asText().indexOf("-");
@@ -127,7 +135,8 @@ public class ItemMapper {
         return new ItemArmorDataModel(
                 node.get("name").asText(),
                 node.get("requiredLevel").asInt(),
-                node.get("armor").asText()
+                node.get("armor").asText(),
+                fetchItemAttrtibutesMap(node)
         );
     }
 
@@ -137,7 +146,9 @@ public class ItemMapper {
                 node.get("name").asText(),
                 node.get("requiredLevel").asInt(),
                 getMinDamage(node),
-                getMaxDamage(node)
+                getMaxDamage(node),
+                //fetchItemAttrtibutes(node)
+                fetchItemAttrtibutesMap(node)
         );
     }
 
@@ -168,7 +179,7 @@ public class ItemMapper {
             return createArmorDataModelToItemsListView(node);
     }
 
-    private ItemWeaponDataModel mapItemToWeaponTypeDataModel(String itemData) {
+    public ItemWeaponDataModel mapItemToWeaponTypeDataModel(String itemData) {
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;

@@ -26,13 +26,19 @@ public class Diablo3CompediumApplication {
     public static void main(String[] args) {
         SpringApplication.run(Diablo3CompediumApplication.class, args);
 
-        FetchToken fetchToken = new FetchToken();
-        ItemMapper itemMapper = new ItemMapper();
+        //FetchToken fetchToken = new FetchToken();
+        //ItemMapper itemMapper = new ItemMapper();
         //System.out.println(itemMapper.mapItemToArmorTypeDataModel(ItemHandlerApi.generateRequest("veil-of-steel-p43_RetroHelm_003", fetchToken)));
         //System.out.println(ItemClassesAndNamesLists.getSelectedItemList("Weapon", "Axes"));
         //System.out.println(ItemClassesAndNamesLists.getArmorSelectedItemFullLists("Armor", "Armors"));
-        //System.out.println(itemMapper.mapItemToWeaponTypeDataModel(ItemHandlerApi.generateRequest("the-butchers-cleaver-p43_RetroAxe_001", fetchToken)));
+        //System.out.println(itemMapper.mapItemToWeaponTypeDataModel(ItemHandlerApi.generateRequest("neanderthal-Unique_Mace_1H_003_x1", fetchToken)).getAttributes("primary"));
 
+        /*ItemWeaponDataModel weapon1 = (ItemWeaponDataModel) itemMapper.mapItemToWeaponTypeDataModel(ItemHandlerApi.generateRequest("corrupted-ashbringer-Unique_Sword_2H_104_x1", fetchToken));
+        System.out.println(weapon1.getSingleAttribute("primary", 0, "text"));
+        for(int i = 0; i < weapon1.getAttributesSize("secondary"); i++) {
+            System.out.println(weapon1.getSingleAttribute("secondary", i, "text"));
+        }*/
+        //simple-dagger-Dagger_001
 
         /*AccountHandlerApi accountHandlerApi = new AccountHandlerApi();
         CharacterHandlerApi characterHandlerApi = new CharacterHandlerApi();
