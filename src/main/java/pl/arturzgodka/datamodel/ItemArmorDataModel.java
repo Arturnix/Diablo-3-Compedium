@@ -14,14 +14,12 @@ import java.util.Map;
 public class ItemArmorDataModel extends ItemDataModel {
 
     private String armor;
-    private int requiredLevel;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
     private List<String> itemBodyPartSlots;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
-    //private Map<String, List<String>> attributes; //(key is the primary/secondary attribute, value is list of attributes)
-    private Map<String, List<Map<String, String>>> attributes;
+    private Map<String, List<String>> attributes; //(key is the primary/secondary attribute, value is list of attributes)
 
     public ItemArmorDataModel() {
     }
@@ -36,9 +34,8 @@ public class ItemArmorDataModel extends ItemDataModel {
         this.armor = armor;
     }
 
-    public ItemArmorDataModel(String name, int requiredLevel, String armor, Map<String, List<Map<String, String>>> attributes) {
-        super(name);
-        this.requiredLevel = requiredLevel;
+    public ItemArmorDataModel(String name, int requiredLevel, String armor, Map<String, List<String>> attributes) {
+        super(name, requiredLevel);
         this.armor = armor;
         this.attributes = attributes;
     }
@@ -47,36 +44,12 @@ public class ItemArmorDataModel extends ItemDataModel {
         return this.armor;
     }
 
-    public int getRequiredLevel() {
-        return this.requiredLevel;
-    }
-
     public String getName() {
         return super.getName();
     }
 
-    public List<String> attributesList(String key) {
-
-        if(this.attributes == null) {
-            return new ArrayList<>();
-        }
-
-        List<String> attributesList = new ArrayList<String>();
-
-        for(int i = 0; i < getAttributesSize(key); i++) {
-            attributesList.add(this.attributes.get(key).get(i).get("text"));
-        }
-
-        return attributesList;
-    }
-
-    public int getAttributesSize(String key) {
-
-        if(this.attributes == null) {
-            return 0;
-        }
-
-        return this.attributes.get(key).size();
+    public Map<String, List<String>> attributes() {
+        return attributes;
     }
 
     @Override
@@ -85,7 +58,6 @@ public class ItemArmorDataModel extends ItemDataModel {
                 "itemBodyPartSlots='" + itemBodyPartSlots + '\'' +
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", requiredLevel=" + requiredLevel +
                 ", attributes='" + attributes + '\'' +
                 ", armor=" + armor +
                 '}';

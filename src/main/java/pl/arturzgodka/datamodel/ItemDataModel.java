@@ -15,6 +15,7 @@ public class ItemDataModel {
     protected String bodyPart;
     protected String id;
     protected String name;
+    protected int requiredLevel;
     @ManyToOne(fetch=FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "character_id") //join column jest zawsze tam gdzie adnotacja many to one
@@ -28,8 +29,9 @@ public class ItemDataModel {
     public ItemDataModel() {
     }
 
-    public ItemDataModel(String name) {
+    public ItemDataModel(String name, int requiredLevel) {
         this.name = name;
+        this.requiredLevel = requiredLevel;
     }
 
     public ItemDataModel(String bodyPart, String id, String name) {
@@ -44,6 +46,10 @@ public class ItemDataModel {
 
     public String getName() {
         return this.name;
+    }
+
+    public int getRequiredLevel() {
+        return this.requiredLevel;
     }
 
     public CharacterDataModel getCharacterDataModel() {
@@ -68,6 +74,7 @@ public class ItemDataModel {
                 "bodyPart='" + bodyPart + '\'' +
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", requiredLevel=" + requiredLevel +
                 '}';
     }
 }

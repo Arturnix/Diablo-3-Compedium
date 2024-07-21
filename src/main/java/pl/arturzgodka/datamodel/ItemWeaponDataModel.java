@@ -15,14 +15,12 @@ import java.util.Map;
 public class ItemWeaponDataModel extends ItemDataModel {
     private String minDamage;
     private String maxDamage;
-    private int requiredLevel;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
     private List<String> itemBodyPartSlots;
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
-    //private Map<String, List<String>> attributes;
-    private Map<String, List<Map<String, String>>> attributes;
+    private Map<String, List<String>> attributes;
 
     public ItemWeaponDataModel() {
     }
@@ -40,8 +38,8 @@ public class ItemWeaponDataModel extends ItemDataModel {
         this.attributes = attributes;
     } */
 
-    public ItemWeaponDataModel(String name, int requiredLevel, String minDamage, String maxDamage, Map<String, List<Map<String, String>>> attributes) {
-        super(name);
+    public ItemWeaponDataModel(String name, int requiredLevel, String minDamage, String maxDamage, Map<String, List<String>> attributes) {
+        super(name, requiredLevel);
         this.requiredLevel = requiredLevel;
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
@@ -52,10 +50,6 @@ public class ItemWeaponDataModel extends ItemDataModel {
         return super.getName();
     }
 
-    public int getRequiredLevel() {
-        return this.requiredLevel;
-    }
-
     public String getMinDamage() {
         return this.minDamage;
     }
@@ -64,28 +58,8 @@ public class ItemWeaponDataModel extends ItemDataModel {
         return this.maxDamage;
     }
 
-    public List<String> attributesList(String key) {
-
-        if(this.attributes == null) {
-            return new ArrayList<>();
-        }
-
-        List<String> attributesList = new ArrayList<String>();
-
-        for(int i = 0; i < getAttributesSize(key); i++) {
-            attributesList.add(this.attributes.get(key).get(i).get("text"));
-        }
-
-        return attributesList;
-    }
-
-    public int getAttributesSize(String key) {
-
-        if(this.attributes == null) {
-            return 0;
-        }
-
-        return this.attributes.get(key).size();
+    public Map<String, List<String>> attributes() {
+        return attributes;
     }
 
     @Override
@@ -94,7 +68,6 @@ public class ItemWeaponDataModel extends ItemDataModel {
                 "itemBodyPartSlots='" + itemBodyPartSlots + '\'' +
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", requiredLevel=" + requiredLevel +
                 ", attributes='" + attributes + '\'' +
                 ", minDamage='" + minDamage + '\'' +
                 ", maxDamage='" + maxDamage + '\'' +

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -100,18 +101,36 @@ public class ItemMapper {
 
     private Map<String, List<String>> fetchItemAttrtibutes(JsonNode node) {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, List<String>> mapItemAttributes = objectMapper.convertValue(node.get("attributes"), Map.class);
+        Map<String, List<String>> mapItemAttributes = new HashMap<>();
+
+        mapItemAttributes.put("primary", attributesList(node, "primary"));
+        mapItemAttributes.put("secondary", attributesList(node, "secondary"));
 
         return mapItemAttributes;
     }
 
-    private Map<String, List<Map<String, String>>> fetchItemAttrtibutesMap(JsonNode node) {
+    private List<String> attributesList(JsonNode node, String key) {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, List<Map<String, String>>> mapItemAttributes = objectMapper.convertValue(node.get("attributes"), Map.class);
+        if(node.get("attributes") == null) {
+            return new ArrayList<>();
+        }
 
-        return mapItemAttributes;
+        List<String> attributesList = new ArrayList<String>();
+
+        for(int i = 0; i < getAttributesSize(node, key); i++) {
+            attributesList.add(node.get("attributes").get(key).get(i).get("text").asText());
+        }
+
+        return attributesList;
+    }
+
+    private int getAttributesSize(JsonNode node, String key) {
+
+        if(node.get("attributes") == null) {
+            return 0;
+        }
+
+        return node.get("attributes").get(key).size();
     }
 
     private String getMinDamage(JsonNode node) {
@@ -149,7 +168,7 @@ public class ItemMapper {
                 node.get("name").asText(),
                 node.get("requiredLevel").asInt(),
                 node.get("armor").asText(),
-                fetchItemAttrtibutesMap(node)
+                fetchItemAttrtibutes(node)
         );
     }
 
@@ -160,7 +179,7 @@ public class ItemMapper {
                 node.get("requiredLevel").asInt(),
                 getMinDamage(node),
                 getMaxDamage(node),
-                fetchItemAttrtibutesMap(node)
+                fetchItemAttrtibutes(node)
         );
     }
 
