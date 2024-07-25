@@ -1,5 +1,6 @@
 package pl.arturzgodka;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.arturzgodka.apihandlers.AccountHandlerApi;
@@ -28,10 +29,14 @@ public class Diablo3CompediumApplication {
 
         //FetchToken fetchToken = new FetchToken();
         //ItemMapper itemMapper = new ItemMapper();
-        //System.out.println(itemMapper.mapItemToArmorTypeDataModel(ItemHandlerApi.generateRequest("veil-of-steel-p43_RetroHelm_003", fetchToken)));
+        //System.out.println(itemMapper.mapItemToArmorTypeDataModel(ItemHandlerApi.generateRequest("tragouls-scales-P6_Necro_Set_2_Chest", fetchToken)).getAttributesSize("secondary"));
         //System.out.println(ItemClassesAndNamesLists.getSelectedItemList("Weapon", "Axes"));
         //System.out.println(ItemClassesAndNamesLists.getArmorSelectedItemFullLists("Armor", "Armors"));
-        //System.out.println(itemMapper.mapItemToWeaponTypeDataModel(ItemHandlerApi.generateRequest("neanderthal-Unique_Mace_1H_003_x1", fetchToken)).getAttributes("primary"));
+        //System.out.println(itemMapper.mapItemToWeaponTypeDataModel(ItemHandlerApi.generateRequest("neanderthal-Unique_Mace_1H_003_x1", fetchToken)).attributes());
+        //System.out.println(itemMapper.attributesList(ItemHandlerApi.generateRequest("neanderthal-Unique_Mace_1H_003_x1", fetchToken), "primary"));
+        //System.out.println(itemMapper.mapItemToWeaponTypeDataModel(ItemHandlerApi.generateRequest("neanderthal-Unique_Mace_1H_003_x1", fetchToken)).attributesList("primary"));
+        //System.out.println(itemMapper.getAttributesSize(ItemHandlerApi.generateRequest("tal-rashas-relentless-pursuit-Unique_Chest_014_x1", fetchToken), "primary"));
+        //System.out.println(itemMapper.attributesList(ItemHandlerApi.generateRequest("tal-rashas-relentless-pursuit-Unique_Chest_014_x1", fetchToken), "primary"));
 
         /*ItemWeaponDataModel weapon1 = (ItemWeaponDataModel) itemMapper.mapItemToWeaponTypeDataModel(ItemHandlerApi.generateRequest("corrupted-ashbringer-Unique_Sword_2H_104_x1", fetchToken));
         System.out.println(weapon1.getSingleAttribute("primary", 0, "text"));
