@@ -53,7 +53,6 @@ public class UserDataModelDaoTest {
 
     @Test
     public void deleteUserWithNullEmailValueThrowsException() {
-        userDaoTest = new UserDao();
         Assertions.assertThrows(NullPointerException.class, () -> {
             userDaoTest.deleteUser(new UserDataModel(null, "abc", charactersList, "abc"));
         });

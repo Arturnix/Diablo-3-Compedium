@@ -2,6 +2,7 @@ package pl.arturzgodka;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -13,11 +14,19 @@ import pl.arturzgodka.databaseutils.CharacterDao;
 import pl.arturzgodka.datamodel.CharacterDataModel;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 @Testcontainers
 public class CharacterDaoContainerTest {
 
-    CharacterDao characterDaoTest = new CharacterDao();
+    private final CharacterDao characterDaoTest = new CharacterDao();
+    private CharacterDataModel characterDataModel;
+    @BeforeEach
+    public void initializeDataModelAndAddItToDatabase() {
+        characterDataModel = new CharacterDataModel(14, "Barb", "Barbarian",  35);
+        characterDaoTest.saveCharacter(characterDataModel);
+    }
+
 
     @Container
     private static final PostgreSQLContainer<?> postgresSqlContainer = new PostgreSQLContainer<>( //tworzenie kontenera
@@ -37,41 +46,39 @@ public class CharacterDaoContainerTest {
 
     @Test
     void addCharacterToDatabase() {
-        //given
-        CharacterDataModel characterDataModel = new CharacterDataModel(14, "Barb", "Barbarian",  35);
-
+        //given @BeforeEach
         //when
-        characterDaoTest.saveCharacter(characterDataModel);
-
         //then
-        Assertions.assertEquals(14, characterDaoTest.findCharacterById(14).getId());
-        Assertions.assertNotNull(characterDaoTest.findCharacterById(14));
+        assertNotNull(characterDaoTest.findCharacterById(14));
+    }
+
+    @Test
+    public void findCharacterInDatabaseById() {
+        //given @BeforeEach
+        //when
+        //then
+        assertEquals(14, characterDaoTest.findCharacterById(14).getId());
+
     }
 
     @Test
     void deleteExistingCharacterFromDatabase() {
-        //given
-        CharacterDataModel characterDataModel = new CharacterDataModel(14, "Barb", "Barbarian",  35);
-
+        //given @BeforeEach
         //when
-        characterDaoTest.saveCharacter(characterDataModel);
         characterDaoTest.deleteCharacter(characterDataModel);
 
         //then
-        Assertions.assertNull(characterDaoTest.findCharacterById(14));
+        assertNull(characterDaoTest.findCharacterById(14));
     }
 
     @Test
     void changeCharacterLevelInDatabase() {
-        //given
-        CharacterDataModel characterDataModel = new CharacterDataModel(14, "Barb", "Barbarian",  35);
-
+        //given @BeforeEach
         //when
-        characterDaoTest.saveCharacter(characterDataModel);
         characterDaoTest.changeCharacterLevel(14, 15);
 
         //then
-        Assertions.assertEquals(15, characterDaoTest.findCharacterById(14).getLevel());
+        assertEquals(15, characterDaoTest.findCharacterById(14).getLevel());
     }
 
     //pozostale testy w klasie CharacterDaoTest.java
