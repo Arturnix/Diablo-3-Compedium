@@ -15,7 +15,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class UserDaoContainerTest { //zrobic extends plik z danymi do Test containers
+public class UserDaoContainerTest extends TestContainerData {
 
     private final UserDao userDaoTest = new UserDao();
     private UserDataModel userDataModel;
