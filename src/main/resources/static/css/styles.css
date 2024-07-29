@@ -66,6 +66,10 @@
   font-size: small;
 }
 
+.setName {
+  color: greenyellow;
+}
+
 /* links */
 a {
   font-family: "DiabloLight", sans-serif;
@@ -205,4 +209,21 @@ footer {
 
 .items-list-item {
   margin-bottom: 60px;
+}
+
+p.item-info {
+  margin-bottom: 0;
+}
+
+p.item-description {
+  margin-bottom: 0;
+  margin-top: 20px;
+  color: peru;
+  font-style: italic;
+  text-align: center;
+}
+
+div.display-item-info-div {
+  height: auto;
+  width: 44%;
 }

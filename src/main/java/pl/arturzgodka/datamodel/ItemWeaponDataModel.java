@@ -38,8 +38,8 @@ public class ItemWeaponDataModel extends ItemDataModel {
         this.attributes = attributes;
     } */
 
-    public ItemWeaponDataModel(String name, int requiredLevel, String minDamage, String maxDamage, Map<String, List<String>> attributes) {
-        super(name, requiredLevel);
+    public ItemWeaponDataModel(String name, int requiredLevel, String typeName, String description, List<String> randomAffixes, String setName, String setDescription, String iconURL, String minDamage, String maxDamage, Map<String, List<String>> attributes) {
+        super(name, requiredLevel, typeName, description, randomAffixes, setName, setDescription, iconURL);
         this.requiredLevel = requiredLevel;
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
@@ -56,6 +56,14 @@ public class ItemWeaponDataModel extends ItemDataModel {
 
     public String getMaxDamage() {
         return this.maxDamage;
+    }
+
+    public String getTypeName() {
+        return super.getTypeName();
+    }
+
+    public List<String> randomAffixes() {
+        return super.getRandomAffixes();
     }
 
     public Map<String, List<String>> attributes() {

@@ -1,5 +1,6 @@
 package pl.arturzgodka.jsonmappers;
 
+import pl.arturzgodka.apihandlers.BaseUrlParts;
 import pl.arturzgodka.apihandlers.ItemHandlerApi;
 import pl.arturzgodka.datamodel.ItemArmorDataModel;
 import pl.arturzgodka.datamodel.ItemDataModel;
@@ -150,7 +151,67 @@ public class ItemMapper {
         return maxDamage;
     }
 
-    private ItemDataModel createArmorDataModel(JsonNode node) {
+    private String getFlavorTextDescription(JsonNode node) {
+
+        if(node.get("flavorText") == null) {
+            return null;
+        }
+
+        return node.get("flavorText").asText()
+                .replace(".” –", ".”<br/>–")
+                .replace(". –", ".<br/>-")
+                .replace("”.–", ".”<br/>–")
+                .replace(".” -", ".”<br/>-")
+                .replace("” –", "”<br/>–");
+    }
+
+    private List<String> fetchRandomAffixes(JsonNode node) {
+
+        if(node.get("randomAffixes") == null) {
+            return new ArrayList<>();
+        }
+
+        List<String> randomAffixesList = new ArrayList<String>();
+
+        for(int i = 0; i < getRandomAffixesSize(node); i++) {
+            randomAffixesList.add(node.get("randomAffixes").get(0).get("oneOf").get(i).get("text").asText());
+        }
+
+        return randomAffixesList;
+    }
+
+    private int getRandomAffixesSize(JsonNode node) {
+
+        if(node.get("randomAffixes") == null) {
+            return 0;
+        }
+
+        return node.get("randomAffixes").get(0).get("oneOf").size();
+    }
+
+    private String getSetName(JsonNode node) {
+
+        if(!node.has("setName")) {
+            return null;
+        } else {
+            return node.get("setName").asText();
+        }
+    }
+
+    private String getSetDescription(JsonNode node) {
+
+        if(!node.has("setDescriptionHtml")) {
+            return null;
+        } else {
+            return node.get("setDescriptionHtml").asText();
+        }
+    }
+
+    private String getIconURL(JsonNode node) {
+        return BaseUrlParts.BASE_MEDIA_BLIZZARD_ITEM_ICON_URL + node.get("icon").asText() + ".png";
+    }
+
+    private ItemDataModel createArmorDataModel(JsonNode node) { //czy dodac pole typeName i pozostale?
 
         return new ItemArmorDataModel(
                 fetchItemBodyPartSlots(node),
@@ -167,6 +228,12 @@ public class ItemMapper {
         return new ItemArmorDataModel(
                 node.get("name").asText(),
                 node.get("requiredLevel").asInt(),
+                node.get("typeName").asText(),
+                getFlavorTextDescription(node),
+                fetchRandomAffixes(node),
+                getSetName(node),
+                getSetDescription(node),
+                getIconURL(node),
                 node.get("armor").asText(),
                 fetchItemAttrtibutes(node)
         );
@@ -177,13 +244,19 @@ public class ItemMapper {
         return new ItemWeaponDataModel(
                 node.get("name").asText(),
                 node.get("requiredLevel").asInt(),
+                node.get("typeName").asText(),
+                getFlavorTextDescription(node),
+                fetchRandomAffixes(node),
+                getSetName(node),
+                getSetDescription(node),
+                getIconURL(node),
                 getMinDamage(node),
                 getMaxDamage(node),
                 fetchItemAttrtibutes(node)
         );
     }
 
-    private ItemDataModel createWeaponDataModel(JsonNode node) {
+    private ItemDataModel createWeaponDataModel(JsonNode node) { //czy dodac pole typeName?
 
         return new ItemWeaponDataModel(
                 fetchItemBodyPartSlots(node),

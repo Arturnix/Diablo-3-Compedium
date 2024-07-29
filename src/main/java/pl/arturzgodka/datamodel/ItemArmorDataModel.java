@@ -34,8 +34,8 @@ public class ItemArmorDataModel extends ItemDataModel {
         this.armor = armor;
     }
 
-    public ItemArmorDataModel(String name, int requiredLevel, String armor, Map<String, List<String>> attributes) {
-        super(name, requiredLevel);
+    public ItemArmorDataModel(String name, int requiredLevel, String typeName, String description, List<String> randomAffixes, String setName, String setDescription, String iconURL, String armor, Map<String, List<String>> attributes) {
+        super(name, requiredLevel, typeName, description, randomAffixes, setName, setDescription, iconURL);
         this.armor = armor;
         this.attributes = attributes;
     }
@@ -46,6 +46,14 @@ public class ItemArmorDataModel extends ItemDataModel {
 
     public String getName() {
         return super.getName();
+    }
+
+    public String getTypeName() {
+        return super.getTypeName();
+    }
+
+    public List<String> randomAffixes() {
+        return super.getRandomAffixes();
     }
 
     public Map<String, List<String>> attributes() {
