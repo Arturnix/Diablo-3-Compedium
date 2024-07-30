@@ -1,29 +1,29 @@
 package pl.arturzgodka;
 
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
+import org.junit.Before;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
+import pl.arturzgodka.databaseutils.UserDao;
+import pl.arturzgodka.databaseutils.UserSessionFactoryTest;
 
 @Testcontainers
 public class TestContainerData {
 
+    static DockerImageName postgres = DockerImageName.parse("postgres:16");
+
     @Container
-    private static PostgreSQLContainer<?> postgreSqlContainer = new PostgreSQLContainer<>( //tworzenie kontenera
-            "postgres:16"/*"postgres:16-alpine"*/)
-            .withDatabaseName("postgresTestContainer")
-            .withUsername("postgresTestContainer")
-            .withPassword("admin");
+    private static PostgreSQLContainer postgreSqlContainer = (PostgreSQLContainer) new PostgreSQLContainer(postgres)
+            .withDatabaseName("postgres")
+            .withUsername("postgres")
+            .withPassword("admin")
+            .withReuse(true);
 
-
-    //przekazanie wartosci do Springa aby wiedzial z czym ma sie laczyc. To jest tylko konfiguracja springowa. Mozna ja ustawic tez w application properties.
-    //stworzyc application-test properties plik i tam miec te dane dla hibernate pod testy containers.
-    //dane sa pobierane z kontenera przez postgresSqlContainer i przekazywane sping bootowi aby wiedzial z czym ma sie laczyc.
-    @DynamicPropertySource
-    public static void containerConfig(DynamicPropertyRegistry registry) { //aby nie meczyc sie juz z application properties
-        registry.add("spring.datasource.url", postgreSqlContainer::getJdbcUrl);
-        registry.add("spring.datasource.username", postgreSqlContainer::getUsername);
-        registry.add("spring.datasource.password", postgreSqlContainer::getPassword);
+    @Before
+    public void testInitialization() {
+        int mappedPort = postgreSqlContainer.getMappedPort(5432);
+        UserDao userDaoTest = new UserDao(UserSessionFactoryTest.getCustomUserSessionFactoryTest(mappedPort));
+        System.out.println(mappedPort);
     }
 }

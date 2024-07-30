@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UserDaoContainerTest extends TestContainerData {
 
-    private final UserDao userDaoTest = new UserDao();
+    private final UserDao userDaoTest = new UserDao(UserSessionFactoryTest.getCustomUserSessionFactoryTest(5432));
     private UserDataModel userDataModel;
     private List<CharacterDataModel> charactersList = new ArrayList<CharacterDataModel>();
 
