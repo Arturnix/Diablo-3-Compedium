@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class AccountMapper {
 
-    public AccountDataModel mapAccountToDataModel(String accountData) { //zmienic nazwe na mapAccToDM
+    public AccountDataModel mapAccountToDataModel(String accountData) {
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
@@ -28,9 +28,9 @@ public class AccountMapper {
                 node.get("battleTag").asText(),
                 node.get("paragonLevel").asInt(),
                 node.get("guildName").asText(),
-                fetchHeroesList(node), //przerzucic taki mechanizm do osbnej klasy? Aby zwiekszyc test coverage to mialbym ten kod private jako public innej klasie i bym testowal
+                fetchHeroesList(node),
                 node.get("highestHardcoreLevel").asInt(),
-                sumEliteKills(node) //przerzucic taki mechanizm do osbnej klasy?
+                sumEliteKills(node)
         );
     }
 

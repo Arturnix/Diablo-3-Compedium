@@ -126,7 +126,7 @@ public class ItemClassesAndNamesLists {
         return itemsTypesMap.get(itemType).keySet();
     }
 
-    public static List<String> getSelectedItemList(String itemType, String selectedItem) { //zmienic nie armor tylko oglnie bo weapon tez bedzie z tego korzystal
+    public static List<String> getSelectedItemList(String itemType, String selectedItem) {
 
         List<String> allItemsOfSelectedType = new ArrayList<>();
 
@@ -136,13 +136,13 @@ public class ItemClassesAndNamesLists {
         return allItemsOfSelectedType;
     }
 
-    public static List<List<String>> getArmorSelectedItemFullLists(String itemType, String selectedItem) { //czy to jest potrzebne???
+    public static List<List<String>> getArmorSelectedItemFullLists(String itemType, String selectedItem) { //TODO czy to jest potrzebne???
         return itemsTypesMap.get(itemType).get(selectedItem);
     }
 
     private static final Map<String, Map<String, List<List<String>>>> itemsTypesMap = new HashMap<String, Map<String, List<List<String>>>>() {{
         put("Armor", new HashMap<String, List<List<String>>>() {{
-            put("Helmets", List.of(spiritStones, voodooMasks, wizardHats)); //wyrzuca blad kiedy klikam w Helmets i dodana jest lista "Helmets". Pewnie ktorys string wyrzuca blad api. Czy wszystkie te itemy pphodza ze sciezki item? jesli z artisan to moze wywalac rzeczywiscie...
+            put("Helmets", List.of(spiritStones, voodooMasks, wizardHats)); //TODO wyrzuca blad kiedy klikam w Helmets i dodana jest lista "Helmets". Pewnie ktorys string wyrzuca blad api. Czy wszystkie te itemy pphodza ze sciezki item? jesli z artisan to moze wywalac rzeczywiscie...
             put("Pauldrons", List.of(pauldrons));
             put("Armors", List.of(chestArmor, cloaks));
             put("Bracers", List.of(bracers));

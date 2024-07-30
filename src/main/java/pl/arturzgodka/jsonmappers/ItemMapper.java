@@ -211,7 +211,7 @@ public class ItemMapper {
         return BaseUrlParts.BASE_MEDIA_BLIZZARD_ITEM_ICON_URL + node.get("icon").asText() + ".png";
     }
 
-    private ItemDataModel createArmorDataModel(JsonNode node) { //czy dodac pole typeName i pozostale?
+    private ItemDataModel createArmorDataModel(JsonNode node) { //TODO czy dodac pole typeName i pozostale? Sprawdzić gdzie taka instancja jest wykorzystywana.
 
         return new ItemArmorDataModel(
                 fetchItemBodyPartSlots(node),
@@ -223,7 +223,7 @@ public class ItemMapper {
         );
     }
 
-    private ItemArmorDataModel createArmorDataModelToItemsListView(JsonNode node) { //te 2 moetody zrobic w 1 i dac if w zaleznosci od tego co ma zostac zwrocone? Czy armor czy weapon type.
+    private ItemArmorDataModel createArmorDataModelToItemsListView(JsonNode node) { //TODO te 2 metody zrobic w 1 i dac if w zaleznosci od tego co ma zostac zwrocone? Czy armor czy weapon type.
 
         return new ItemArmorDataModel(
                 node.get("name").asText(),
@@ -256,7 +256,7 @@ public class ItemMapper {
         );
     }
 
-    private ItemDataModel createWeaponDataModel(JsonNode node) { //czy dodac pole typeName?
+    private ItemDataModel createWeaponDataModel(JsonNode node) { //TODO czy dodac pole typeName i pozostale rowniez tutaj?
 
         return new ItemWeaponDataModel(
                 fetchItemBodyPartSlots(node),

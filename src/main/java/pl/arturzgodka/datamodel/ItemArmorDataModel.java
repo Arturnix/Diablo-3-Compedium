@@ -4,8 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +26,7 @@ public class ItemArmorDataModel extends ItemDataModel {
         this.requiredLevel = requiredLevel;
         this.armor = armor;
     }
- //czy te wszystkie konstruktory sa wykorzystywane???
+ //TODO czy te wszystkie konstruktory sa wykorzystywane??? Część jest w testach aby twrzoyć uproszczone instancje tej klasy.
     public ItemArmorDataModel(String bodyPart, String id, String name, String armor) {
         super(bodyPart, id, name);
         this.armor = armor;
@@ -63,11 +61,17 @@ public class ItemArmorDataModel extends ItemDataModel {
     @Override
     public String toString() {
         return "ItemArmorDataModel{" +
-                "itemBodyPartSlots='" + itemBodyPartSlots + '\'' +
+                "armor='" + armor + '\'' +
+                ", itemBodyPartSlots=" + itemBodyPartSlots +
+                ", attributes=" + attributes +
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", attributes='" + attributes + '\'' +
-                ", armor=" + armor +
+                ", requiredLevel=" + requiredLevel +
+                ", typeName='" + typeName + '\'' +
+                ", description='" + description + '\'' +
+                ", randomAffixes=" + randomAffixes +
+                ", setName='" + setName + '\'' +
+                ", setDescription='" + setDescription + '\'' +
                 '}';
     }
 }

@@ -14,12 +14,12 @@ import java.util.List;
 
 public class SkillMapper {
 
-    public List<HeroSkillDataModel> mapSkillsToDataModel(String heroClass, List<String> barbarianSkills) { //change List<String> not to specific class name
+    public List<HeroSkillDataModel> mapSkillsToDataModel(String heroClass, List<String> heroSkills) {
 
         List<HeroSkillDataModel> skills = new ArrayList<>();
         FetchToken fetchToken = new FetchToken();
 
-        for (String skill : barbarianSkills) {
+        for (String skill : heroSkills) {
             HeroSkillDataModel heroSkillDataModel = fetchSkillsAndRunes(SkillHandlerApi.generateRequest(heroClass, skill, fetchToken));
             skills.add(heroSkillDataModel);
         }

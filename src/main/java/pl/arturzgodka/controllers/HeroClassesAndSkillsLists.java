@@ -45,5 +45,4 @@ public class HeroClassesAndSkillsLists {
         return heroClassSkillsMap.get(heroClass);
     }
 
-
 }

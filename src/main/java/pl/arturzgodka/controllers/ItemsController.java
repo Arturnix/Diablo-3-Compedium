@@ -36,28 +36,6 @@ public class ItemsController {
         return "itemTypes";
     }
 
-    /*@RequestMapping("/Armor/")
-    public String getArmorTypeItems(Model model, @RequestParam String itemType) {
-
-        List<ItemArmorDataModel> itemsMapped = itemMapper.getItemsOfArmorType(ItemClassesAndNamesLists.getSelectedItemList("Armor", itemType));
-
-        model.addAttribute("selectedItemType", itemType);
-        model.addAttribute("itemsMapped", itemsMapped);
-
-        return "itemsArmor";
-    }
-
-    @RequestMapping("/Weapon/")
-    public String getWeaponTypeItems(Model model, @RequestParam String itemType) {
-
-        List<ItemWeaponDataModel> itemsMapped = itemMapper.getItemsOfWeaponType(ItemClassesAndNamesLists.getSelectedItemList("Weapon", itemType));
-
-        model.addAttribute("selectedItemType", itemType);
-        model.addAttribute("itemsMapped", itemsMapped);
-
-        return "itemsWeapon";
-    }*/
-
     @RequestMapping("/{selectedItemType}/")
     public String getSelectedTypeItems(Model model, @RequestParam String itemType, @PathVariable(value="selectedItemType") String selectedItem) {
 
