@@ -15,7 +15,7 @@ public class TestContainerData {
 
     @Container
     private static PostgreSQLContainer postgreSqlContainer = (PostgreSQLContainer) new PostgreSQLContainer(postgres)
-            .withDatabaseName("postgres")
+            .withDatabaseName("postgresTestContainers")
             .withUsername("postgres")
             .withPassword("admin")
             .withReuse(true);
