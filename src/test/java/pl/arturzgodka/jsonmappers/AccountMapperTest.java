@@ -1,5 +1,6 @@
-package pl.arturzgodka;
+package pl.arturzgodka.jsonmappers;
 
+import pl.arturzgodka.ShareableDataForTests;
 import pl.arturzgodka.apihandlers.AccountHandlerApi;
 import pl.arturzgodka.datamodel.AccountDataModel;
 import pl.arturzgodka.datamodel.CharacterDataModel;

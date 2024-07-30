@@ -1,7 +1,8 @@
-package pl.arturzgodka;
+package pl.arturzgodka.databaseutils;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.arturzgodka.TestContainerData;
 import pl.arturzgodka.databaseutils.CharacterDao;
 import pl.arturzgodka.datamodel.CharacterDataModel;
 import static org.hamcrest.MatcherAssert.assertThat;

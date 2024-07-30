@@ -1,5 +1,6 @@
-package pl.arturzgodka;
+package pl.arturzgodka.jsonmappers;
 
+import pl.arturzgodka.ShareableDataForTests;
 import pl.arturzgodka.datamodel.FollowerDataModel;
 import pl.arturzgodka.datamodel.CharacterDataModel;
 import pl.arturzgodka.datamodel.ItemDataModel;

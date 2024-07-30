@@ -1,4 +1,4 @@
-package pl.arturzgodka;
+package pl.arturzgodka.apihandlers;
 
 import pl.arturzgodka.apihandlers.BaseUrlParts;
 import pl.arturzgodka.apihandlers.CharacterHandlerApi;

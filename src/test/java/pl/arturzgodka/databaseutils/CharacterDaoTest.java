@@ -1,4 +1,4 @@
-package pl.arturzgodka;
+package pl.arturzgodka.databaseutils;
 
 import jakarta.validation.UnexpectedTypeException;
 import org.junit.jupiter.api.Assertions;

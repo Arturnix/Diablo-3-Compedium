@@ -1,6 +1,7 @@
-package pl.arturzgodka;
+package pl.arturzgodka.jsonmappers;
 
 import org.junit.jupiter.api.Test;
+import pl.arturzgodka.ShareableDataForTests;
 import pl.arturzgodka.apihandlers.ItemHandlerApi;
 import pl.arturzgodka.datamodel.ItemDataModel;
 import pl.arturzgodka.jsonmappers.ItemMapper;

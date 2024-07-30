@@ -1,10 +1,11 @@
-package pl.arturzgodka;
+package pl.arturzgodka.databaseutils;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
+import pl.arturzgodka.TestContainerData;
 import pl.arturzgodka.databaseutils.UserDao;
 import pl.arturzgodka.datamodel.CharacterDataModel;
 import pl.arturzgodka.datamodel.UserDataModel;

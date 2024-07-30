@@ -1,4 +1,4 @@
-package pl.arturzgodka;
+package pl.arturzgodka.apihandlers;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
