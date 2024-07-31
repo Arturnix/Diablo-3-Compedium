@@ -16,8 +16,8 @@ public class SkillsController {
     private final SkillMapper skillMapper = new SkillMapper();
 
     @RequestMapping("/heroClasses.html")
-    public String getHeroesList(Model model) { //model przakzuje aby miec pelne MVC
-        model.addAttribute("heroClassesList", HeroClassesAndSkillsLists.heroClasses); //model.addStribute podake nazwe zmiennje i skad ma pchodzic wartosc dla tej zmiennej.
+    public String getHeroesList(Model model) {
+        model.addAttribute("heroClassesList", HeroClassesAndSkillsLists.heroClasses);
         return "heroClasses";
     }
 

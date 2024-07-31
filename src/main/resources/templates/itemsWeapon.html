@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Items</title>
+    <link rel="icon" href="/img/SwordAttackIcon.webp"/>
+    <!-- CSS Stylesheets -->
+    <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/styles.css"/>
+
+    <!-- Font Awesome -->
+    <script
+            src="https://kit.fontawesome.com/5f0ef8cba2.js"
+            crossorigin="anonymous"
+    ></script>
+
+    <!-- Bootstrap Scripts -->
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+    ></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Ubuntu&display=swap"
+            rel="stylesheet"
+    />
+</head>
+<body>
+<div class="skills-page"> <!-- change naming of css styles classes -->
+
+    <a><button id="button-fixed-top" class="login-btn btn btn-dark btn-block" onclick="history.back()"><i class="fa-solid fa-reply icon-list"></i>Back</button></a>
+
+    <h2 class="font-diablo py-5 px-3" th:text="${selectedItemType} + ' list:'"></h2>
+
+    <div class="display-item-info-div">
+    <ul th:each="item : ${itemsMapped}" class="characters-list">
+        <li class="items-list-item"><img th:src="${item.iconURL}" class="skill-icon item-type-icon" th:text="${item.getName()}">
+            <p class="item-info" th:text="${item.getTypeName()}"></p>
+            <p class="item-info" th:text="${item.getSetName() != null} ? 'Set name: ' + ${item.getSetName()}"></p>
+            <p class="item-info" th:text="'Level required: ' + ${item.getRequiredLevel()}"></p>
+            <p class="item-info" th:text="'Damage: ' + ${item.getMinDamage()} + ' - ' + ${item.getMaxDamage()}"></p>
+            <p class="item-info" th:text="${item.attributes.get('primary').isEmpty()} ? '' : 'Primary attributes:'"></p>
+             <ul th:each="attribute : ${item.attributes.get('primary')}">
+                 <li th:text="${attribute}"></li>
+             </ul>
+            <p class="item-info" th:text="${item.attributes.get('secondary').isEmpty()} ? '' : 'Secondary attributes:'"></p>
+            <ul th:each="attribute : ${item.attributes.get('secondary')}">
+                <li th:text="${attribute}"></li>
+            </ul>
+            <p class="item-info" th:text="${item.randomAffixes().isEmpty()} ? '' : 'One of ' + ${item.randomAffixes().size()} + ' properties:'"></p>
+            <ul th:each="affix : ${item.randomAffixes()}">
+                <li th:text="${affix}"></li>
+            </ul>
+            <p class="item-info setName" th:utext="${item.getSetDescription() != null} ? ${item.getSetDescription()}"></p>
+            <p class="item-info item-description" th:utext="${item.getDescription() != null} ? ${item.getDescription()}"></p>
+          </li>
+      </ul>
+    </div>
+
+      <footer>
+          © 2024 <img src="/img/favicon.ico" alt="Arturnix icon"/> Arturnix.
+      </footer>
+  </div>
+  </body>
+  </html>

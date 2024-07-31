@@ -12,7 +12,14 @@ import pl.arturzgodka.datamodel.UserDataModel;
 
 public class UserDao {
     //private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); //lib spring zawarta w security
-    private final SessionFactory sessionFactory = UserSessionFactory.getCustomUserSessionFactory(); //zasob statyczny
+    private SessionFactory sessionFactory = UserSessionFactory.getCustomUserSessionFactory(); //zasob statyczny
+
+    public UserDao() {
+    }
+
+    public UserDao(SessionFactory userSessionFactory) { //konstruktor dla test containers, jako parametr przyjmuje test session factory.
+        this.sessionFactory = userSessionFactory;
+    }
 
     public void saveUser(UserDataModel userDataModel) {
         Session session = sessionFactory.openSession();

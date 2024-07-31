@@ -48,6 +48,13 @@
   font-style: normal;  /* Specify the font's style */
 }
 
+@font-face {
+  font-family: "DiabloLight";
+  src: url(/font/Diablo_Light.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .font-diablo {
   font-family: "DiabloHeavy", sans-serif;
   color: blanchedalmond;
@@ -59,8 +66,13 @@
   font-size: small;
 }
 
+.setName {
+  color: greenyellow;
+}
+
 /* links */
 a {
+  font-family: "DiabloLight", sans-serif;
   color: blanchedalmond;
   text-decoration: none;
 }
@@ -119,12 +131,24 @@ footer {
   margin-bottom: 7px;
 }
 
+.item-type-icon {
+  background-size: 100%;
+  margin-right: 30px;
+}
+
 /* View skills page */
 
 .skills-heroes-classes-page {
   min-height: 100vh !important;
   background-image: url(https://assets.diablo3.blizzard.com/d3/media/artwork/artwork-0133-large.jpg);
   background-size: 100% 100%;
+}
+
+.items-types-page {
+  min-height: 100vh !important;
+  background-image: url('../img/itemsTypes.jpg');
+  background-size: 100% 100%;
+  position: relative;
 }
 
 .skills-page {
@@ -181,4 +205,25 @@ footer {
   position: fixed;
 }
 
+/* items */
 
+.items-list-item {
+  margin-bottom: 60px;
+}
+
+p.item-info {
+  margin-bottom: 0;
+}
+
+p.item-description {
+  margin-bottom: 0;
+  margin-top: 20px;
+  color: peru;
+  font-style: italic;
+  text-align: center;
+}
+
+div.display-item-info-div {
+  height: auto;
+  width: 44%;
+}

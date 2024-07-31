@@ -1,4 +1,4 @@
-package pl.arturzgodka;
+package pl.arturzgodka.databaseutils;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -53,7 +53,6 @@ public class UserDataModelDaoTest {
 
     @Test
     public void deleteUserWithNullEmailValueThrowsException() {
-        userDaoTest = new UserDao();
         Assertions.assertThrows(NullPointerException.class, () -> {
             userDaoTest.deleteUser(new UserDataModel(null, "abc", charactersList, "abc"));
         });

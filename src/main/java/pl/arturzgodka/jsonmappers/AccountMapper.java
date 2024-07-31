@@ -13,6 +13,41 @@ import java.util.Map;
 
 public class AccountMapper {
 
+    public AccountDataModel mapAccountToDataModel(String accountData) {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode node = null;
+
+        try {
+            node = objectMapper.readTree(accountData);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return new AccountDataModel(
+                node.get("battleTag").asText(),
+                node.get("paragonLevel").asInt(),
+                node.get("guildName").asText(),
+                fetchHeroesList(node),
+                node.get("highestHardcoreLevel").asInt(),
+                sumEliteKills(node)
+        );
+    }
+
+    public List<CharacterDataModel> fetchHeroesList(String accountData) {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode node = null;
+
+        try {
+            node = objectMapper.readTree(accountData);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return fetchHeroesList(node);
+    }
+
     private Map<String, Integer> sumEliteKills(JsonNode node) {
 
         int kills = 0;
@@ -39,40 +74,5 @@ public class AccountMapper {
         }
 
         return heroes;
-    }
-
-    public AccountDataModel mapAccountToDataModel(String accountData) { //zmienic nazwe na mapAccToDM
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode node = null;
-
-        try {
-            node = objectMapper.readTree(accountData);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
-        return new AccountDataModel(
-                node.get("battleTag").asText(),
-                node.get("paragonLevel").asInt(),
-                node.get("guildName").asText(),
-                fetchHeroesList(node), //przerzucic taki mechanizm do osbnej klasy? Aby zwiekszyc test coverage to mialbym ten kod private jako public innej klasie i bym testowal
-                node.get("highestHardcoreLevel").asInt(),
-                sumEliteKills(node) //przerzucic taki mechanizm do osbnej klasy?
-        );
-    }
-
-    public List<CharacterDataModel> fetchHeroesList(String accountData) {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode node = null;
-
-        try {
-            node = objectMapper.readTree(accountData);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
-        return fetchHeroesList(node);
     }
 }

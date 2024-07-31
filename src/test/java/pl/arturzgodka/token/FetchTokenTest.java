@@ -1,4 +1,4 @@
-package pl.arturzgodka;
+package pl.arturzgodka.token;
 
 import pl.arturzgodka.token.FetchToken;
 import pl.arturzgodka.token.Token;
