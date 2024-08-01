@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Items</title>
+    <title>Show item</title>
     <link rel="icon" href="/img/SwordAttackIcon.webp"/>
     <!-- CSS Stylesheets -->
     <link
@@ -35,35 +35,19 @@
     />
 </head>
 <body>
-<div class="items-types-page">
 
-    <a
-            id="button-fixed-top"
-            href="/"
-            class="login-btn btn btn-dark btn-block"
-            type="button"
-    >
-        <i class="fa-solid fa-reply icon-list"></i>
-        Back
-    </a>
+<div class="skills-page"> <!-- change naming of css styles classes -->
+    <a><button id="button-fixed-top" class="login-btn btn btn-dark btn-block" onclick="history.back()"><i class="fa-solid fa-reply icon-list"></i>Back</button></a>
 
-    <h2 class="font-diablo py-5 px-3">Choose items types to show more items:</h2>
+    <h2 class="font-diablo py-5 px-3" th:text="'Search item name: ' + ${itemName}"></h2>
 
-    <ul th:each="itemType : ${itemTypesList}" class="characters-list">
-        <li><a th:href="${itemType}"><img th:src="@{'/img/' + ${itemType} + '.webp'}" class="skill-icon item-type-icon" th:text="${itemType}"></a></li>
-    </ul>
+    <div class="display-item-info-div">
+    </div>
 
-    <h2 class="font-diablo py-3 px-3">or use search bar to find item:</h2>
-
-    <form class="form-inline px-3" action="#" th:action="@{/singleItem}" method="get">
-        <input id="searchItemInput" class="form-control mr-sm-2" type="text" name="itemSearchName" placeholder="Item name" aria-label="Search">
-        <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <footer>
+        © 2024 <img src="/img/favicon.ico" alt="Arturnix icon"/> Arturnix.
+    </footer>
 
 </div>
-
-<footer>
-    © 2024 <img src="/img/favicon.ico" alt="Arturnix icon"/> Arturnix.
-</footer>
 </body>
 </html>

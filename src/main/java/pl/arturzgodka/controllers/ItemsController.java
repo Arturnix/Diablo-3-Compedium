@@ -2,10 +2,7 @@ package pl.arturzgodka.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.arturzgodka.datamodel.ItemArmorDataModel;
 import pl.arturzgodka.datamodel.ItemDataModel;
 import pl.arturzgodka.datamodel.ItemWeaponDataModel;
@@ -24,6 +21,12 @@ public class ItemsController {
     public String getItemTypes(Model model) {
         model.addAttribute("itemTypesList", ItemClassesAndNamesLists.itemTypes);
         return "itemsTypes";
+    }
+
+    @GetMapping("/singleItem")
+    public String searchItemForm(Model model, @RequestParam String itemSearchName) {
+        model.addAttribute("itemName", itemSearchName);
+        return "singleItem";
     }
 
     @RequestMapping(value="/{itemTypes}", method = RequestMethod.GET)

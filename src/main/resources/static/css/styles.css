@@ -227,3 +227,7 @@ div.display-item-info-div {
   height: auto;
   width: 44%;
 }
+
+#searchItemInput {
+  width: 32%;
+}
