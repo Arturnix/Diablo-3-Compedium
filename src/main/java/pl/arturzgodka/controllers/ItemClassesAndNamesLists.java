@@ -1,6 +1,7 @@
 package pl.arturzgodka.controllers;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ItemClassesAndNamesLists {
 
@@ -138,6 +139,24 @@ public class ItemClassesAndNamesLists {
 
     public static List<List<String>> getArmorSelectedItemFullLists(String itemType, String selectedItem) { //TODO czy to jest potrzebne???
         return itemsTypesMap.get(itemType).get(selectedItem);
+    }
+
+    public static List<List<String>> selectedItemNameToApi(String searchItemName) {
+
+        List<String> itemsTypesMapKeys = itemsTypesMap.keySet().stream().toList();
+        List<List<String>> itemsMatch = new ArrayList<>();
+
+        for(String mainKey : itemsTypesMapKeys) {
+            for (String subKey : itemsTypesMap.get(mainKey).keySet().stream().toList()) {
+                for(int i = 0; i < itemsTypesMap.get(mainKey).get(subKey).size(); i++) {
+                    if(itemsTypesMap.get(mainKey).get(subKey).get(i).stream().anyMatch(String -> String.contains(searchItemName))) {
+                        itemsMatch.add(itemsTypesMap.get(mainKey).get(subKey).get(i).stream().filter(String -> String.contains(searchItemName)).collect(Collectors.toList()));
+                    }
+                }
+            }
+        }
+
+        return itemsMatch;
     }
 
     private static final Map<String, Map<String, List<List<String>>>> itemsTypesMap = new HashMap<String, Map<String, List<List<String>>>>() {{

@@ -89,6 +89,24 @@ public class ItemMapper {
         }
     }
 
+    public ItemDataModel mapItemToDataModelSearchItem(String itemData) { //TODO uporzadkowac te konstruktory - teraz jest to zunifikowane nie potrzeba rozdzielac na zwracany tym armor lub weapon tylko przez dziedziczenie jest ItemDataModel
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode node = null;
+
+        try {
+            node = objectMapper.readTree(itemData);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        if(node.has("armor")) {
+            return createArmorDataModelSearchItem(node);
+        } else {
+            return  createWeaponDataModelSearchItem(node);
+        }
+    }
+
     private List<String> fetchItemBodyPartSlots(JsonNode node) {
 
         List<String> itemBodyPartSlots = new ArrayList<>();
@@ -266,6 +284,39 @@ public class ItemMapper {
                 fetchItemAttrtibutes(node),
                 getMinDamage(node),
                 getMaxDamage(node)
+        );
+    }
+
+    private ItemDataModel createArmorDataModelSearchItem(JsonNode node) {
+
+        return new ItemArmorDataModel(
+                node.get("name").asText(),
+                node.get("requiredLevel").asInt(),
+                node.get("typeName").asText(),
+                getFlavorTextDescription(node),
+                fetchRandomAffixes(node),
+                getSetName(node),
+                getSetDescription(node),
+                getIconURL(node),
+                node.get("armor").asText(),
+                fetchItemAttrtibutes(node)
+        );
+    }
+
+    private ItemDataModel createWeaponDataModelSearchItem(JsonNode node) {
+
+        return new ItemWeaponDataModel(
+                node.get("name").asText(),
+                node.get("requiredLevel").asInt(),
+                node.get("typeName").asText(),
+                getFlavorTextDescription(node),
+                fetchRandomAffixes(node),
+                getSetName(node),
+                getSetDescription(node),
+                getIconURL(node),
+                getMinDamage(node),
+                getMaxDamage(node),
+                fetchItemAttrtibutes(node)
         );
     }
 }

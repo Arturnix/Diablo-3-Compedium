@@ -39,7 +39,7 @@
 
     <a><button id="button-fixed-top" class="login-btn btn btn-dark btn-block" onclick="history.back()"><i class="fa-solid fa-reply icon-list"></i>Back</button></a>
 
-    <h2 class="font-diablo py-5 px-3" th:text="${selectedItemType} + ' list:'"></h2>
+    <h2 class="font-diablo py-5 px-3" th:text="${selectedItemType == null} ? '' : ${selectedItemType} + ' list:'"></h2>
 
     <div class="display-item-info-div">
     <ul th:each="item : ${itemsMapped}" class="characters-list">

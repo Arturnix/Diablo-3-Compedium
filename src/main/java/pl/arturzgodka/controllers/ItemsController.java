@@ -3,14 +3,19 @@ package pl.arturzgodka.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.arturzgodka.apihandlers.ItemHandlerApi;
 import pl.arturzgodka.datamodel.ItemArmorDataModel;
 import pl.arturzgodka.datamodel.ItemDataModel;
 import pl.arturzgodka.datamodel.ItemWeaponDataModel;
 import pl.arturzgodka.jsonmappers.ItemMapper;
+import pl.arturzgodka.token.FetchToken;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import static pl.arturzgodka.controllers.ItemClassesAndNamesLists.selectedItemNameToApi;
+import static pl.arturzgodka.controllers.ItemsNamesRepository.getSearchedItemName;
 
 @Controller
 public class ItemsController {
@@ -25,8 +30,25 @@ public class ItemsController {
 
     @GetMapping("/singleItem")
     public String searchItemForm(Model model, @RequestParam String itemSearchName) {
-        model.addAttribute("itemName", itemSearchName);
-        return "singleItem";
+
+        //TODO ujednolicic mapowanie obiektow i view dla nich czyli niech bedzie zwracana jedna templatka i dac pola tylko opcjonalnie w zaleznosci jakiego typu obiekt zostal zwrocony.
+
+        FetchToken fetchToken = new FetchToken();
+        String convertItemSearchName = itemSearchName.toLowerCase().replace(" ", "-").replace("'", "");
+        List<List<String>> itemNameToApi = ItemClassesAndNamesLists.selectedItemNameToApi(convertItemSearchName);
+
+        List<ItemDataModel> itemsMapped = new ArrayList<ItemDataModel>();
+
+        for (List<String> s : itemNameToApi) {
+            for(String x : s) {
+                String itemJSON = ItemHandlerApi.generateRequest(x, fetchToken);
+                itemsMapped.add(itemMapper.mapItemToDataModelSearchItem(itemJSON));
+            }
+        }
+
+        model.addAttribute("itemsMapped", itemsMapped);
+
+        return "items";
     }
 
     @RequestMapping(value="/{itemTypes}", method = RequestMethod.GET)
