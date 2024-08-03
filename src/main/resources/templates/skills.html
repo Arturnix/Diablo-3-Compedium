@@ -49,6 +49,8 @@
     >
 
     <h2 class="font-diablo py-5 px-3" th:text="${heroClass} + ' skills list:'"></h2>
+
+    <div class="display-item-info-div">
     <ul th:each="skill : ${skills}" class="characters-list">
         <li><img class="skill-icon" th:src="${skill.iconURL}" th:text="${skill.name}"></li>
         <p style="margin-bottom: 0">Level required: <span th:text="${skill.level}"></span></p>
@@ -61,11 +63,11 @@
             </p>
         </ul>
     </ul>
+    </div>
 
+    <footer>
+        © 2024 <img src="/img/favicon.ico" alt="Arturnix icon"/> Arturnix.
+    </footer>
 </div>
-
-<footer>
-    © 2024 <img src="/img/favicon.ico" alt="Arturnix icon"/> Arturnix.
-</footer>
 </body>
 </html>

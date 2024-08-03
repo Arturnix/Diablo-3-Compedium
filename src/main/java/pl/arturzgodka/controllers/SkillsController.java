@@ -15,13 +15,13 @@ import static pl.arturzgodka.controllers.HeroClassesAndSkillsLists.getHeroClassS
 public class SkillsController {
     private final SkillMapper skillMapper = new SkillMapper();
 
-    @RequestMapping("/heroClasses.html")
+    @RequestMapping("skills/heroClasses.html")
     public String getHeroesList(Model model) {
         model.addAttribute("heroClassesList", HeroClassesAndSkillsLists.heroClasses);
         return "heroClasses";
     }
 
-    @RequestMapping("/{heroClasses}")
+    @RequestMapping("skills/{heroClasses}")
     public String getSkills(Model model, @PathVariable(value="heroClasses") String heroClass) {
 
         String heroClassWithHyphonSeparator = heroClass.replace(" ", "-");

@@ -70,13 +70,11 @@ public class ItemsController {
             List<ItemArmorDataModel> itemsMapped = itemMapper.getItemsOfArmorType(ItemClassesAndNamesLists.getSelectedItemList(selectedItem, itemType));
             model.addAttribute("itemsMapped", itemsMapped);
 
-            return "itemsArmor";
-
         } else {
             List<ItemWeaponDataModel> itemsMapped = itemMapper.getItemsOfWeaponType(ItemClassesAndNamesLists.getSelectedItemList(selectedItem, itemType));
             model.addAttribute("itemsMapped", itemsMapped);
 
-            return "itemsWeapon";
         }
+        return "items";
     }
 }

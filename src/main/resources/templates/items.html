@@ -39,13 +39,15 @@
 
     <a><button id="button-fixed-top" class="login-btn btn btn-dark btn-block" onclick="history.back()"><i class="fa-solid fa-reply icon-list"></i>Back</button></a>
 
+    <h2 class="font-diablo py-5 px-3" th:if="${itemsMapped.isEmpty()}" th:text="'Item not found!'"></h2>
+
     <h2 class="font-diablo py-5 px-3" th:text="${selectedItemType == null} ? '' : ${selectedItemType} + ' list:'"></h2>
 
     <div class="display-item-info-div">
         <ul th:each="item : ${itemsMapped}" class="characters-list">
             <li class="items-list-item"><img th:src="${item.iconURL}" class="skill-icon item-type-icon" th:text="${item.getName()}">
                 <p class="item-info" th:text="${item.getTypeName()}"></p>
-                <p class="item-info" th:text="${item.getSetName() != null} ? 'Set name: ' + ${item.getSetName()}"></p>
+                <p class="item-info setName" th:text="${item.getSetName() != null} ? 'Set name: ' + ${item.getSetName()}"></p>
                 <p class="item-info" th:text="'Level required: ' + ${item.getRequiredLevel()}"></p>
                 <p class="item-info" th:if="${item.class.name == 'pl.arturzgodka.datamodel.ItemArmorDataModel'}" th:text="'Armor: ' + ${item.getArmor()}"></p>
                 <p class="item-info" th:if="${item.class.name == 'pl.arturzgodka.datamodel.ItemWeaponDataModel'}" th:text="'Damage: ' + ${item.getMinDamage()} + ' - ' + ${item.getMaxDamage()}"></p>
