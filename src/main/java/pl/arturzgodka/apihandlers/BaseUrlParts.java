@@ -10,5 +10,5 @@ public class BaseUrlParts {
     public static final String BASE_SKILL_API = "/skill/";
     public static final String BASE_ITEM_API = BASE_BLIZZARD_URL + "data/item/";
     public static final String BASE_DATA_HERO_API = BASE_BLIZZARD_URL + "data/hero/";
-    public static final String BASE_LOCALE_AND_TOKEN = "/?locale=en_US&access_token=";
+    public static final String BASE_LOCALE_AND_TOKEN = "/?locale=en_EU&access_token=";
 }

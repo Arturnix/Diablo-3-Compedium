@@ -12,6 +12,9 @@ import java.util.Map;
 public class ItemArmorDataModel extends ItemDataModel {
 
     private String armor;
+
+    //TODO move fields below to ItemDataModel class since these fields and shareable among child classes of ItemDataModel class.
+
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
     private List<String> itemBodyPartSlots;

@@ -1,27 +1,7 @@
 package pl.arturzgodka;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pl.arturzgodka.apihandlers.AccountHandlerApi;
-import pl.arturzgodka.apihandlers.CharacterHandlerApi;
-import pl.arturzgodka.apihandlers.ItemHandlerApi;
-import pl.arturzgodka.apihandlers.SkillHandlerApi;
-import pl.arturzgodka.controllers.ItemClassesAndNamesLists;
-import pl.arturzgodka.databaseutils.CharacterDao;
-import pl.arturzgodka.databaseutils.UserDao;
-import pl.arturzgodka.datamodel.*;
-import pl.arturzgodka.jsonmappers.AccountMapper;
-import pl.arturzgodka.jsonmappers.CharacterMapper;
-import pl.arturzgodka.jsonmappers.ItemMapper;
-import pl.arturzgodka.token.FetchToken;
-import pl.arturzgodka.token.Token;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static pl.arturzgodka.controllers.ItemClassesAndNamesLists.selectedItemNameToApi;
-import static pl.arturzgodka.controllers.ItemsNamesRepository.getSearchedItemName;
 
 @SpringBootApplication
 //@EntityScan( basePackages = {"pl.arturzgodka.datamodel.ItemDataModel"} ) // entities package name
