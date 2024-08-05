@@ -15,14 +15,14 @@ public class ItemMapperTest {
     private FetchToken fetchToken = new FetchToken();
 
     @Test
-    public void correctArmorItemTypeFetchedToDataModel() { //test for container - no mock used
+    public void correctArmorItemTypeFetchedToDataModel() {
 
         //given
         //when
-        ItemDataModel armor = itemMapper.mapItemToArmorTypeDataModel(ItemHandlerApi.generateRequest("veil-of-steel-p43_RetroHelm_003", fetchToken));
+        ItemDataModel armor = itemMapper.mapItemToDataModelSearchItem(ItemHandlerApi.generateRequest("veil-of-steel-p43_RetroHelm_003", fetchToken));
 
         //then
-        assertEquals("Stalowy Całun", armor.getName());
+        assertEquals("Veil of Steel", armor.getName());
     }
 
     @Test
@@ -30,23 +30,23 @@ public class ItemMapperTest {
 
         //given
         //when
-        ItemDataModel weapon = itemMapper.mapItemToWeaponTypeDataModel(ItemHandlerApi.generateRequest("corrupted-ashbringer-Unique_Sword_2H_104_x1", fetchToken));
+        ItemDataModel weapon = itemMapper.mapItemToDataModelSearchItem(ItemHandlerApi.generateRequest("corrupted-ashbringer-Unique_Sword_2H_104_x1", fetchToken));
 
         //then
-        assertEquals("Spaczony Spopielacz", weapon.getName());
+        assertEquals("Corrupted Ashbringer", weapon.getName());
     }
 
     @Test
     public void providedItemSlugAndIdDoesntExistThrowsException() {
         assertThrows(RuntimeException.class, ()-> {
-            itemMapper.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdAsDoesntExist);
+            itemMapper.mapItemToDataModelSearchItem(ShareableDataForTests.itemSlugAndIdAsDoesntExist);
         });
     }
 
     @Test
     public void providedItemDataNullThrowsException() {
         assertThrows(IllegalArgumentException.class, ()-> {
-            itemMapper.mapItemToDataModel(null);
+            itemMapper.mapItemToDataModelSearchItem(null);
         });
     }
 }

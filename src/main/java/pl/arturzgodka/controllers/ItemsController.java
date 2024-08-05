@@ -66,15 +66,9 @@ public class ItemsController {
 
         model.addAttribute("selectedItemType", itemType);
 
-        if (selectedItem.equals("Armor")) {
-            List<ItemArmorDataModel> itemsMapped = itemMapper.getItemsOfArmorType(ItemClassesAndNamesLists.getSelectedItemList(selectedItem, itemType));
-            model.addAttribute("itemsMapped", itemsMapped);
+        List<ItemDataModel> itemsMapped = itemMapper.getItemsOfAnyType(ItemClassesAndNamesLists.getSelectedItemList(selectedItem, itemType));
+        model.addAttribute("itemsMapped", itemsMapped);
 
-        } else {
-            List<ItemWeaponDataModel> itemsMapped = itemMapper.getItemsOfWeaponType(ItemClassesAndNamesLists.getSelectedItemList(selectedItem, itemType));
-            model.addAttribute("itemsMapped", itemsMapped);
-
-        }
         return "items";
     }
 }
