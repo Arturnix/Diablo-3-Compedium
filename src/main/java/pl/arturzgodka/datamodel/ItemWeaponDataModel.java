@@ -12,6 +12,9 @@ import java.util.Map;
 public class ItemWeaponDataModel extends ItemDataModel {
     private String minDamage;
     private String maxDamage;
+
+    //TODO move fields below to ItemDataModel class since these fields and shareable among child classes of ItemDataModel class.
+
     @SuppressWarnings("JpaAttributeTypeInspection")
     @JdbcTypeCode(SqlTypes.JSON)
     private List<String> itemBodyPartSlots;

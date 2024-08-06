@@ -1,6 +1,7 @@
 package pl.arturzgodka.controllers;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ItemClassesAndNamesLists {
 
@@ -126,7 +127,7 @@ public class ItemClassesAndNamesLists {
         return itemsTypesMap.get(itemType).keySet();
     }
 
-    public static List<String> getSelectedItemList(String itemType, String selectedItem) {
+    public static List<String> getAllItemsOfSelectedType(String itemType, String selectedItem) {
 
         List<String> allItemsOfSelectedType = new ArrayList<>();
 
@@ -136,8 +137,28 @@ public class ItemClassesAndNamesLists {
         return allItemsOfSelectedType;
     }
 
-    public static List<List<String>> getArmorSelectedItemFullLists(String itemType, String selectedItem) { //TODO czy to jest potrzebne???
-        return itemsTypesMap.get(itemType).get(selectedItem);
+    public static List<List<String>> selectedItemsNamesToApi(String searchItemName) {
+        return getMatchedItems(searchItemName);
+    }
+
+    private static List<List<String>> getMatchedItems(String searchItemName) {
+
+        List<List<String>> itemsMatch = new ArrayList<>();
+
+        for(String mainKey : itemsTypesMap.keySet().stream().toList()) {
+            for (String subKey : itemsTypesMap.get(mainKey).keySet().stream().toList()) {
+                foundItemsMatchWithSearchString(mainKey, subKey, searchItemName, itemsMatch);
+            }
+        }
+
+        return itemsMatch;
+    }
+
+    private static void foundItemsMatchWithSearchString(String mainKey, String subKey, String searchItemName, List<List<String>> itemsMatch) {
+
+        if(getAllItemsOfSelectedType(mainKey, subKey).stream().anyMatch(String -> String.contains(searchItemName))) {
+            itemsMatch.add(getAllItemsOfSelectedType(mainKey, subKey).stream().filter(String -> String.contains(searchItemName)).collect(Collectors.toList()));
+        }
     }
 
     private static final Map<String, Map<String, List<List<String>>>> itemsTypesMap = new HashMap<String, Map<String, List<List<String>>>>() {{
