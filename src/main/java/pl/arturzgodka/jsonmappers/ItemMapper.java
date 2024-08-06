@@ -17,22 +17,20 @@ import java.util.Map;
 
 public class ItemMapper {
 
-    //TODO improve naming of methods
-
-    public List<ItemDataModel> getItemsOfAnyType(List<String> itemsOfSelectedType) {
+    public List<ItemDataModel> getItems(List<String> itemsOfSelectedType) {
 
         List<ItemDataModel> items = new ArrayList<>();
         FetchToken fetchToken = new FetchToken();
 
         for (String item : itemsOfSelectedType) {
-            ItemDataModel itemDataModel = mapItemToDataModelSearchItem(ItemHandlerApi.generateRequest(item, fetchToken));
+            ItemDataModel itemDataModel = mapItemToDataModel(ItemHandlerApi.generateRequest(item, fetchToken));
             items.add(itemDataModel);
         }
 
         return items;
     }
 
-    public ItemDataModel mapItemToDataModelSearchItem(String itemData) {
+    public ItemDataModel mapItemToDataModel(String itemData) {
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
@@ -44,9 +42,9 @@ public class ItemMapper {
         }
 
         if(node.has("armor")) {
-            return createArmorDataModelToItemsListView(node);
+            return createArmorDataModel(node);
         } else {
-            return  createWeaponDataModelToItemsListView(node);
+            return  createWeaponDataModel(node);
         }
     }
 
@@ -104,7 +102,7 @@ public class ItemMapper {
 
     private String getMaxDamage(JsonNode node) {
 
-        int maxDamageStartIndex = node.get("damage").asText().indexOf("-")+1;
+        int maxDamageStartIndex = node.get("damage").asText().indexOf("-") + 1;
         int maxDamageEndIndex = node.get("damage").asText().indexOf(" ");
 
         return node.get("damage").asText().substring(maxDamageStartIndex, maxDamageEndIndex);
@@ -170,7 +168,7 @@ public class ItemMapper {
         return BaseUrlParts.BASE_MEDIA_BLIZZARD_ITEM_ICON_URL + node.get("icon").asText() + ".png";
     }
 
-    private ItemArmorDataModel createArmorDataModelToItemsListView(JsonNode node) {
+    private ItemDataModel createArmorDataModel(JsonNode node) {
 
         return new ItemArmorDataModel(
                 node.get("name").asText(),
@@ -186,7 +184,7 @@ public class ItemMapper {
         );
     }
 
-    private ItemWeaponDataModel createWeaponDataModelToItemsListView(JsonNode node) {
+    private ItemDataModel createWeaponDataModel(JsonNode node) {
 
         return new ItemWeaponDataModel(
                 node.get("name").asText(),

@@ -127,7 +127,7 @@ public class ItemClassesAndNamesLists {
         return itemsTypesMap.get(itemType).keySet();
     }
 
-    public static List<String> getSelectedItemList(String itemType, String selectedItem) {
+    public static List<String> getAllItemsOfSelectedType(String itemType, String selectedItem) {
 
         List<String> allItemsOfSelectedType = new ArrayList<>();
 
@@ -138,10 +138,10 @@ public class ItemClassesAndNamesLists {
     }
 
     public static List<List<String>> selectedItemsNamesToApi(String searchItemName) {
-        return getMainAndSubKeysToSearchMatchInItemsMap(searchItemName);
+        return getMatchedItems(searchItemName);
     }
 
-    private static List<List<String>> getMainAndSubKeysToSearchMatchInItemsMap(String searchItemName) {
+    private static List<List<String>> getMatchedItems(String searchItemName) {
 
         List<List<String>> itemsMatch = new ArrayList<>();
 
@@ -156,8 +156,8 @@ public class ItemClassesAndNamesLists {
 
     private static void foundItemsMatchWithSearchString(String mainKey, String subKey, String searchItemName, List<List<String>> itemsMatch) {
 
-        if(getSelectedItemList(mainKey, subKey).stream().anyMatch(String -> String.contains(searchItemName))) {
-            itemsMatch.add(getSelectedItemList(mainKey, subKey).stream().filter(String -> String.contains(searchItemName)).collect(Collectors.toList()));
+        if(getAllItemsOfSelectedType(mainKey, subKey).stream().anyMatch(String -> String.contains(searchItemName))) {
+            itemsMatch.add(getAllItemsOfSelectedType(mainKey, subKey).stream().filter(String -> String.contains(searchItemName)).collect(Collectors.toList()));
         }
     }
 

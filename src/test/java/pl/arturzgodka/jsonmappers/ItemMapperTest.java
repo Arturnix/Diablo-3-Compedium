@@ -4,22 +4,21 @@ import org.junit.jupiter.api.Test;
 import pl.arturzgodka.ShareableDataForTests;
 import pl.arturzgodka.apihandlers.ItemHandlerApi;
 import pl.arturzgodka.datamodel.ItemDataModel;
-import pl.arturzgodka.jsonmappers.ItemMapper;
 import pl.arturzgodka.token.FetchToken;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ItemMapperTest {
 
-    private ItemMapper itemMapper = new ItemMapper();
-    private FetchToken fetchToken = new FetchToken();
+    private final ItemMapper itemMapper = new ItemMapper();
+    private final FetchToken fetchToken = new FetchToken();
 
     @Test
     public void correctArmorItemTypeFetchedToDataModel() {
 
         //given
         //when
-        ItemDataModel armor = itemMapper.mapItemToDataModelSearchItem(ItemHandlerApi.generateRequest("veil-of-steel-p43_RetroHelm_003", fetchToken));
+        ItemDataModel armor = itemMapper.mapItemToDataModel(ItemHandlerApi.generateRequest("veil-of-steel-p43_RetroHelm_003", fetchToken));
 
         //then
         assertEquals("Veil of Steel", armor.getName());
@@ -30,7 +29,7 @@ public class ItemMapperTest {
 
         //given
         //when
-        ItemDataModel weapon = itemMapper.mapItemToDataModelSearchItem(ItemHandlerApi.generateRequest("corrupted-ashbringer-Unique_Sword_2H_104_x1", fetchToken));
+        ItemDataModel weapon = itemMapper.mapItemToDataModel(ItemHandlerApi.generateRequest("corrupted-ashbringer-Unique_Sword_2H_104_x1", fetchToken));
 
         //then
         assertEquals("Corrupted Ashbringer", weapon.getName());
@@ -39,14 +38,14 @@ public class ItemMapperTest {
     @Test
     public void providedItemSlugAndIdDoesntExistThrowsException() {
         assertThrows(RuntimeException.class, ()-> {
-            itemMapper.mapItemToDataModelSearchItem(ShareableDataForTests.itemSlugAndIdAsDoesntExist);
+            itemMapper.mapItemToDataModel(ShareableDataForTests.itemSlugAndIdAsDoesntExist);
         });
     }
 
     @Test
     public void providedItemDataNullThrowsException() {
         assertThrows(IllegalArgumentException.class, ()-> {
-            itemMapper.mapItemToDataModelSearchItem(null);
+            itemMapper.mapItemToDataModel(null);
         });
     }
 }

@@ -26,18 +26,8 @@ public class ItemsController {
     @GetMapping("/singleItem")
     public String searchItemForm(Model model, @RequestParam String itemSearchName) {
 
-        FetchToken fetchToken = new FetchToken();
-        String convertItemSearchName = itemSearchName.toLowerCase().replace(" ", "-").replace("'", "");
-        List<List<String>> itemsNamesToApi = ItemClassesAndNamesLists.selectedItemsNamesToApi(convertItemSearchName);
-
-        List<ItemDataModel> itemsMapped = new ArrayList<ItemDataModel>();
-
-        for (List<String> itemCategory : itemsNamesToApi) {
-            for(String itemName : itemCategory) {
-                String itemJSON = ItemHandlerApi.generateRequest(itemName, fetchToken);
-                itemsMapped.add(itemMapper.mapItemToDataModelSearchItem(itemJSON));
-            }
-        }
+        List<List<String>> itemsNamesToApi = getMatchedItemsToAPI(convertProvidedItemNameToSearchToAPIFormat(itemSearchName));
+        List<ItemDataModel> itemsMapped = getSearchedItems(itemsNamesToApi);
 
         model.addAttribute("itemsMapped", itemsMapped);
 
@@ -59,9 +49,32 @@ public class ItemsController {
 
         model.addAttribute("selectedItemType", itemType);
 
-        List<ItemDataModel> itemsMapped = itemMapper.getItemsOfAnyType(ItemClassesAndNamesLists.getSelectedItemList(selectedItem, itemType));
+        List<ItemDataModel> itemsMapped = itemMapper.getItems(ItemClassesAndNamesLists.getAllItemsOfSelectedType(selectedItem, itemType));
         model.addAttribute("itemsMapped", itemsMapped);
 
         return "items";
+    }
+
+    private String convertProvidedItemNameToSearchToAPIFormat(String itemSearchName) {
+        return itemSearchName.toLowerCase().replace(" ", "-").replace("'", "");
+    }
+
+    private List<List<String>> getMatchedItemsToAPI(String convertedItemName) {
+        return ItemClassesAndNamesLists.selectedItemsNamesToApi(convertedItemName);
+    }
+
+    private List<ItemDataModel> getSearchedItems(List<List<String>> itemsNamesToApi) {
+
+        List<ItemDataModel> itemsMapped = new ArrayList<ItemDataModel>();
+        FetchToken fetchToken = new FetchToken();
+
+        for (List<String> itemCategory : itemsNamesToApi) {
+            for(String itemName : itemCategory) {
+                String itemJSON = ItemHandlerApi.generateRequest(itemName, fetchToken);
+                itemsMapped.add(itemMapper.mapItemToDataModel(itemJSON));
+            }
+        }
+
+        return itemsMapped;
     }
 }
