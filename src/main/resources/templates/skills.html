@@ -37,18 +37,14 @@
 <body id="body-skills-list">
 <div class="skills-page">
 
-    <a
-            id="button-fixed-top"
-            href="heroClasses.html"
-            class="login-btn btn btn-dark btn-block"
-            type="button"
-    >
-        <i class="fa-solid fa-reply icon-list"></i>
-        Back
-    </a
-    >
+    <a><button id="button-fixed-top" class="login-btn btn btn-dark btn-block" onclick="history.back()"><i class="fa-solid fa-reply icon-list"></i>Back</button></a>
 
     <h2 class="font-diablo py-5 px-3" th:text="${heroClass} + ' skills list:'"></h2>
+
+    <form class="form-inline px-3 pb-5" action="#" th:action="@{/skills/skillSearch}" method="get">
+        <input id="searchSkillInput" class="form-control mr-sm-2" type="text" name="skillSearchName" placeholder="Skill name" aria-label="Search" required>
+        <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
 
     <div class="display-item-info-div">
     <ul th:each="skill : ${skills}" class="characters-list">
