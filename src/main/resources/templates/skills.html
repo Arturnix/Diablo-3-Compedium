@@ -13,12 +13,6 @@
     />
     <link rel="stylesheet" href="/css/styles.css"/>
 
-    <!-- Font Awesome -->
-    <script
-            src="https://kit.fontawesome.com/5f0ef8cba2.js"
-            crossorigin="anonymous"
-    ></script>
-
     <!-- Bootstrap Scripts -->
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
@@ -37,12 +31,26 @@
 <body id="body-skills-list">
 <div class="skills-page">
 
-    <a><button id="button-fixed-top" class="login-btn btn btn-dark btn-block" onclick="history.back()"><i class="fa-solid fa-reply icon-list"></i>Back</button></a>
+   <a><button id="button-fixed-top" class="login-btn btn btn-dark btn-block" onclick="history.back()"><i class="fa-solid fa-reply icon-list"></i>Back</button></a>
+
+    <div class="input-container" th:if="${skillSearched}">
+        <a
+                th:href="${heroClass}"
+                class="login-btn btn btn-dark btn-block"
+                type="button"
+        >
+            <i class="fa-solid fa-reply icon-list"></i>
+            Back to class skills list
+        </a>
+    </div>
 
     <h2 class="font-diablo py-5 px-3" th:text="${heroClass} + ' skills list:'"></h2>
 
+    <h2 class="font-diablo px-3 pb-5" th:if="${skills.isEmpty()}" th:text="'Skill not found!'"></h2>
+
     <form class="form-inline px-3 pb-5" action="#" th:action="@{/skills/skillSearch}" method="get">
         <input id="searchSkillInput" class="form-control mr-sm-2" type="text" name="skillSearchName" placeholder="Skill name" aria-label="Search" required>
+        <input type="hidden" id="heroClass" name="heroClassName" th:value="${heroClass}">
         <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 
