@@ -90,7 +90,8 @@ footer {
   background-color: #fed049;
   text-align: center;
   height: 30px;
-  position: static;
+  /*position: static;*/
+  position: absolute;
   bottom: 0;
   width: 100%;
 }
@@ -142,6 +143,7 @@ footer {
   min-height: 100vh !important;
   background-image: url(https://assets.diablo3.blizzard.com/d3/media/artwork/artwork-0133-large.jpg);
   background-size: 100% 100%;
+  position: relative;
 }
 
 .items-types-page {
@@ -152,6 +154,7 @@ footer {
 }
 
 .skills-page {
+  min-height: 100vh !important;
   background-color: #172C3B;
   position: relative;
 }
@@ -226,4 +229,8 @@ p.item-description {
 div.display-item-info-div {
   height: auto;
   width: 44%;
+}
+
+#searchItemInput {
+  width: 32%;
 }

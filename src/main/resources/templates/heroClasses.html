@@ -35,6 +35,16 @@
     />
 </head>
 <body>
+<div class="input-container">
+    <a
+            href="/"
+            class="login-btn btn btn-dark btn-block"
+            type="button"
+    >
+        <i class="fa-solid fa-reply icon-list"></i>
+        Back
+    </a>
+</div>
 <div class="skills-heroes-classes-page">
 
     <h2 class="font-diablo py-3 px-3">Choose character class to show skills:</h2>
@@ -42,22 +52,9 @@
     <ul th:each="heroClass : ${heroClassesList}" class="characters-list">
         <li><a th:href="${heroClass}"><img class="heroes-classes-list-face" th:classappend="${heroClass}" th:text="${heroClass.substring(0,1).toUpperCase().concat(heroClass.substring(1))}"></a></li>
     </ul>
-
-    <div class="input-container">
-        <a
-                href="/"
-                class="login-btn btn btn-dark btn-block"
-                type="button"
-        >
-            <i class="fa-solid fa-reply icon-list"></i>
-            Back
-        </a>
-    </div>
-
+    <footer>
+        © 2024 <img src="/img/favicon.ico" alt="Arturnix icon"/> Arturnix.
+    </footer>
 </div>
-
-<footer>
-    © 2024 <img src="/img/favicon.ico" alt="Arturnix icon"/> Arturnix.
-</footer>
 </body>
 </html>

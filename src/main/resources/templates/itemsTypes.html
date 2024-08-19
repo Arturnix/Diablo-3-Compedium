@@ -52,6 +52,14 @@
     <ul th:each="itemType : ${itemTypesList}" class="characters-list">
         <li><a th:href="${itemType}"><img th:src="@{'/img/' + ${itemType} + '.webp'}" class="skill-icon item-type-icon" th:text="${itemType}"></a></li>
     </ul>
+
+    <h2 class="font-diablo py-3 px-3">or use search bar to find item:</h2>
+
+    <form class="form-inline px-3" action="#" th:action="@{/singleItem}" method="get">
+        <input id="searchItemInput" class="form-control mr-sm-2" type="text" name="itemSearchName" placeholder="Item name" aria-label="Search" required>
+        <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
 </div>
 
 <footer>

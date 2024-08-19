@@ -2,14 +2,11 @@ package pl.arturzgodka.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import pl.arturzgodka.datamodel.ItemArmorDataModel;
+import org.springframework.web.bind.annotation.*;
+import pl.arturzgodka.apihandlers.ItemHandlerApi;
 import pl.arturzgodka.datamodel.ItemDataModel;
-import pl.arturzgodka.datamodel.ItemWeaponDataModel;
 import pl.arturzgodka.jsonmappers.ItemMapper;
+import pl.arturzgodka.token.FetchToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +21,17 @@ public class ItemsController {
     public String getItemTypes(Model model) {
         model.addAttribute("itemTypesList", ItemClassesAndNamesLists.itemTypes);
         return "itemsTypes";
+    }
+
+    @GetMapping("/singleItem")
+    public String searchItemForm(Model model, @RequestParam String itemSearchName) {
+
+        List<List<String>> itemsNamesToApi = getMatchedItemsToAPI(convertProvidedItemNameToSearchToAPIFormat(itemSearchName));
+        List<ItemDataModel> itemsMapped = getSearchedItems(itemsNamesToApi);
+
+        model.addAttribute("itemsMapped", itemsMapped);
+
+        return "items";
     }
 
     @RequestMapping(value="/{itemTypes}", method = RequestMethod.GET)
@@ -41,17 +49,32 @@ public class ItemsController {
 
         model.addAttribute("selectedItemType", itemType);
 
-        if (selectedItem.equals("Armor")) {
-            List<ItemArmorDataModel> itemsMapped = itemMapper.getItemsOfArmorType(ItemClassesAndNamesLists.getSelectedItemList(selectedItem, itemType));
-            model.addAttribute("itemsMapped", itemsMapped);
+        List<ItemDataModel> itemsMapped = itemMapper.getItems(ItemClassesAndNamesLists.getAllItemsOfSelectedType(selectedItem, itemType));
+        model.addAttribute("itemsMapped", itemsMapped);
 
-            return "itemsArmor";
+        return "items";
+    }
 
-        } else {
-            List<ItemWeaponDataModel> itemsMapped = itemMapper.getItemsOfWeaponType(ItemClassesAndNamesLists.getSelectedItemList(selectedItem, itemType));
-            model.addAttribute("itemsMapped", itemsMapped);
+    private String convertProvidedItemNameToSearchToAPIFormat(String itemSearchName) {
+        return itemSearchName.toLowerCase().replace(" ", "-").replace("'", "");
+    }
 
-            return "itemsWeapon";
+    private List<List<String>> getMatchedItemsToAPI(String convertedItemName) {
+        return ItemClassesAndNamesLists.selectedItemsNamesToApi(convertedItemName);
+    }
+
+    private List<ItemDataModel> getSearchedItems(List<List<String>> itemsNamesToApi) {
+
+        List<ItemDataModel> itemsMapped = new ArrayList<ItemDataModel>();
+        FetchToken fetchToken = new FetchToken();
+
+        for (List<String> itemCategory : itemsNamesToApi) {
+            for(String itemName : itemCategory) {
+                String itemJSON = ItemHandlerApi.generateRequest(itemName, fetchToken);
+                itemsMapped.add(itemMapper.mapItemToDataModel(itemJSON));
+            }
         }
+
+        return itemsMapped;
     }
 }

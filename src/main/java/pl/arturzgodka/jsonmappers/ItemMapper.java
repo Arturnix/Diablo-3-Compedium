@@ -17,55 +17,14 @@ import java.util.Map;
 
 public class ItemMapper {
 
-    public ItemArmorDataModel mapItemToArmorTypeDataModel(String itemData) {
+    public List<ItemDataModel> getItems(List<String> itemsOfSelectedType) {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode node = null;
-
-        try {
-            node = objectMapper.readTree(itemData);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
-        return createArmorDataModelToItemsListView(node);
-    }
-
-    public ItemWeaponDataModel mapItemToWeaponTypeDataModel(String itemData) {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode node = null;
-
-        try {
-            node = objectMapper.readTree(itemData);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
-        return createWeaponDataModelToItemsListView(node);
-    }
-
-    public List<ItemArmorDataModel> getItemsOfArmorType(List<String> itemsOfSelectedType) {
-
-        List<ItemArmorDataModel> items = new ArrayList<>();
+        List<ItemDataModel> items = new ArrayList<>();
         FetchToken fetchToken = new FetchToken();
 
         for (String item : itemsOfSelectedType) {
-            ItemArmorDataModel itemArmorDataModel = mapItemToArmorTypeDataModel(ItemHandlerApi.generateRequest(item, fetchToken));
-            items.add(itemArmorDataModel);
-        }
-
-        return items;
-    }
-
-    public List<ItemWeaponDataModel> getItemsOfWeaponType(List<String> itemsOfSelectedType) {
-
-        List<ItemWeaponDataModel> items = new ArrayList<>();
-        FetchToken fetchToken = new FetchToken();
-
-        for (String item : itemsOfSelectedType) {
-            ItemWeaponDataModel itemWeaponDataModel = mapItemToWeaponTypeDataModel(ItemHandlerApi.generateRequest(item, fetchToken));
-            items.add(itemWeaponDataModel);
+            ItemDataModel itemDataModel = mapItemToDataModel(ItemHandlerApi.generateRequest(item, fetchToken));
+            items.add(itemDataModel);
         }
 
         return items;
@@ -100,7 +59,7 @@ public class ItemMapper {
         return itemBodyPartSlots;
     }
 
-    private Map<String, List<String>> fetchItemAttrtibutes(JsonNode node) {
+    private Map<String, List<String>> fetchItemAttributes(JsonNode node) {
 
         Map<String, List<String>> mapItemAttributes = new HashMap<>();
 
@@ -137,18 +96,16 @@ public class ItemMapper {
     private String getMinDamage(JsonNode node) {
 
         int minDamageEndIndex = node.get("damage").asText().indexOf("-");
-        String minDamage = node.get("damage").asText().substring(0, minDamageEndIndex);
 
-        return minDamage;
+        return node.get("damage").asText().substring(0, minDamageEndIndex);
     }
 
     private String getMaxDamage(JsonNode node) {
 
-        int maxDamageStartIndex = node.get("damage").asText().indexOf("-")+1;
+        int maxDamageStartIndex = node.get("damage").asText().indexOf("-") + 1;
         int maxDamageEndIndex = node.get("damage").asText().indexOf(" ");
-        String maxDamage = node.get("damage").asText().substring(maxDamageStartIndex, maxDamageEndIndex);
 
-        return maxDamage;
+        return node.get("damage").asText().substring(maxDamageStartIndex, maxDamageEndIndex);
     }
 
     private String getFlavorTextDescription(JsonNode node) {
@@ -211,19 +168,7 @@ public class ItemMapper {
         return BaseUrlParts.BASE_MEDIA_BLIZZARD_ITEM_ICON_URL + node.get("icon").asText() + ".png";
     }
 
-    private ItemDataModel createArmorDataModel(JsonNode node) { //TODO czy dodac pole typeName i pozostale? Sprawdzić gdzie taka instancja jest wykorzystywana.
-
-        return new ItemArmorDataModel(
-                fetchItemBodyPartSlots(node),
-                node.get("id").asText(),
-                node.get("name").asText(),
-                node.get("requiredLevel").asInt(),
-                fetchItemAttrtibutes(node),
-                node.get("armor").asText()
-        );
-    }
-
-    private ItemArmorDataModel createArmorDataModelToItemsListView(JsonNode node) { //TODO te 2 metody zrobic w 1 i dac if w zaleznosci od tego co ma zostac zwrocone? Czy armor czy weapon type.
+    private ItemDataModel createArmorDataModel(JsonNode node) {
 
         return new ItemArmorDataModel(
                 node.get("name").asText(),
@@ -235,11 +180,11 @@ public class ItemMapper {
                 getSetDescription(node),
                 getIconURL(node),
                 node.get("armor").asText(),
-                fetchItemAttrtibutes(node)
+                fetchItemAttributes(node)
         );
     }
 
-    private ItemWeaponDataModel createWeaponDataModelToItemsListView(JsonNode node) {
+    private ItemDataModel createWeaponDataModel(JsonNode node) {
 
         return new ItemWeaponDataModel(
                 node.get("name").asText(),
@@ -252,20 +197,7 @@ public class ItemMapper {
                 getIconURL(node),
                 getMinDamage(node),
                 getMaxDamage(node),
-                fetchItemAttrtibutes(node)
-        );
-    }
-
-    private ItemDataModel createWeaponDataModel(JsonNode node) { //TODO czy dodac pole typeName i pozostale rowniez tutaj?
-
-        return new ItemWeaponDataModel(
-                fetchItemBodyPartSlots(node),
-                node.get("id").asText(),
-                node.get("name").asText(),
-                node.get("requiredLevel").asInt(),
-                fetchItemAttrtibutes(node),
-                getMinDamage(node),
-                getMaxDamage(node)
+                fetchItemAttributes(node)
         );
     }
 }
