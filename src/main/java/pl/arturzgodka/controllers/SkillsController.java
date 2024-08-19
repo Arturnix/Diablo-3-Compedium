@@ -31,8 +31,7 @@ public class SkillsController {
     @RequestMapping("skills/{heroClasses}")
     public String getSkills(Model model, @PathVariable(value="heroClasses") String heroClass) {
 
-        String heroClassWithHyphonSeparator = heroClass.replace(" ", "-");
-        List<HeroSkillDataModel> skillsMapped = skillMapper.mapSkillsToDataModel(heroClassWithHyphonSeparator, getHeroClassSkillsList(heroClassWithHyphonSeparator)); //z innej klasy nie moge tak zrobic bo dostaję błąd, server status 500.
+        List<HeroSkillDataModel> skillsMapped = getSkillsToDisplay(heroClass);
 
         model.addAttribute("skills", skillsMapped);
         model.addAttribute("heroClass", heroClass);
@@ -43,16 +42,23 @@ public class SkillsController {
     @GetMapping("skills/skillSearch")
     public String searchSkillForm(Model model, @RequestParam String skillSearchName, @RequestParam String heroClassName) {
 
-        String heroClassWithHyphonSeparator = heroClassName.replace(" ", "-");
-        List<HeroSkillDataModel> skillsMapped = skillMapper.mapSkillsToDataModel(heroClassName, getSearchedSkillName(heroClassWithHyphonSeparator, skillSearchName));
+        List<HeroSkillDataModel> skillsMatched = getSkillsToDisplay(heroClassName, skillSearchName);
 
-        Boolean skillSearched = true;
-
-        model.addAttribute("skills", skillsMapped);
+        model.addAttribute("skills", skillsMatched);
         model.addAttribute("heroClass", heroClassName);
-        model.addAttribute("skillSearched", skillSearched);
+        model.addAttribute("skillSearched", true); //flag to not display search bar after search was submitted and results are being displayed
 
         return "skills";
+    }
+
+    private List<HeroSkillDataModel> getSkillsToDisplay(String heroClassName, String skillSearchName) {
+        String heroClassWithHyphenSeparator = heroClassName.replace(" ", "-");
+        String skillSearchNameWithHyphenSeparator = skillSearchName.replaceAll(" ", "-");
+        return skillMapper.mapSkillsToDataModel(heroClassWithHyphenSeparator, getSearchedSkillName(heroClassWithHyphenSeparator, skillSearchNameWithHyphenSeparator.toLowerCase()));
+    }
+
+    private List<HeroSkillDataModel> getSkillsToDisplay(String heroClassName) {
+        return getSkillsToDisplay(heroClassName, "");
     }
 
 }

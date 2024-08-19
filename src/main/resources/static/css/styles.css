@@ -90,8 +90,8 @@ footer {
   background-color: #fed049;
   text-align: center;
   height: 30px;
-  /*position: static;*/
-  position: absolute;
+  position: static;
+  /*position: absolute;*/
   bottom: 0;
   width: 100%;
 }

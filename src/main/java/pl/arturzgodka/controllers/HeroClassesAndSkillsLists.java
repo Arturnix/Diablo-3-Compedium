@@ -44,14 +44,7 @@ public class HeroClassesAndSkillsLists {
     }
 
     public static List<String> getSearchedSkillName(String heroClass, String skillName) {
-
-        List<String> skillNamesMatched = new ArrayList<>();
-
-        if (getHeroClassSkillsList(heroClass).stream().anyMatch(String -> String.contains(skillName))) {
-             skillNamesMatched = (heroClassSkillsMap.get(heroClass).stream().filter(String -> String.contains(skillName)).toList());
-        }
-
-        return skillNamesMatched;
+        return heroClassSkillsMap.get(heroClass).stream().filter(String -> String.contains(skillName)).toList();
     }
 
 }
