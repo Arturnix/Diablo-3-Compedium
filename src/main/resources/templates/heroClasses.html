@@ -52,6 +52,12 @@
     <ul th:each="heroClass : ${heroClassesList}" class="characters-list">
         <li><a th:href="${heroClass}"><img class="heroes-classes-list-face" th:classappend="${heroClass}" th:text="${heroClass.substring(0,1).toUpperCase().concat(heroClass.substring(1))}"></a></li>
     </ul>
+
+    <form class="form-inline px-3" action="#" th:action="@{/skillSearch}" method="get">
+        <input id="searchSkillInput" class="form-control mr-sm-2" type="text" name="skillSearch" placeholder="Skill name" aria-label="Search" required>
+        <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
     <footer>
         © 2024 <img src="/img/favicon.ico" alt="Arturnix icon"/> Arturnix.
     </footer>
