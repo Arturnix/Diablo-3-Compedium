@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static pl.arturzgodka.controllers.SearchItem.*;
+
 @Controller
 public class ItemsController {
 
@@ -55,26 +57,4 @@ public class ItemsController {
         return "items";
     }
 
-    private String convertProvidedItemNameToSearchToAPIFormat(String itemSearchName) {
-        return itemSearchName.toLowerCase().replace(" ", "-").replace("'", "");
-    }
-
-    private List<List<String>> getMatchedItemsToAPI(String convertedItemName) {
-        return ItemClassesAndNamesLists.selectedItemsNamesToApi(convertedItemName);
-    }
-
-    private List<ItemDataModel> getSearchedItems(List<List<String>> itemsNamesToApi) {
-
-        List<ItemDataModel> itemsMapped = new ArrayList<ItemDataModel>();
-        FetchToken fetchToken = new FetchToken();
-
-        for (List<String> itemCategory : itemsNamesToApi) {
-            for(String itemName : itemCategory) {
-                String itemJSON = ItemHandlerApi.generateRequest(itemName, fetchToken);
-                itemsMapped.add(itemMapper.mapItemToDataModel(itemJSON));
-            }
-        }
-
-        return itemsMapped;
-    }
 }
