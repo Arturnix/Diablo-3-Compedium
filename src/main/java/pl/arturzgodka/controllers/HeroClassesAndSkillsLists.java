@@ -2,8 +2,6 @@ package pl.arturzgodka.controllers;
 
 import java.util.*;
 
-import static pl.arturzgodka.controllers.ItemClassesAndNamesLists.selectedItemsNamesToApi;
-
 public class HeroClassesAndSkillsLists {
 
     public static final List<String> heroClasses = Arrays.asList("barbarian", "crusader", "demon hunter", "monk", "necromancer", "witch doctor", "wizard");
@@ -44,7 +42,7 @@ public class HeroClassesAndSkillsLists {
         return heroClassSkillsMap.get(heroClass);
     }
 
-    public static List<String> getSearchedSkillName(String heroClass, String skillName) {
+    public static List<String> getMatchedSkillName(String heroClass, String skillName) {
         return heroClassSkillsMap.get(heroClass).stream().filter(String -> String.contains(skillName)).toList();
     }
 

@@ -45,7 +45,7 @@ public class HeroClassesAndSkillsListsTest {
         String skillName = "ba";
 
         //when
-        List<String> skillsMatched = HeroClassesAndSkillsLists.getSearchedSkillName(heroClass, skillName);
+        List<String> skillsMatched = HeroClassesAndSkillsLists.getMatchedSkillName(heroClass, skillName);
 
         //then
         assertThat(skillsMatched, not(empty()));
@@ -59,7 +59,7 @@ public class HeroClassesAndSkillsListsTest {
         String skillName = "magic";
 
         //when
-        List<String> skillsMatched = HeroClassesAndSkillsLists.getSearchedSkillName(heroClass, skillName);
+        List<String> skillsMatched = HeroClassesAndSkillsLists.getMatchedSkillName(heroClass, skillName);
 
         //then
         assertThat(skillsMatched.size(), is(2));
@@ -74,7 +74,7 @@ public class HeroClassesAndSkillsListsTest {
 
         //when
         //then
-        assertThrows(NullPointerException.class, () -> HeroClassesAndSkillsLists.getSearchedSkillName(heroClass, skillName));
+        assertThrows(NullPointerException.class, () -> HeroClassesAndSkillsLists.getMatchedSkillName(heroClass, skillName));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class HeroClassesAndSkillsListsTest {
 
         //when
         //then
-        assertThat(HeroClassesAndSkillsLists.getSearchedSkillName(heroClass, skillName), empty());
+        assertThat(HeroClassesAndSkillsLists.getMatchedSkillName(heroClass, skillName), empty());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class HeroClassesAndSkillsListsTest {
 
         //when
         //then
-        assertThrows(NullPointerException.class, () -> HeroClassesAndSkillsLists.getSearchedSkillName(heroClass, skillName));
+        assertThrows(NullPointerException.class, () -> HeroClassesAndSkillsLists.getMatchedSkillName(heroClass, skillName));
     }
 
     @Test
@@ -107,7 +107,7 @@ public class HeroClassesAndSkillsListsTest {
 
         //when
         //then
-        assertThrows(NullPointerException.class, () -> HeroClassesAndSkillsLists.getSearchedSkillName(heroClass, skillName));
+        assertThrows(NullPointerException.class, () -> HeroClassesAndSkillsLists.getMatchedSkillName(heroClass, skillName));
     }
 
     @Test
@@ -118,6 +118,6 @@ public class HeroClassesAndSkillsListsTest {
 
         //when
         //then
-        assertThrows(NullPointerException.class, () -> HeroClassesAndSkillsLists.getSearchedSkillName(heroClass, skillName));
+        assertThrows(NullPointerException.class, () -> HeroClassesAndSkillsLists.getMatchedSkillName(heroClass, skillName));
     }
 }
