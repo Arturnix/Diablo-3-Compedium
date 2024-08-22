@@ -1,7 +1,8 @@
 package pl.arturzgodka.controllers;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
+import static pl.arturzgodka.controllers.ItemClassesAndNamesLists.selectedItemsNamesToApi;
 
 public class HeroClassesAndSkillsLists {
 
