@@ -12,8 +12,8 @@ public class SearchSkill {
     public static List<HeroSkillDataModel> getSkillsToDisplay(String heroClassName, String skillSearchName) {
         SkillMapper skillMapper = new SkillMapper();
         String heroClassWithHyphenSeparator = heroClassName.replace(" ", "-");
-        String skillSearchNameWithHyphenSeparator = skillSearchName.replaceAll(" ", "-");
-        return skillMapper.mapSkillsToDataModel(heroClassWithHyphenSeparator, getMatchedSkillName(heroClassWithHyphenSeparator, skillSearchNameWithHyphenSeparator.toLowerCase()));
+        String skillSearchNameWithHyphenSeparatorAndLowerCase = skillSearchName.replaceAll(" ", "-").toLowerCase();
+        return skillMapper.mapSkillsToDataModel(heroClassWithHyphenSeparator, getMatchedSkillName(heroClassWithHyphenSeparator, skillSearchNameWithHyphenSeparatorAndLowerCase));
     }
 
     public static List<HeroSkillDataModel> getSkillsToDisplay(String heroClassName) {
