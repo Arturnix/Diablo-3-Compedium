@@ -1,9 +1,6 @@
 package pl.arturzgodka.controllers;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class HeroClassesAndSkillsLists {
 
@@ -43,6 +40,10 @@ public class HeroClassesAndSkillsLists {
 
     public static List<String> getHeroClassSkillsList(String heroClass){
         return heroClassSkillsMap.get(heroClass);
+    }
+
+    public static List<String> getMatchedSkillName(String heroClass, String skillName) {
+        return heroClassSkillsMap.get(heroClass).stream().filter(String -> String.contains(skillName)).toList();
     }
 
 }
