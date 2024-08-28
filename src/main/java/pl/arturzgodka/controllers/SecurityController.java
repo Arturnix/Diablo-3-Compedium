@@ -17,7 +17,7 @@ public class SecurityController {
 
     @GetMapping("/register")
     public String getRegistrationPage(Model model) {
-        model.addAttribute("User", new UserDataModel());
+        model.addAttribute("user", new UserDataModel());
         return "security/register";
     }
 
