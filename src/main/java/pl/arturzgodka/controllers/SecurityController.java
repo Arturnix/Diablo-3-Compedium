@@ -28,7 +28,6 @@ public class SecurityController {
     @PostMapping("/register")
     public String registerUser(UserDataModel user) {
         UserDao dao = new UserDao();
-        CharactersForAccountProvider charactersForAccountProvider = new CharactersForAccountProvider();
         List<CharacterDataModel> emptyCharactersListForNewUser = new ArrayList<>();
 
         //user.setCharacters(charactersForAccountProvider.assignUserToCharactersOnProvidedAccount(user));
