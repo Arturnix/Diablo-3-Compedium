@@ -95,11 +95,12 @@
                                 </h4>
                             </div>
 
-                            <form class="was-validated">
+                            <form class="was-validated" th:action="@{/login}" method="post">
                                 <div class="input-container mb-4">
                                     <i class="fa-solid fa-envelope icon-login"></i>
                                     <input
                                             type="email"
+                                            name="email"
                                             id="email"
                                             class="form-control"
                                             placeholder="Podaj e-mail aby się zalogować"
@@ -111,6 +112,7 @@
                                     <i class="fa-solid fa-lock icon-login"></i>
                                     <input
                                             type="password"
+                                            name="password"
                                             id="password"
                                             class="form-control"
                                             placeholder="Podaj hasło aby się zalogować"

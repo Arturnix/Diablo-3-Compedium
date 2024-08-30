@@ -6,12 +6,11 @@ import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import pl.arturzgodka.datamodel.CharacterDataModel;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pl.arturzgodka.datamodel.UserDataModel;
 
 public class UserDao {
-    //private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); //lib spring zawarta w security
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); //lib spring zawarta w security
     private SessionFactory sessionFactory = UserSessionFactory.getCustomUserSessionFactory(); //zasob statyczny
 
     public UserDao() {
@@ -24,7 +23,7 @@ public class UserDao {
     public void saveUser(UserDataModel userDataModel) {
         Session session = sessionFactory.openSession();
         Transaction t = session.beginTransaction();
-        //userDataModel.setPassword(passwordEncoder.encode(userDataModel.getPassword())); //aby nie trzymac hasel jako plain text w bazie danych.
+        userDataModel.setPassword(passwordEncoder.encode(userDataModel.getPassword())); //aby nie trzymac hasel jako plain text w bazie danych.
         session.merge(userDataModel);
         t.commit();
         session.close();

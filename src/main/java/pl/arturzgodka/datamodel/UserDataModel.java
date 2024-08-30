@@ -43,6 +43,12 @@ public class UserDataModel {
         this.battleTag = battleTag;
     }
 
+    public UserDataModel(String email, String password, String battleTag) {
+        this.email = email;
+        this.password = password;
+        this.battleTag = battleTag;
+    }
+
     public long getId() {
         return id;
     }

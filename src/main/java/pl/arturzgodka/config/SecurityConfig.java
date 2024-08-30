@@ -26,12 +26,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity security) throws  Exception {
 
         security
-                .authorizeHttpRequests((requests) -> requests.requestMatchers("/", "/register", "/skills/**", "/items/**", "/css/**", "/font/**","/img/**")
+                .authorizeHttpRequests((requests) -> requests.requestMatchers("/register", "/skills/**", "/items/**", "/css/**", "/font/**","/img/**")
                 .permitAll()
                         .anyRequest()
                         .authenticated())
                 .formLogin((form) -> form
-                        .loginPage("/login")
+                        .loginPage("/")
                         .usernameParameter("email")
                         .defaultSuccessUrl("/profile")
                         .permitAll());
