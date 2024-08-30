@@ -11,7 +11,7 @@ import pl.arturzgodka.token.FetchToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuildNewUser {
+public class CharactersForAccountProvider {
 
     private final FetchToken fetchToken = new FetchToken();
     private final AccountMapper accountMapper = new AccountMapper();

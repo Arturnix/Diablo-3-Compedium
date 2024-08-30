@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pl.arturzgodka.databaseutils.UserDao;
 import pl.arturzgodka.datamodel.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class SecurityController {
 
@@ -25,9 +28,11 @@ public class SecurityController {
     @PostMapping("/register")
     public String registerUser(UserDataModel user) {
         UserDao dao = new UserDao();
-        BuildNewUser buildNewUser = new BuildNewUser();
+        CharactersForAccountProvider charactersForAccountProvider = new CharactersForAccountProvider();
+        List<CharacterDataModel> emptyCharactersListForNewUser = new ArrayList<>();
 
-        user.setCharacters(buildNewUser.assignUserToCharactersOnProvidedAccount(user));
+        //user.setCharacters(charactersForAccountProvider.assignUserToCharactersOnProvidedAccount(user));
+        user.setCharacters(emptyCharactersListForNewUser);
         dao.saveUser(user);
 
         return "index";
