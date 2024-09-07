@@ -5,6 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-<h1></h1>
+<h1 th:text="'Grettings ' + ${user.battleTag}"></h1>
+<p>Check what's on your profile.</p></br>
+<p>Characters list: </p>
+<ul th:each="character : ${user.getCharacters()}">
+    <li>
+        <p th:text="${character.name} + ' ' + ${character.level} + ' lvl'"></p>
+        <p th:text="${character.classHero}"></p>
+    </li>
+</ul>
 </body>
 </html>

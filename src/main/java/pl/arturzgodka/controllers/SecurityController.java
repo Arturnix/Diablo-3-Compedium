@@ -45,7 +45,7 @@ public class SecurityController {
       String email = auth.getName();
       UserDataModel user = dao.findUserByEmail(email);
 
-      model.addAttribute(user);
+      model.addAttribute("user", user);
 
         return "security/profile";
     }
