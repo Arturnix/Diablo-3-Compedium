@@ -1,5 +1,7 @@
 package pl.arturzgodka.controllers;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +50,13 @@ public class SecurityController {
       model.addAttribute("user", user);
 
         return "security/profile";
+    }
+
+    @GetMapping("/logout")
+    public String logoutUser(HttpServletRequest request) throws ServletException
+    {
+        request.logout();
+        return "redirect:" + "index";
     }
 
 }

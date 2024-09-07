@@ -77,13 +77,13 @@
 }
 
 /* links */
-a {
+a, button {
   font-family: "DiabloLight", sans-serif;
   color: blanchedalmond;
   text-decoration: none;
 }
 
-a:hover {
+a:hover, button:hover {
   font-family: "DiabloHeavy", sans-serif;
   text-decoration: none;
   color: blanchedalmond;
