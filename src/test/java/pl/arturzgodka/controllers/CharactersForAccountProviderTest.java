@@ -7,7 +7,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.arturzgodka.datamodel.CharacterDataModel;
-import pl.arturzgodka.datamodel.SkillDataModel;
 import pl.arturzgodka.datamodel.UserDataModel;
 
 import java.util.ArrayList;

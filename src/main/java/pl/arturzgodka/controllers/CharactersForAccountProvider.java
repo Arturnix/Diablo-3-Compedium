@@ -21,7 +21,7 @@ public class CharactersForAccountProvider {
         return accountMapper.fetchHeroesList(AccountHandlerApi.generateRequest(battleTag, fetchToken));
     }
 
-    private CharacterDataModel getCharacterForProvidedBattleTagAndCharacterId(UserDataModel user, Integer characterId) {
+    private CharacterDataModel getCharacterForProvidedBattleTagAndCharacterId(UserDataModel user, int characterId) {
         return characterMapper.mapHeroToDataModel(CharacterHandlerApi.generateRequest(user.getBattleTag(), String.valueOf(characterId), fetchToken));
     }
 
@@ -68,7 +68,7 @@ public class CharactersForAccountProvider {
         }
     }
 
-    private CharacterDataModel setCharacterDataToMakeFullCharacterDataModelForProvidedAccount(UserDataModel user, Integer characterId) {
+    private CharacterDataModel setCharacterDataToMakeFullCharacterDataModelForProvidedAccount(UserDataModel user, int characterId) {
 
         CharacterDataModel characterDataModel = getCharacterForProvidedBattleTagAndCharacterId(user, characterId);
         characterDataModel.setUser(user);
@@ -77,19 +77,17 @@ public class CharactersForAccountProvider {
         assignFollowersItemsToTheirOwners(characterDataModel, assignCharactersToTheirFollowers(characterDataModel));
 
         return characterDataModel;
-
     }
 
     public List<CharacterDataModel> assignUserToCharactersOnProvidedAccount(UserDataModel user) {
         List<Integer> charactersIdOnProvidedAccount = getCharactersIdFromSpecifiedAccount(user.getBattleTag());
         List<CharacterDataModel> fullCharactersList = new ArrayList<>();
 
-        for (Integer characterId : charactersIdOnProvidedAccount) {
+        for (int characterId : charactersIdOnProvidedAccount) {
             fullCharactersList.add(setCharacterDataToMakeFullCharacterDataModelForProvidedAccount(user, characterId));
         }
 
         return fullCharactersList;
     }
-
 }
 

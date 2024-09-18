@@ -9,6 +9,5 @@ public class Diablo3CompediumApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(Diablo3CompediumApplication.class, args);
-
     }
 }
