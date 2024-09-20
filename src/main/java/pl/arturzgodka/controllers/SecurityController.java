@@ -49,10 +49,8 @@ public class SecurityController {
     }
 
     @GetMapping("/logout")
-    public String logoutUser(HttpServletRequest request) throws ServletException
-    {
+    public String logoutUser(HttpServletRequest request) throws ServletException {
         request.logout();
         return "redirect:" + "index";
     }
-
 }
