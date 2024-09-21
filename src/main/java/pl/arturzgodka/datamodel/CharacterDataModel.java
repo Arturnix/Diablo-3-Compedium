@@ -74,11 +74,13 @@ public class CharacterDataModel {
     public CharacterDataModel() {
     }
 
-    public CharacterDataModel(int id, String name, String classHero, int level) {
+    public CharacterDataModel(int id, String name, String classHero, int level, int paragonLevel, boolean hardcore) {
         this.id = id;
         this.name = name;
         this.classHero = classHero;
         this.level = level;
+        this.paragonLevel = paragonLevel;
+        this.hardcore = hardcore;
     }
 
    public CharacterDataModel(int id, String name, String classHero, int level, int paragonLevel,
@@ -115,6 +117,9 @@ public class CharacterDataModel {
     public int getLevel() {
         return this.level;
     }
+    public int getParagonLevel() {
+        return this.paragonLevel;
+    }
 
     public Map<String, Integer> getKills() {
         return this.kills;
@@ -141,7 +146,7 @@ public class CharacterDataModel {
     }
 
     public boolean isHardcore() {
-        return hardcore;
+        return this.hardcore;
     }
 
     public void setUser(UserDataModel userDataModel) {

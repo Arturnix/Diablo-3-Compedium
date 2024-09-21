@@ -20,6 +20,12 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"
     ></script>
+
+    <!-- Font Awesome -->
+    <script
+            src="https://kit.fontawesome.com/5f0ef8cba2.js"
+            crossorigin="anonymous"
+    ></script>
 </head>
 <body id="body-skills-list">
 <div class="skills-page">
@@ -29,8 +35,11 @@
 
     <div class="display-item-info-div">
 <ul class="characters-list" th:each="character : ${user.getCharacters()}">
-    <li><a th:href="${character.classHero}"><img class="heroes-classes-list-face" th:classappend="${character.classHero}" th:text="${character.name} + ' ' + ${character.level} + ' lvl'"> <!-- th:text="${character.classHero.substring(0,1).toUpperCase().concat(character.classHero.substring(1))}" --></a>
-    <p th:text="${character.classHero.substring(0,1).toUpperCase().concat(character.classHero.substring(1))}"></p>
+    <li><a th:href="${character.classHero}"><img class="heroes-classes-list-face" th:classappend="${character.classHero}" th:text="${character.name} + ' ' + ${character.level} + ' lvl ' + 'Paragon: ' + ${character.paragonLevel}"></a>
+        </br>
+        <span th:if="${character.hardcore}"><i class="fa-solid fa-skull"></i></span>
+        <p th:text="${character.classHero.substring(0,1).toUpperCase().concat(character.classHero.substring(1))}"></p>
+
     </li>
 </ul>
     </div>

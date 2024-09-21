@@ -68,7 +68,9 @@ public class AccountMapper {
                     node.get("heroes").get(i).get("id").asInt(),
                     node.get("heroes").get(i).get("name").asText(),
                     node.get("heroes").get(i).get("class").asText(),
-                    node.get("heroes").get(i).get("level").asInt()
+                    node.get("heroes").get(i).get("level").asInt(),
+                    node.get("heroes").get(i).get("paragonLevel").asInt(),
+                    node.get("heroes").get(i).get("hardcore").asBoolean()
             );
             heroes.add(characterDataModel);
         }
