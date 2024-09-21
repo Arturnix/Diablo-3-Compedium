@@ -21,16 +21,19 @@
             crossorigin="anonymous"
     ></script>
 </head>
-<body>
-<h1 th:text="'Grettings ' + ${user.battleTag}"></h1>
-<p>Check what's on your profile.</p></br>
-<p>Characters list: </p>
-<ul th:each="character : ${user.getCharacters()}">
-    <li>
-        <p th:text="${character.name} + ' ' + ${character.level} + ' lvl'"></p>
-        <p th:text="${character.classHero}"></p>
+<body id="body-skills-list">
+<div class="skills-page">
+<h1 class="font-diablo py-1 px-3" th:text="'Grettings ' + ${user.battleTag}"></h1>
+<p class="font-diablo py-1 px-3" >Check what's on your profile.</p></br>
+<p class="font-diablo py-2 px-3" >Characters list: </p>
+
+    <div class="display-item-info-div">
+<ul class="characters-list" th:each="character : ${user.getCharacters()}">
+    <li><a th:href="${character.classHero}"><img class="heroes-classes-list-face" th:classappend="${character.classHero}" th:text="${character.name} + ' ' + ${character.level} + ' lvl'"> <!-- th:text="${character.classHero.substring(0,1).toUpperCase().concat(character.classHero.substring(1))}" --></a>
+    <p th:text="${character.classHero.substring(0,1).toUpperCase().concat(character.classHero.substring(1))}"></p>
     </li>
 </ul>
+    </div>
 <div class="text-center pt-1 mb-3 pb-1">
     <a
             href="/logout"
@@ -39,6 +42,10 @@
     >
         Log out
     </a>
+</div>
+    <footer>
+        © 2024 <img src="/img/favicon.ico" alt="Arturnix icon"/> Arturnix.
+    </footer>
 </div>
 </body>
 </html>
