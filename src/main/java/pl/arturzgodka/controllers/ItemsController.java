@@ -19,13 +19,13 @@ public class ItemsController {
 
     private final ItemMapper itemMapper = new ItemMapper();
 
-    @RequestMapping("/itemsTypes.html")
+    @RequestMapping("items/itemsTypes.html")
     public String getItemTypes(Model model) {
         model.addAttribute("itemTypesList", ItemClassesAndNamesLists.itemTypes);
         return "itemsTypes";
     }
 
-    @GetMapping("/singleItem")
+    @GetMapping("items/singleItem")
     public String searchItemForm(Model model, @RequestParam String itemSearchName) {
 
         List<List<String>> itemsNamesToApi = getMatchedItemsToAPI(convertProvidedItemNameToSearchToAPIFormat(itemSearchName));
@@ -36,7 +36,7 @@ public class ItemsController {
         return "items";
     }
 
-    @RequestMapping(value="/{itemTypes}", method = RequestMethod.GET)
+    @RequestMapping(value="items/{itemTypes}", method = RequestMethod.GET)
     public String getItemTypesNames(Model model, @PathVariable(value="itemTypes") String itemType) {
 
         Set<String> itemTypeNames = ItemClassesAndNamesLists.getItemTypesNames(itemType);
@@ -46,7 +46,7 @@ public class ItemsController {
         return "itemTypes";
     }
 
-    @RequestMapping("/{selectedItemType}/")
+    @RequestMapping("items/{selectedItemType}/")
     public String getSelectedTypeItems(Model model, @RequestParam String itemType, @PathVariable(value="selectedItemType") String selectedItem) {
 
         model.addAttribute("selectedItemType", itemType);

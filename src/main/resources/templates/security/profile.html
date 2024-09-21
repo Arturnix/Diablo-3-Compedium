@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="icon" href="/img/D3_256x256.png"/>
+
+    <!-- CSS Stylesheets -->
+    <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/styles.css"/>
+
+    <!-- Bootstrap Scripts -->
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+<h1 th:text="'Grettings ' + ${user.battleTag}"></h1>
+<p>Check what's on your profile.</p></br>
+<p>Characters list: </p>
+<ul th:each="character : ${user.getCharacters()}">
+    <li>
+        <p th:text="${character.name} + ' ' + ${character.level} + ' lvl'"></p>
+        <p th:text="${character.classHero}"></p>
+    </li>
+</ul>
+<div class="text-center pt-1 mb-3 pb-1">
+    <a
+            href="/logout"
+            class="login-btn btn btn-dark btn-block mb-3"
+            type="button"
+    >
+        Log out
+    </a>
+</div>
+</body>
+</html>

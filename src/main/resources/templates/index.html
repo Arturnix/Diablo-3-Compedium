@@ -44,8 +44,8 @@
             <div class="col-xl-11">
                 <div id="homepage-title">
                     <header>
-                        <h2 class="font-diablo">Diablo 3 Compedium</h2>
-                        <p class="font-diablo-p">informacje o bohaterach Sanktuarium, ich rynsztunku i umiejętnościach</p>
+                        <h2 class="font-diablo">Diablo 3 Compendium</h2>
+                        <p class="font-diablo-p">Knowledge base of Sanctuary world heroes, their arsenal and skills</p>
                     </header>
                 </div>
                 <div class="row g-0">
@@ -56,18 +56,18 @@
                             <div class="title-login-page">
                                 <h4 class="mb-4 mt-2">
                                     <strong
-                                    >Zdobądź wiedzę bez logowania:</strong
+                                    >Gain knowledge without registration</strong
                                     >
                                 </h4>
 
                                 <div class="input-container mb-4">
                                     <i class="fa-solid fa-shield-halved icon-list"></i>
                                     <a
-                                            href="/itemsTypes.html"
+                                            href="items/itemsTypes.html"
                                             class="login-btn btn btn-dark btn-block"
                                             type="button"
                                     >
-                                        Wyszukaj przedmiot
+                                        Find item
                                     </a>
                                 </div>
 
@@ -78,7 +78,7 @@
                                             class="login-btn btn btn-dark btn-block"
                                             type="button"
                                     >
-                                        Wyszukaj umiejętność
+                                        Find skill
                                     </a>
                                 </div>
                             </div>
@@ -90,19 +90,20 @@
                             <div class="title-login-page">
                                 <h4 class="mb-4 mt-2 pb-1">
                                     <strong>
-                                        Uzyskaj dostęp do kompedium
+                                        Gain access to compendium
                                     </strong>
                                 </h4>
                             </div>
 
-                            <form class="was-validated">
+                            <form class="was-validated" th:action="@{/}" method="post">
                                 <div class="input-container mb-4">
                                     <i class="fa-solid fa-envelope icon-login"></i>
                                     <input
                                             type="email"
+                                            name="email"
                                             id="email"
                                             class="form-control"
-                                            placeholder="Podaj e-mail aby się zalogować"
+                                            placeholder="Type e-mail to log in"
                                             required
                                     />
                                 </div>
@@ -111,33 +112,28 @@
                                     <i class="fa-solid fa-lock icon-login"></i>
                                     <input
                                             type="password"
+                                            name="password"
                                             id="password"
                                             class="form-control"
-                                            placeholder="Podaj hasło aby się zalogować"
+                                            placeholder="Type password to log in"
                                             required
                                     />
                                 </div>
 
                                 <div class="text-center pt-1 mb-3 pb-1">
-                                    <a
-                                            href="/"
-                                            class="login-btn btn btn-dark btn-block mb-3"
-                                            type="button"
-                                    >
-                                        Zaloguj się
-                                    </a>
+                                    <button type="submit" class="btn btn-dark btn-block mb-4">Submit</button>
                                 </div>
 
                                 <div
                                         class="d-flex align-items-center justify-content-center pb-4"
                                 >
                                     <a
-                                            href="/"
+                                            href="/register"
                                             type="button"
                                             class="btn btn-success"
                                     >
                                         <i class="fa-solid fa-pen-to-square"></i>
-                                        Zarejestruj się
+                                        Register
                                     </a>
                                 </div>
                             </form>

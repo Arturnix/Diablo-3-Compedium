@@ -13,7 +13,6 @@ import java.util.*;
 
 @Controller
 public class SkillsController {
-    private final SkillMapper skillMapper = new SkillMapper();
 
     @RequestMapping("skills/heroClasses.html")
     public String getHeroesList(Model model) {
