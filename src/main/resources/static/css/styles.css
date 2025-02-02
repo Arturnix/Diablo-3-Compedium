@@ -212,6 +212,62 @@ footer {
   background-position: 100% 50%;
 }
 
+.barbarian.male {
+  background-position: 0 0;
+}
+
+.barbarian.female {
+  background-position: 100% 0;
+}
+
+.witch.male {
+  background-position: 0 16.538462%;
+}
+
+.witch.female {
+  background-position: 100% 16.538462%;
+}
+
+.demon.male {
+  background-position: 0 33.247754%;
+}
+
+.demon.female {
+  background-position: 100% 33.247754%;
+}
+
+.wizard.male {
+  background-position: 0 50%;
+}
+
+.wizard.female {
+  background-position: 100% 50%;
+}
+
+.monk.male {
+  background-position: 0 66.666667%;
+}
+
+.monk.female {
+  background-position: 100% 66.666667%;
+}
+
+.necromancer.male {
+  background-position: 0 83.333333%;
+}
+
+.necromancer.female {
+  background-position: 100% 83.333333%;
+}
+
+.crusader.male {
+  background-position: 0 100%;
+}
+
+.crusader.female {
+  background-position: 100% 100%;
+}
+
 /* button */
 
 #button-fixed-top {
