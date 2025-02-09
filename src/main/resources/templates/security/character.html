@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
+    <title>Character</title>
     <link rel="icon" href="/img/D3_256x256.png"/>
 
     <!-- CSS Stylesheets -->
@@ -29,27 +29,37 @@
 </head>
 <body id="body-skills-list">
 <div class="skills-page">
-<h1 class="font-diablo py-1 px-3" th:text="'Grettings ' + ${user.battleTag}"></h1>
-<p class="font-diablo py-1 px-3" >Check what's on your profile.</p></br>
-<p class="font-diablo py-2 px-3" >Characters list: </p>
+<h1 class="font-diablo py-1 px-3" th:text="'Grettings ' + ${battleTag}"></h1>
+<p class="font-diablo py-1 px-3" >Check character's detailed view.</p></br>
+<p class="font-diablo py-2 px-3" th:text="${character.name} + 'details:'">Character details: </p>
 
     <div class="display-item-info-div">
-        <ul class="characters-list" th:each="character : ${user.getCharacters()}">
-            <!-- <li><a th:href="'profile/' + ${user.battleTag} + '/' + ${character.id}"><img class="heroes-classes-list-face" th:classappend="|${character.classHero} ${character.gender==0 ? 'male' : 'female'}|" th:text="${character.name} + ' ' + ${character.level} + ' lvl ' + 'Paragon: ' + ${character.paragonLevel}"></a> -->
-            <li><a th:href="'profile/' + ${user.battleTag.replace('#','%23')} + '/character/' + ${character.id}"><img class="heroes-classes-list-face" th:classappend="|${character.classHero} ${character.gender==0 ? 'male' : 'female'}|" th:text="${character.name} + ' ' + ${character.level} + ' lvl ' + 'Paragon: ' + ${character.paragonLevel}"></a>
+        <ul class="characters-list">
+            <li><img class="heroes-classes-list-face" th:classappend="|${character.classHero} ${character.gender==0 ? 'male' : 'female'}|" th:text="${character.name} + ' ' + ${character.level} + ' lvl ' + 'Paragon: ' + ${character.paragonLevel}">
                 </br>
                 <span th:if="${character.hardcore}"><i class="fa-solid fa-skull"></i>Hardcore</span>
                 <p th:text="${character.classHero.substring(0,1).toUpperCase().concat(character.classHero.substring(1))}"></p>
             </li>
         </ul>
+        <ul class="characters-list" th:each="item : ${items}">
+            <li>
+                <p th:text="'Item bodypart: ' + ${item.bodyPart}"></p>
+                <p th:text="'Item name: ' + ${item.name}"></p>
+            </li>
+        </ul>
+        <ul class="characters-list" th:each="follower : ${followers}">
+            <li>
+                <p th:text="'Follower: ' + ${follower}"></p>
+            </li>
+        </ul>
     </div>
 <div class="text-center pt-1 mb-3 pb-1">
     <a
-            href="/logout"
+            href="/profile"
             class="login-btn btn btn-dark btn-block mb-3"
             type="button"
     >
-        Log out
+        Back
     </a>
 </div>
     <footer>

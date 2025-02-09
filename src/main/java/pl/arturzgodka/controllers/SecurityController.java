@@ -5,11 +5,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import pl.arturzgodka.databaseutils.CharacterDao;
 import pl.arturzgodka.databaseutils.UserDao;
 import pl.arturzgodka.datamodel.*;
+
+import java.util.List;
 
 
 @Controller
@@ -46,6 +48,21 @@ public class SecurityController {
       model.addAttribute("user", user);
 
         return "security/profile";
+    }
+
+    @GetMapping("profile/{battleTag}/character/{characterId}")
+    public String getCharacter(@PathVariable("battleTag") String battleTag, @PathVariable("characterId") int characterId, Model model) {
+        CharacterDao dao = new CharacterDao();
+        CharacterDataModel selectedCharacter = dao.findCharacterById(characterId);
+        List<ItemDataModel> items = selectedCharacter.getItems().stream().filter(item -> item.getFollowerDataModel() == null).toList();
+        List<FollowerDataModel> followers = selectedCharacter.getFollowers();
+
+        model.addAttribute("battleTag", battleTag);
+        model.addAttribute("character", selectedCharacter);
+        model.addAttribute("items", items);
+        model.addAttribute("followers", followers);
+
+        return "security/character";
     }
 
     @GetMapping("/logout")
