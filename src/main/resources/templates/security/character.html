@@ -30,8 +30,9 @@
 <body id="body-skills-list">
 <div class="skills-page">
 <h1 class="font-diablo py-1 px-3" th:text="'Grettings ' + ${battleTag}"></h1>
-<p class="font-diablo py-1 px-3" >Check character's detailed view.</p></br>
-<p class="font-diablo py-2 px-3" th:text="${character.name} + 'details:'">Character details: </p>
+<p class="font-diablo py-1 px-3" >Check character's detailed view.</p>
+    </br>
+    <h4 class="font-diablo py-2 px-3" th:text="${character.name} + ' details:'">Character details: </h4>
 
     <div class="display-item-info-div">
         <ul class="characters-list">
@@ -39,17 +40,23 @@
                 </br>
                 <span th:if="${character.hardcore}"><i class="fa-solid fa-skull"></i>Hardcore</span>
                 <p th:text="${character.classHero.substring(0,1).toUpperCase().concat(character.classHero.substring(1))}"></p>
+                <ul class="characters-list">
+
+                </ul>
             </li>
         </ul>
+        <br>
+        <h4 class="font-diablo py-2 px-3">Equipped items</h4>
         <ul class="characters-list" th:each="item : ${items}">
             <li>
-                <p th:text="'Item bodypart: ' + ${item.bodyPart}"></p>
-                <p th:text="'Item name: ' + ${item.name}"></p>
+                <p th:text="${item.bodyPart} + ': ' + ${item.name}"></p>
             </li>
         </ul>
+        <br>
+        <h4 class="font-diablo py-2 px-3">Followers</h4>
         <ul class="characters-list" th:each="follower : ${followers}">
             <li>
-                <p th:text="'Follower: ' + ${follower}"></p>
+                <p th:text="${follower.name} + ': ' + ${follower.level} + ' lvl'"></p>
             </li>
         </ul>
     </div>

@@ -12,6 +12,7 @@ import pl.arturzgodka.databaseutils.UserDao;
 import pl.arturzgodka.datamodel.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -54,11 +55,13 @@ public class SecurityController {
     public String getCharacter(@PathVariable("battleTag") String battleTag, @PathVariable("characterId") int characterId, Model model) {
         CharacterDao dao = new CharacterDao();
         CharacterDataModel selectedCharacter = dao.findCharacterById(characterId);
+        Map<String, Integer> stats = selectedCharacter.getStats();
         List<ItemDataModel> items = selectedCharacter.getItems().stream().filter(item -> item.getFollowerDataModel() == null).toList();
         List<FollowerDataModel> followers = selectedCharacter.getFollowers();
 
         model.addAttribute("battleTag", battleTag);
         model.addAttribute("character", selectedCharacter);
+        model.addAttribute("stats", stats);
         model.addAttribute("items", items);
         model.addAttribute("followers", followers);
 
