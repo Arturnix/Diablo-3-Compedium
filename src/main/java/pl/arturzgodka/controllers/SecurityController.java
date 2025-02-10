@@ -11,6 +11,8 @@ import pl.arturzgodka.databaseutils.CharacterDao;
 import pl.arturzgodka.databaseutils.UserDao;
 import pl.arturzgodka.datamodel.*;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,12 +58,18 @@ public class SecurityController {
         CharacterDao dao = new CharacterDao();
         CharacterDataModel selectedCharacter = dao.findCharacterById(characterId);
         Map<String, Integer> stats = selectedCharacter.getStats();
+        Map<String, Integer> shortStats = new HashMap<String, Integer>(3) {{
+            put("Life", stats.get("life"));
+            put("Damage", stats.get("damage"));
+            put("Armor", stats.get("armor"));
+        }};
+
         List<ItemDataModel> items = selectedCharacter.getItems().stream().filter(item -> item.getFollowerDataModel() == null).toList();
         List<FollowerDataModel> followers = selectedCharacter.getFollowers();
 
         model.addAttribute("battleTag", battleTag);
         model.addAttribute("character", selectedCharacter);
-        model.addAttribute("stats", stats);
+        model.addAttribute("stats", shortStats);
         model.addAttribute("items", items);
         model.addAttribute("followers", followers);
 

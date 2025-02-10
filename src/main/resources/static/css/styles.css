@@ -300,3 +300,8 @@ div.display-item-info-div {
 #searchItemInput {
   width: 32%;
 }
+
+ul.horizontal-list li {
+  display: inline;
+  margin-right: 10px;
+}

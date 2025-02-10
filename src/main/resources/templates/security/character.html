@@ -40,9 +40,14 @@
                 </br>
                 <span th:if="${character.hardcore}"><i class="fa-solid fa-skull"></i>Hardcore</span>
                 <p th:text="${character.classHero.substring(0,1).toUpperCase().concat(character.classHero.substring(1))}"></p>
-                <ul class="characters-list">
-
-                </ul>
+            </li>
+        </ul>
+        <ul class="characters-list horizontal-list">
+            <li th:text="'Life: ' + ${stats.get('Life')}">
+            </li>
+            <li th:text="'Damage: ' + ${stats.get('Damage')}">
+            </li>
+            <li th:text="'Armor: ' + ${stats.get('Armor')}">
             </li>
         </ul>
         <br>
