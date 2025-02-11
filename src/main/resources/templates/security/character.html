@@ -33,7 +33,6 @@
 <p class="font-diablo py-1 px-3" >Check character's detailed view.</p>
     </br>
     <h4 class="font-diablo py-2 px-3" th:text="${character.name} + ' details:'">Character details: </h4>
-
     <div class="display-item-info-div">
         <ul class="characters-list">
             <li><img class="heroes-classes-list-face" th:classappend="|${character.classHero} ${character.gender==0 ? 'male' : 'female'}|" th:text="${character.name} + ' ' + ${character.level} + ' lvl ' + 'Paragon: ' + ${character.paragonLevel}">
@@ -43,11 +42,14 @@
             </li>
         </ul>
         <ul class="characters-list horizontal-list">
-            <li th:text="'Life: ' + ${stats.get('Life')}">
+            <li>
+                <i class="fa-solid fa-heart-pulse px-1"></i><span th:text="${stats.get('Life')}"></span>
             </li>
-            <li th:text="'Damage: ' + ${stats.get('Damage')}">
+            <li>
+                <i class="fa-solid fa-gun px-1"></i><span th:text="${stats.get('Damage')}"></span>
             </li>
-            <li th:text="'Armor: ' + ${stats.get('Armor')}">
+            <li>
+                <i class="fa-solid fa-shield-halved px-1"></i><span th:text="${stats.get('Armor')}"></span>
             </li>
         </ul>
         <br>
