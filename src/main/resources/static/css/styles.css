@@ -305,3 +305,7 @@ ul.horizontal-list li {
   display: inline;
   margin-right: 20px;
 }
+
+.modal-body, .modal-header{
+  color: #172C3B;
+}

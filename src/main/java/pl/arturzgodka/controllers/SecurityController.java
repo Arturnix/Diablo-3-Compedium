@@ -70,6 +70,7 @@ public class SecurityController {
         model.addAttribute("battleTag", battleTag);
         model.addAttribute("character", selectedCharacter);
         model.addAttribute("stats", shortStats);
+        model.addAttribute("moreStats", stats);
         model.addAttribute("items", items);
         model.addAttribute("followers", followers);
 
