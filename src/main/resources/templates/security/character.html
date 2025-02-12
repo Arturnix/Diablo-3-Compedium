@@ -39,7 +39,8 @@
         <ul class="characters-list">
             <li><img class="heroes-classes-list-face" th:classappend="|${character.classHero} ${character.gender==0 ? 'male' : 'female'}|" th:text="${character.name} + ' ' + ${character.level} + ' lvl ' + 'Paragon: ' + ${character.paragonLevel}">
                 </br>
-                <span th:if="${character.hardcore}"><i class="fa-solid fa-skull"></i>Hardcore</span>
+                <span th:if="${character.hardcore}">Hardcore<i class="fa-solid fa-skull pl-1"></i></br></span>
+                <span th:text="'Elites killed: ' + ${kills.get('elites')}"></span><i class="fa-solid fa-crown pl-1"></i>
                 <p th:text="${character.classHero.substring(0,1).toUpperCase().concat(character.classHero.substring(1))}"></p>
             </li>
         </ul>

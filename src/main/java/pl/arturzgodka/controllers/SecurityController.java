@@ -60,7 +60,7 @@ public class SecurityController {
             put("Damage", stats.get("damage"));
             put("Armor", stats.get("armor"));
         }};
-
+        Map<String, Integer> kills = selectedCharacter.getKills();
         List<ItemDataModel> items = selectedCharacter.getItems().stream().filter(item -> item.getFollowerDataModel() == null).toList();
         List<FollowerDataModel> followers = selectedCharacter.getFollowers();
 
@@ -68,6 +68,7 @@ public class SecurityController {
         model.addAttribute("character", selectedCharacter);
         model.addAttribute("stats", shortStats);
         model.addAttribute("moreStats", stats);
+        model.addAttribute("kills", kills);
         model.addAttribute("items", items);
         model.addAttribute("followers", followers);
 
