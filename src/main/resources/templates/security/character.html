@@ -69,7 +69,7 @@
                             </div>
                             <div class="modal-body characters-list">
                                 <ul th:each="stat : ${moreStats}">
-                                    <li th:text="${stat.key} + ': ' + ${stat.value}"></li>
+                                    <li th:text="${stat.key.replaceAll('(?<!^)(?=[A-Z])', ' ').toLowerCase()} + ': ' + ${stat.value}"></li>
                                 </ul>
                             </div>
                             <div class="modal-footer">
