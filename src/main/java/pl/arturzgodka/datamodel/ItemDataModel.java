@@ -13,7 +13,6 @@ public class ItemDataModel {
     @GeneratedValue
     @Column(unique = true)
     private long itemId;
-
     protected String bodyPart;
     protected String id;
     protected String name;
@@ -93,6 +92,10 @@ public class ItemDataModel {
 
     public String getIconURL() {
         return iconURL;
+    }
+
+    public String getBodyPart() {
+        return bodyPart;
     }
 
     public CharacterDataModel getCharacterDataModel() {

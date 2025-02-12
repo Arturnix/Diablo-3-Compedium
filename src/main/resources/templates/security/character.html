@@ -92,7 +92,7 @@
         <h4 class="font-diablo py-2 px-3">Followers</h4>
         <ul class="characters-list" th:each="follower : ${followers}">
             <li>
-                <p th:text="${follower.name} + ': ' + ${follower.level} + ' lvl'"></p>
+                <img class="follower-face" th:classappend="${follower.name}" th:text="${follower.name.substring(0,1).toUpperCase().concat(follower.name.substring(1))} + ': ' + ${follower.level} + ' lvl'">
             </li>
         </ul>
     </div>

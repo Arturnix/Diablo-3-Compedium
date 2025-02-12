@@ -64,17 +64,17 @@ public class AccountMapper {
 
         List<CharacterDataModel> heroes = new ArrayList<>();
         for(int i = 0; i < node.get("heroes").size(); i++) {
-            CharacterDataModel characterDataModel = new CharacterDataModel(
-                    node.get("heroes").get(i).get("id").asInt(),
-                    node.get("heroes").get(i).get("name").asText(),
-                    node.get("heroes").get(i).get("class").asText(),
-                    node.get("heroes").get(i).get("level").asInt(),
-                    node.get("heroes").get(i).get("paragonLevel").asInt(),
-                    node.get("heroes").get(i).get("hardcore").asBoolean()
-            );
-            heroes.add(characterDataModel);
-        }
-
+                CharacterDataModel characterDataModel = new CharacterDataModel(
+                        node.get("heroes").get(i).get("id").asInt(),
+                        node.get("heroes").get(i).get("name").asText(),
+                        node.get("heroes").get(i).get("class").asText(),
+                        node.get("heroes").get(i).get("level").asInt(),
+                        node.get("heroes").get(i).get("paragonLevel").asInt(),
+                        node.get("heroes").get(i).get("hardcore").asBoolean(),
+                        node.get("heroes").get(i).get("gender").asInt()
+                );
+                heroes.add(characterDataModel);
+            }
         return heroes;
     }
 }

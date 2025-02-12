@@ -45,7 +45,8 @@ public class CharacterMapper {
                 fetchSkills(node),
                 fetchItems(node),
                 fetchFollowers(node),
-                fetchHeroStats(node)
+                fetchHeroStats(node),
+                node.get("gender").asInt()
         );
     }
 

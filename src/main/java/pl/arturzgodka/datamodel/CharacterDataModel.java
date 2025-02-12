@@ -35,6 +35,8 @@ public class CharacterDataModel {
     private int paragonLevel;
     @NotNull(message = "Is hardcore character may not be null")
     private boolean hardcore;
+    @NotNull(message = "Gender of character may not be null")
+    private int gender;
     @NotNull(message = "Is seasonal character may not be null")
     private boolean seasonal;
     @NotNull(message = "Is dead character may not be null")
@@ -74,19 +76,20 @@ public class CharacterDataModel {
     public CharacterDataModel() {
     }
 
-    public CharacterDataModel(int id, String name, String classHero, int level, int paragonLevel, boolean hardcore) {
+    public CharacterDataModel(int id, String name, String classHero, int level, int paragonLevel, boolean hardcore, int gender) {
         this.id = id;
         this.name = name;
         this.classHero = classHero;
         this.level = level;
         this.paragonLevel = paragonLevel;
         this.hardcore = hardcore;
+        this.gender = gender;
     }
 
    public CharacterDataModel(int id, String name, String classHero, int level, int paragonLevel,
                              boolean hardcore, boolean seasonal, boolean dead,
                              Map<String, Integer> kills, List<SkillDataModel> skills,
-                             List<ItemDataModel> items, List<FollowerDataModel> followers, Map<String, Integer> stats) {
+                             List<ItemDataModel> items, List<FollowerDataModel> followers, Map<String, Integer> stats, int gender) {
         this.id = id;
         this.name = name;
         this.classHero = classHero;
@@ -100,6 +103,7 @@ public class CharacterDataModel {
         this.items = items;
         this.followers = followers;
         this.stats = stats;
+        this.gender = gender;
     }
 
     public int getId() {
@@ -119,6 +123,10 @@ public class CharacterDataModel {
     }
     public int getParagonLevel() {
         return this.paragonLevel;
+    }
+
+    public int getGender() {
+        return this.gender;
     }
 
     public Map<String, Integer> getKills() {
@@ -197,6 +205,9 @@ public class CharacterDataModel {
             str.append(", name: ").append(characterDataModel.getName());
             str.append(", class: ").append(characterDataModel.getClassHero());
             str.append(", level: ").append(characterDataModel.getLevel());
+            str.append(", paragonLevel: ").append(characterDataModel.getParagonLevel());
+            str.append(", hardcore: ").append(characterDataModel.isHardcore());
+            str.append(", gender: ").append(characterDataModel.getGender());
             System.out.println(str.toString() + '\n');
         }
     }
@@ -209,7 +220,10 @@ public class CharacterDataModel {
                     "id=" + id +
                     ", name='" + name + '\'' +
                     ", classHero='" + classHero + '\'' +
-                    ", level=" + level +
+                    ", level=" + level + '\'' +
+                    ", paragonLevel=" + paragonLevel + '\'' +
+                    ", hardcore=" + hardcore + '\'' +
+                    ", gender=" + gender +
                     '}';
         } else {
         return "HeroDataModel{" +
@@ -226,6 +240,7 @@ public class CharacterDataModel {
                 ", items=" + items +
                 ", followers=" + followers +
                 ", stats=" + stats +
+                ", gender=" + gender +
                 '}';
         }
     }

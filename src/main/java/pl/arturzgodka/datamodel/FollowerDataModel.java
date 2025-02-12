@@ -63,8 +63,22 @@ public class FollowerDataModel {
 
     public void setCharacterDataModel(CharacterDataModel characterDataModel) {
         this.characterDataModel = characterDataModel;
+    }
 
+    public long getId() {
+        return id;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public Map<String, Integer> getStats() {
+        return stats;
     }
 
     @Override

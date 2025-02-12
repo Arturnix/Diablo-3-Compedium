@@ -268,6 +268,25 @@ footer {
   background-position: 100% 100%;
 }
 
+.follower-face {
+  background-size: 105%;
+  width: 100px;
+  height: 79px;
+  margin-right: 30px;
+}
+
+.templar {
+  background-image: url('../img/FollowerTemplar_PortraitResized.webp');
+}
+
+.scoundrel {
+  background-image: url('../img/FollowerScoundrel_PortraitResized.webp');
+}
+
+.enchantress {
+  background-image: url('../img/FollowerEnchantress_PortraitResized.webp');
+}
+
 /* button */
 
 #button-fixed-top {
