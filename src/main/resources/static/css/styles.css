@@ -325,6 +325,16 @@ ul.horizontal-list li {
   margin-right: 20px;
 }
 
+.float-left {
+    float: left;
+    width:50%;
+}
+
+.float-none {
+  float: none;
+  width: 50%;
+}
+
 .modal-body, .modal-header{
   color: #172C3B;
 }
