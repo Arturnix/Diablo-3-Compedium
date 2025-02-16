@@ -54,6 +54,10 @@ public class SkillDataModel {
         this.description = description;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public String getSlug() {
         return slug;
     }

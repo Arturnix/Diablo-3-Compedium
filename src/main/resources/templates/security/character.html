@@ -137,9 +137,9 @@
 
         <div class="float-left">
             <h4 class="font-diablo py-2 px-3">Used skills</h4>
-            <ul class="characters-list" th:each="skill : ${skills}">
+            <ul class="hero-items-list" th:each="skill : ${skills}">
                 <li>
-                    <p th:text="${skill.name}"></p>
+                    <a tabindex="0" class="hero-items-list" data-bs-toggle="popover" data-bs-trigger="focus" th:data-bs-title="${skill.name}" th:data-bs-content="'Skill level: ' + ${skill.level} + ' ' + 'Skill type: ' + ${skill.type} + ' ' + ${skill.description}" th:text="${skill.name}"></a>
                 </li>
             </ul>
         </div>
