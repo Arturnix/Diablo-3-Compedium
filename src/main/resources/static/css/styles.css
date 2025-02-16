@@ -90,6 +90,13 @@ a:hover, button:hover {
   cursor:pointer;
 }
 
+.custom-popover {
+  font-family: inherit;
+  color: blanchedalmond;
+  font-size: inherit;
+  text-decoration: none;
+}
+
 /* footer */
 
 footer {
@@ -173,6 +180,17 @@ footer {
   font-family: Montserrat;
   color: blanchedalmond;
   font-size: larger;
+  list-style-type: none;
+}
+
+.hero-items-list {
+  font-family: Montserrat;
+  color: blanchedalmond;
+  font-size: large;
+  list-style-type: none;
+}
+
+.hero-items-details {
   list-style-type: none;
 }
 

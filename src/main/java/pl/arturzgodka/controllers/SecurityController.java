@@ -1,15 +1,22 @@
 package pl.arturzgodka.controllers;
 
+import com.fasterxml.jackson.core.JsonGenerator;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import pl.arturzgodka.apihandlers.HeroItemsApi;
 import pl.arturzgodka.databaseutils.CharacterDao;
 import pl.arturzgodka.databaseutils.UserDao;
 import pl.arturzgodka.datamodel.*;
+import pl.arturzgodka.jsonmappers.ItemMapper;
+import pl.arturzgodka.token.FetchToken;
 
 import java.util.*;
 
@@ -51,7 +58,7 @@ public class SecurityController {
     }
 
     @GetMapping("profile/{battleTag}/character/{characterId}")
-    public String getCharacter(@PathVariable("battleTag") String battleTag, @PathVariable("characterId") int characterId, Model model) {
+    public String getCharacter(@PathVariable("battleTag") String battleTag, @PathVariable("characterId") int characterId, Model model) throws JsonProcessingException {
         CharacterDao dao = new CharacterDao();
         CharacterDataModel selectedCharacter = dao.findCharacterById(characterId);
         Map<String, Integer> stats = selectedCharacter.getStats();
@@ -62,7 +69,11 @@ public class SecurityController {
         }};
         Map<String, Integer> kills = selectedCharacter.getKills();
         List<ItemDataModel> items = selectedCharacter.getItems().stream().filter(item -> item.getFollowerDataModel() == null).toList();
+        List<SkillDataModel> skills = selectedCharacter.getSkills();
         List<FollowerDataModel> followers = selectedCharacter.getFollowers();
+
+        ItemMapper itemMapper = new ItemMapper();
+        List<ItemDataModel> heroItems = itemMapper.getHeroItems(battleTag, characterId);
 
         model.addAttribute("battleTag", battleTag);
         model.addAttribute("character", selectedCharacter);
@@ -70,6 +81,8 @@ public class SecurityController {
         model.addAttribute("moreStats", stats);
         model.addAttribute("kills", kills);
         model.addAttribute("items", items);
+        model.addAttribute("heroItems", heroItems);
+        model.addAttribute("skills", skills);
         model.addAttribute("followers", followers);
 
         return "security/character";

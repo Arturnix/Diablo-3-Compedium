@@ -39,7 +39,7 @@ public class ItemMapper {
 
         JsonNode node = mapper.readTree(HeroItemsApi.generateRequest(battleTag, Integer.toString(heroId), fetchToken));
         for(JsonNode singleItem : node) {
-            ItemDataModel itemDataModel = mapItemToDataModel(mapper.writeValueAsString(singleItem));
+            ItemDataModel itemDataModel = mapHeroItemToDataModel(mapper.writeValueAsString(singleItem));
             items.add(itemDataModel);
         }
 
@@ -58,6 +58,24 @@ public class ItemMapper {
         }
 
         if(node.has("armor")) {
+            return createArmorDataModel(node);
+        } else {
+            return  createWeaponDataModel(node);
+        }
+    }
+
+    public ItemDataModel mapHeroItemToDataModel(String itemData) {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode node = null;
+
+        try {
+            node = objectMapper.readTree(itemData);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        if(node.get("armor").asInt() != 0 || node.get("attacksPerSecond").asInt() == 0) {
             return createArmorDataModel(node);
         } else {
             return  createWeaponDataModel(node);

@@ -35,7 +35,6 @@
 
     <div class="display-item-info-div">
         <ul class="characters-list" th:each="character : ${user.getCharacters()}">
-            <!-- <li><a th:href="'profile/' + ${user.battleTag} + '/' + ${character.id}"><img class="heroes-classes-list-face" th:classappend="|${character.classHero} ${character.gender==0 ? 'male' : 'female'}|" th:text="${character.name} + ' ' + ${character.level} + ' lvl ' + 'Paragon: ' + ${character.paragonLevel}"></a> -->
             <li><a th:href="'profile/' + ${user.battleTag.replace('#','%23')} + '/character/' + ${character.id}"><img class="heroes-classes-list-face" th:classappend="|${character.classHero} ${character.gender==0 ? 'male' : 'female'}|" th:text="${character.name} + ' ' + ${character.level} + ' lvl ' + 'Paragon: ' + ${character.paragonLevel}"></a>
                 </br>
                 <span th:if="${character.hardcore}"><i class="fa-solid fa-skull"></i>Hardcore</span>
