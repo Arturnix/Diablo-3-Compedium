@@ -16,6 +16,7 @@ import pl.arturzgodka.databaseutils.CharacterDao;
 import pl.arturzgodka.databaseutils.UserDao;
 import pl.arturzgodka.datamodel.*;
 import pl.arturzgodka.jsonmappers.ItemMapper;
+import pl.arturzgodka.jsonmappers.SkillMapper;
 import pl.arturzgodka.token.FetchToken;
 
 import java.util.*;
@@ -75,6 +76,20 @@ public class SecurityController {
         ItemMapper itemMapper = new ItemMapper();
         List<ItemDataModel> heroItems = itemMapper.getHeroItems(battleTag, characterId);
 
+        SkillMapper skillMapper = new SkillMapper();
+        List<String> slugsSkill = new ArrayList<>();
+        for(SkillDataModel skillSlug : skills) {
+            slugsSkill.add(skillSlug.getSlug());
+        }
+        List<HeroSkillDataModel> heroFullSkills = skillMapper.mapSkillsToDataModel(selectedCharacter.getClassHero(), slugsSkill);
+
+        JsonNode node = itemMapper.getFollowersItems(battleTag, characterId);
+        Map<String, List<ItemDataModel>> followersItems = new HashMap<String, List<ItemDataModel>>(3);
+
+        for(FollowerDataModel follower : followers) {
+            followersItems.put(follower.getName(), itemMapper.fetchFollowerItems(follower.getName(), node));
+        }
+
         model.addAttribute("battleTag", battleTag);
         model.addAttribute("character", selectedCharacter);
         model.addAttribute("stats", shortStats);
@@ -82,8 +97,10 @@ public class SecurityController {
         model.addAttribute("kills", kills);
         model.addAttribute("items", items);
         model.addAttribute("heroItems", heroItems);
+        model.addAttribute("followerItems", followersItems);
         model.addAttribute("skills", skills);
         model.addAttribute("followers", followers);
+        model.addAttribute("fullSkills", heroFullSkills);
 
         return "security/character";
     }

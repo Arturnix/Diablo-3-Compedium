@@ -85,7 +85,7 @@
         </ul>
         </br>
 
-        <div class="float-left pb-3">
+        <div class="float-left">
             <h4 class="font-diablo py-2 px-3">Equipped items</h4>
             <ul class="hero-items-list" th:each="heroItem : ${heroItems}">
                 <li>
@@ -149,13 +149,53 @@
 
         <div class="float-left">
         <h4 class="font-diablo py-2 px-3">Followers</h4>
-        <ul class="hero-items-list" th:each="follower : ${followers}">
-            <li>
-                <img class="follower-face" th:classappend="${follower.name}" th:text="${follower.name.substring(0,1).toUpperCase().concat(follower.name.substring(1))} + ': ' + ${follower.level} + ' lvl'">
-            </li>
-        </ul>
-        </div>
+            <ul class="hero-items-list" th:each="follower : ${followers}">
+                <li>
+                    <!-- Button trigger modal -->
+                    <a class="hero-items-list" data-bs-toggle="modal" th:data-bs-target="'#' + ${follower.name}">
+                        <img class="follower-face" th:classappend="${follower.name}" th:text="${follower.name.substring(0,1).toUpperCase().concat(follower.name.substring(1))} + ': ' + ${follower.level} + ' lvl'">
+                    </a>
 
+                    <!-- Modal to show more stats -->
+                   <div class="modal fade" th:id="${follower.name}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" th:text="${follower.name.substring(0,1).toUpperCase().concat(follower.name.substring(1))} + '\'s items'"></h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body characters-list">
+                                    <ul class="hero-items-details" th:each="followerItem : ${followerItems.get(follower.name)}">
+                                        <li><img th:src="${followerItem.iconURL}" th:text="${followerItem.name}">
+                                            <p th:text="${followerItem.getTypeName()}"></p>
+                                            <p class="setName" th:text="${followerItem.getSetName() != null} ? 'Set name: ' + ${followerItem.getSetName()}"></p>
+                                            <p th:text="'Level required: ' + ${followerItem.getRequiredLevel()}"></p>
+                                            <p th:if="${followerItem.class.name == 'pl.arturzgodka.datamodel.ItemArmorDataModel'}" th:text="'Armor: ' + ${followerItem.getArmor()}"></p>
+                                            <p th:if="${followerItem.class.name == 'pl.arturzgodka.datamodel.ItemWeaponDataModel'}" th:text="'Damage: ' + ${followerItem.getMinDamage()} + ' - ' + ${followerItem.getMaxDamage()}"></p>
+                                            <p th:text="${followerItem.attributes.get('primary').isEmpty()} ? '' : 'Primary attributes:'"></p>
+                                            <ul th:each="attribute : ${followerItem.attributes.get('primary')}">
+                                                <li th:text="${attribute}"></li>
+                                            </ul>
+                                            <br>
+                                            <p th:text="${followerItem.attributes.get('secondary').isEmpty()} ? '' : 'Secondary attributes:'"></p>
+                                            <ul th:each="attribute : ${followerItem.attributes.get('secondary')}">
+                                                <li th:text="${attribute}"></li>
+                                            </ul>
+                                            <br>
+                                            <p class="setName" th:utext="${followerItem.getSetDescription() != null} ? ${followerItem.getSetDescription()}"></p>
+                                            <p class="item-description" th:utext="${followerItem.getDescription() != null} ? ${followerItem.getDescription()}"></p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 <div class="text-center pt-1 mb-3 pb-1">
     <a

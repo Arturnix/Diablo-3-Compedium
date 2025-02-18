@@ -1,10 +1,7 @@
 package pl.arturzgodka.jsonmappers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import pl.arturzgodka.datamodel.FollowerDataModel;
-import pl.arturzgodka.datamodel.CharacterDataModel;
-import pl.arturzgodka.datamodel.ItemDataModel;
-import pl.arturzgodka.datamodel.SkillDataModel;
+import pl.arturzgodka.datamodel.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

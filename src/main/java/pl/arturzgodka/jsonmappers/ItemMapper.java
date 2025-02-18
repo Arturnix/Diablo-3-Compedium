@@ -1,6 +1,7 @@
 package pl.arturzgodka.jsonmappers;
 
 import pl.arturzgodka.apihandlers.BaseUrlParts;
+import pl.arturzgodka.apihandlers.FollowerItemsHandlerApi;
 import pl.arturzgodka.apihandlers.HeroItemsApi;
 import pl.arturzgodka.apihandlers.ItemHandlerApi;
 import pl.arturzgodka.datamodel.ItemArmorDataModel;
@@ -39,6 +40,27 @@ public class ItemMapper {
 
         JsonNode node = mapper.readTree(HeroItemsApi.generateRequest(battleTag, Integer.toString(heroId), fetchToken));
         for(JsonNode singleItem : node) {
+            ItemDataModel itemDataModel = mapHeroItemToDataModel(mapper.writeValueAsString(singleItem));
+            items.add(itemDataModel);
+        }
+
+        return items;
+    }
+
+    public JsonNode getFollowersItems(String battleTag, int heroId) throws JsonProcessingException {
+
+        FetchToken fetchToken = new FetchToken();
+        ObjectMapper mapper = new ObjectMapper();
+
+        return mapper.readTree(FollowerItemsHandlerApi.generateRequest(battleTag, Integer.toString(heroId), fetchToken));
+    }
+
+    public List<ItemDataModel> fetchFollowerItems(String follower, JsonNode followersItems) throws JsonProcessingException {
+
+        List<ItemDataModel> items = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
+
+        for (JsonNode singleItem : followersItems.get(follower)) {
             ItemDataModel itemDataModel = mapHeroItemToDataModel(mapper.writeValueAsString(singleItem));
             items.add(itemDataModel);
         }
@@ -125,6 +147,10 @@ public class ItemMapper {
     private int getAttributesSize(JsonNode node, String key) {
 
         if(node.get("attributes") == null) {
+            return 0;
+        }
+
+        if(node.get("attributes").get(key) == null) {
             return 0;
         }
 

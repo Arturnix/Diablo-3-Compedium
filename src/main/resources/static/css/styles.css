@@ -289,8 +289,8 @@ footer {
 
 .follower-face {
   background-size: 105%;
-  width: 100px;
-  height: 79px;
+  width: 85px; /*100*/
+  height: 67px; /*79*/
   margin-right: 5px;
 }
 
