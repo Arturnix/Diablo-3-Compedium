@@ -12,4 +12,5 @@ public class BaseUrlParts {
     public static final String BASE_DATA_HERO_API = BASE_BLIZZARD_URL + "data/hero/";
     public static final String BASE_LOCALE_AND_TOKEN = "/?locale=en_EU&access_token=";
     public static final String BASE_LOCALE_AND_TOKEN_FOR_HERO_ITEMS = "/items?locale=en_EU&access_token=";
+    public static final String BASE_LOCALE_AND_TOKEN_FOR_FOLLOWERS_ITEMS = "/follower-items?locale=en_EU&access_token=";
 }
