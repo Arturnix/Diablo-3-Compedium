@@ -48,14 +48,21 @@
         </ul>
         <ul class="characters-list horizontal-list">
             <li>
-                <i class="fa-solid fa-heart-pulse px-1"></i><span th:text="${stats.get('Life')}"></span>
+                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Life">
+                    <i class="fa-solid fa-heart-pulse px-1"></i><span th:text="${stats.get('Life')}"></span>
+                </span>
             </li>
             <li>
-                <i class="fa-solid fa-gun px-1"></i><span th:text="${stats.get('Damage')}"></span>
+                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Damage">
+                    <i class="fa-solid fa-gun px-1"></i><span th:text="${stats.get('Damage')}"></span>
+                </span>
             </li>
             <li>
-                <i class="fa-solid fa-shield-halved px-1"></i><span th:text="${stats.get('Armor')}"></span>
+                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Armor">
+                    <i class="fa-solid fa-shield-halved px-1"></i><span th:text="${stats.get('Armor')}"></span>
+                </span>
             </li>
+
             <li>
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#moreStats">
