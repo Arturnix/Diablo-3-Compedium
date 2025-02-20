@@ -11,10 +11,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import pl.arturzgodka.apihandlers.AccountHandlerApi;
 import pl.arturzgodka.apihandlers.HeroItemsApi;
 import pl.arturzgodka.databaseutils.CharacterDao;
 import pl.arturzgodka.databaseutils.UserDao;
 import pl.arturzgodka.datamodel.*;
+import pl.arturzgodka.jsonmappers.AccountMapper;
 import pl.arturzgodka.jsonmappers.ItemMapper;
 import pl.arturzgodka.jsonmappers.SkillMapper;
 import pl.arturzgodka.token.FetchToken;
@@ -54,6 +56,18 @@ public class SecurityController {
       UserDataModel user = dao.findUserByEmail(email);
 
       model.addAttribute("user", user);
+
+        return "security/profile";
+    }
+
+    @PostMapping("/profile")
+    public String searchOtherPlayerCharactersList(@ModelAttribute UserDataModel user, String battleTag, Model model) {
+        FetchToken fetchToken = new FetchToken();
+        AccountMapper accountMapper = new AccountMapper();
+
+        user.setBattleTag(battleTag);
+        user.setCharacters(accountMapper.mapAccountToDataModel(AccountHandlerApi.generateRequest(battleTag, fetchToken)).getHeroes());
+        model.addAttribute("user", user);
 
         return "security/profile";
     }

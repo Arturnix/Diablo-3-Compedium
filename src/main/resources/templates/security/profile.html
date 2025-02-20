@@ -30,7 +30,12 @@
 <body id="body-skills-list">
 <div class="skills-page">
 <h1 class="font-diablo py-1 px-3" th:text="'Grettings ' + ${user.battleTag}"></h1>
-<p class="font-diablo py-1 px-3" >Check what's on your profile.</p></br>
+<p class="font-diablo py-1 px-3" >Check what's on your profile or find characters of other players.</p></br>
+    <form class="form-inline py-1 px-3 pb-4" action="#" th:action="@{/profile}" method="post">
+        <input type="text" class="form-control mr-sm-2" id="checkBattleTag" name="battleTag" placeholder="BattleTag" required aria-describedby="provideOtherPlayerBattleTag">
+        <button type="submit" class="btn btn-primary my-2 my-sm-0">Search characters</button>
+    </form>
+
 <p class="font-diablo py-2 px-3" >Characters list: </p>
 
     <div class="display-item-info-div">
