@@ -12,11 +12,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import pl.arturzgodka.apihandlers.AccountHandlerApi;
+import pl.arturzgodka.apihandlers.CharacterHandlerApi;
 import pl.arturzgodka.apihandlers.HeroItemsApi;
 import pl.arturzgodka.databaseutils.CharacterDao;
 import pl.arturzgodka.databaseutils.UserDao;
 import pl.arturzgodka.datamodel.*;
 import pl.arturzgodka.jsonmappers.AccountMapper;
+import pl.arturzgodka.jsonmappers.CharacterMapper;
 import pl.arturzgodka.jsonmappers.ItemMapper;
 import pl.arturzgodka.jsonmappers.SkillMapper;
 import pl.arturzgodka.token.FetchToken;
@@ -74,8 +76,11 @@ public class SecurityController {
 
     @GetMapping("profile/{battleTag}/character/{characterId}")
     public String getCharacter(@PathVariable("battleTag") String battleTag, @PathVariable("characterId") int characterId, Model model) throws JsonProcessingException {
-        CharacterDao dao = new CharacterDao();
-        CharacterDataModel selectedCharacter = dao.findCharacterById(characterId);
+        //CharacterDao dao = new CharacterDao(); /*used to operate on database*/
+        //CharacterDataModel selectedCharacter = dao.findCharacterById(characterId);
+        CharacterMapper characterMapper = new CharacterMapper();
+        FetchToken fetchToken = new FetchToken();
+        CharacterDataModel selectedCharacter = characterMapper.mapHeroToDataModel(CharacterHandlerApi.generateRequest(battleTag, Integer.toString(characterId), fetchToken));
         Map<String, Integer> stats = selectedCharacter.getStats();
         Map<String, Integer> shortStats = new HashMap<String, Integer>(3) {{
             put("Life", stats.get("life"));
